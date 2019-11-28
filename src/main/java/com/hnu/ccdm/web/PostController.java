@@ -1,7 +1,9 @@
 package com.hnu.ccdm.web;
 
 import com.hnu.ccdm.entity.Post;
+import com.hnu.ccdm.entity.Reply;
 import com.hnu.ccdm.service.PostService;
+import com.hnu.ccdm.service.ReplyService;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ import java.util.List;
 public class PostController {
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private ReplyService replyService;
 
     @ResponseBody
     @RequestMapping("getPostById")
@@ -101,5 +106,16 @@ public class PostController {
 
     @ResponseBody
     @RequestMapping("reply")
+    String reply(String userId, String postId, String content){
+        Reply reply = new Reply();
+        reply.setPostId(postId);
+        reply.setUserAccount(userId);
+        reply.setReplyTime(new Date());
+        reply.setReplyContent(content);
+        reply.setReplyId(userId+(new Date().getTime()));
+        if(replyService.addReply(reply) > 0)
+            return "回复成功";
+        return "回复失败";
+    }
 
 }
