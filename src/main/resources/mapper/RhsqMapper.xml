@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.RhsqMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Rhsq" >
+    <id column="RHSQ_SQid" property="rhsqSqid" jdbcType="VARCHAR" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="SQSL_SQBH" property="sqslSqbh" jdbcType="VARCHAR" />
+    <result column="RHSQ_SQRid" property="rhsqSqrid" jdbcType="VARCHAR" />
+    <result column="RHSQ_ZRXHid" property="rhsqZrxhid" jdbcType="VARCHAR" />
+    <result column="RHSQ_SQTJSJ" property="rhsqSqtjsj" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.RhsqWithBLOBs" extends="BaseResultMap" >
+    <result column="RHSQ_SQYY" property="rhsqSqyy" jdbcType="LONGVARCHAR" />
+    <result column="RHSQ_FJ" property="rhsqFj" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RHSQ_SQid, user_account, SQSL_SQBH, RHSQ_SQRid, RHSQ_ZRXHid, RHSQ_SQTJSJ
+  </sql>
+  <sql id="Blob_Column_List" >
+    RHSQ_SQYY, RHSQ_FJ
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.RhsqExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rhsq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.RhsqExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rhsq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rhsq
+    where RHSQ_SQid = #{rhsqSqid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from rhsq
+    where RHSQ_SQid = #{rhsqSqid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.RhsqExample" >
+    delete from rhsq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.RhsqWithBLOBs" >
+    insert into rhsq (RHSQ_SQid, user_account, SQSL_SQBH, 
+      RHSQ_SQRid, RHSQ_ZRXHid, RHSQ_SQTJSJ, 
+      RHSQ_SQYY, RHSQ_FJ)
+    values (#{rhsqSqid,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{sqslSqbh,jdbcType=VARCHAR}, 
+      #{rhsqSqrid,jdbcType=VARCHAR}, #{rhsqZrxhid,jdbcType=VARCHAR}, #{rhsqSqtjsj,jdbcType=TIMESTAMP}, 
+      #{rhsqSqyy,jdbcType=LONGVARCHAR}, #{rhsqFj,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.RhsqWithBLOBs" >
+    insert into rhsq
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rhsqSqid != null" >
+        RHSQ_SQid,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="sqslSqbh != null" >
+        SQSL_SQBH,
+      </if>
+      <if test="rhsqSqrid != null" >
+        RHSQ_SQRid,
+      </if>
+      <if test="rhsqZrxhid != null" >
+        RHSQ_ZRXHid,
+      </if>
+      <if test="rhsqSqtjsj != null" >
+        RHSQ_SQTJSJ,
+      </if>
+      <if test="rhsqSqyy != null" >
+        RHSQ_SQYY,
+      </if>
+      <if test="rhsqFj != null" >
+        RHSQ_FJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rhsqSqid != null" >
+        #{rhsqSqid,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sqslSqbh != null" >
+        #{sqslSqbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rhsqSqrid != null" >
+        #{rhsqSqrid,jdbcType=VARCHAR},
+      </if>
+      <if test="rhsqZrxhid != null" >
+        #{rhsqZrxhid,jdbcType=VARCHAR},
+      </if>
+      <if test="rhsqSqtjsj != null" >
+        #{rhsqSqtjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rhsqSqyy != null" >
+        #{rhsqSqyy,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rhsqFj != null" >
+        #{rhsqFj,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.RhsqExample" resultType="java.lang.Integer" >
+    select count(*) from rhsq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rhsq
+    <set >
+      <if test="record.rhsqSqid != null" >
+        RHSQ_SQid = #{record.rhsqSqid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqslSqbh != null" >
+        SQSL_SQBH = #{record.sqslSqbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rhsqSqrid != null" >
+        RHSQ_SQRid = #{record.rhsqSqrid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rhsqZrxhid != null" >
+        RHSQ_ZRXHid = #{record.rhsqZrxhid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rhsqSqtjsj != null" >
+        RHSQ_SQTJSJ = #{record.rhsqSqtjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rhsqSqyy != null" >
+        RHSQ_SQYY = #{record.rhsqSqyy,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.rhsqFj != null" >
+        RHSQ_FJ = #{record.rhsqFj,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update rhsq
+    set RHSQ_SQid = #{record.rhsqSqid,jdbcType=VARCHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      SQSL_SQBH = #{record.sqslSqbh,jdbcType=VARCHAR},
+      RHSQ_SQRid = #{record.rhsqSqrid,jdbcType=VARCHAR},
+      RHSQ_ZRXHid = #{record.rhsqZrxhid,jdbcType=VARCHAR},
+      RHSQ_SQTJSJ = #{record.rhsqSqtjsj,jdbcType=TIMESTAMP},
+      RHSQ_SQYY = #{record.rhsqSqyy,jdbcType=LONGVARCHAR},
+      RHSQ_FJ = #{record.rhsqFj,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rhsq
+    set RHSQ_SQid = #{record.rhsqSqid,jdbcType=VARCHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      SQSL_SQBH = #{record.sqslSqbh,jdbcType=VARCHAR},
+      RHSQ_SQRid = #{record.rhsqSqrid,jdbcType=VARCHAR},
+      RHSQ_ZRXHid = #{record.rhsqZrxhid,jdbcType=VARCHAR},
+      RHSQ_SQTJSJ = #{record.rhsqSqtjsj,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.RhsqWithBLOBs" >
+    update rhsq
+    <set >
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sqslSqbh != null" >
+        SQSL_SQBH = #{sqslSqbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rhsqSqrid != null" >
+        RHSQ_SQRid = #{rhsqSqrid,jdbcType=VARCHAR},
+      </if>
+      <if test="rhsqZrxhid != null" >
+        RHSQ_ZRXHid = #{rhsqZrxhid,jdbcType=VARCHAR},
+      </if>
+      <if test="rhsqSqtjsj != null" >
+        RHSQ_SQTJSJ = #{rhsqSqtjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rhsqSqyy != null" >
+        RHSQ_SQYY = #{rhsqSqyy,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rhsqFj != null" >
+        RHSQ_FJ = #{rhsqFj,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where RHSQ_SQid = #{rhsqSqid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.RhsqWithBLOBs" >
+    update rhsq
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      SQSL_SQBH = #{sqslSqbh,jdbcType=VARCHAR},
+      RHSQ_SQRid = #{rhsqSqrid,jdbcType=VARCHAR},
+      RHSQ_ZRXHid = #{rhsqZrxhid,jdbcType=VARCHAR},
+      RHSQ_SQTJSJ = #{rhsqSqtjsj,jdbcType=TIMESTAMP},
+      RHSQ_SQYY = #{rhsqSqyy,jdbcType=LONGVARCHAR},
+      RHSQ_FJ = #{rhsqFj,jdbcType=LONGVARBINARY}
+    where RHSQ_SQid = #{rhsqSqid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Rhsq" >
+    update rhsq
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      SQSL_SQBH = #{sqslSqbh,jdbcType=VARCHAR},
+      RHSQ_SQRid = #{rhsqSqrid,jdbcType=VARCHAR},
+      RHSQ_ZRXHid = #{rhsqZrxhid,jdbcType=VARCHAR},
+      RHSQ_SQTJSJ = #{rhsqSqtjsj,jdbcType=TIMESTAMP}
+    where RHSQ_SQid = #{rhsqSqid,jdbcType=VARCHAR}
+  </update>
+</mapper>

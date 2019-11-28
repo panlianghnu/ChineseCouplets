@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.CoupletintroMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Coupletintro" >
+    <id column="CoupletsExisted_id" property="coupletsexistedId" jdbcType="CHAR" />
+    <result column="CoupletIntro_origin" property="coupletintroOrigin" jdbcType="VARCHAR" />
+    <result column="CoupletIntro_Image" property="coupletintroImage" jdbcType="VARCHAR" />
+    <result column="CoupletIntro_name" property="coupletintroName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.CoupletintroWithBLOBs" extends="BaseResultMap" >
+    <result column="CoupletIntro_story" property="coupletintroStory" jdbcType="LONGVARCHAR" />
+    <result column="CoupletIntro_JSNR" property="coupletintroJsnr" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CoupletsExisted_id, CoupletIntro_origin, CoupletIntro_Image, CoupletIntro_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    CoupletIntro_story, CoupletIntro_JSNR
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.CoupletintroExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from coupletintro
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.CoupletintroExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from coupletintro
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from coupletintro
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from coupletintro
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.CoupletintroExample" >
+    delete from coupletintro
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.CoupletintroWithBLOBs" >
+    insert into coupletintro (CoupletsExisted_id, CoupletIntro_origin, 
+      CoupletIntro_Image, CoupletIntro_name, CoupletIntro_story, 
+      CoupletIntro_JSNR)
+    values (#{coupletsexistedId,jdbcType=CHAR}, #{coupletintroOrigin,jdbcType=VARCHAR}, 
+      #{coupletintroImage,jdbcType=VARCHAR}, #{coupletintroName,jdbcType=VARCHAR}, #{coupletintroStory,jdbcType=LONGVARCHAR}, 
+      #{coupletintroJsnr,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.CoupletintroWithBLOBs" >
+    insert into coupletintro
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coupletsexistedId != null" >
+        CoupletsExisted_id,
+      </if>
+      <if test="coupletintroOrigin != null" >
+        CoupletIntro_origin,
+      </if>
+      <if test="coupletintroImage != null" >
+        CoupletIntro_Image,
+      </if>
+      <if test="coupletintroName != null" >
+        CoupletIntro_name,
+      </if>
+      <if test="coupletintroStory != null" >
+        CoupletIntro_story,
+      </if>
+      <if test="coupletintroJsnr != null" >
+        CoupletIntro_JSNR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coupletsexistedId != null" >
+        #{coupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="coupletintroOrigin != null" >
+        #{coupletintroOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletintroImage != null" >
+        #{coupletintroImage,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletintroName != null" >
+        #{coupletintroName,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletintroStory != null" >
+        #{coupletintroStory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="coupletintroJsnr != null" >
+        #{coupletintroJsnr,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.CoupletintroExample" resultType="java.lang.Integer" >
+    select count(*) from coupletintro
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update coupletintro
+    <set >
+      <if test="record.coupletsexistedId != null" >
+        CoupletsExisted_id = #{record.coupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="record.coupletintroOrigin != null" >
+        CoupletIntro_origin = #{record.coupletintroOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletintroImage != null" >
+        CoupletIntro_Image = #{record.coupletintroImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletintroName != null" >
+        CoupletIntro_name = #{record.coupletintroName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletintroStory != null" >
+        CoupletIntro_story = #{record.coupletintroStory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.coupletintroJsnr != null" >
+        CoupletIntro_JSNR = #{record.coupletintroJsnr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update coupletintro
+    set CoupletsExisted_id = #{record.coupletsexistedId,jdbcType=CHAR},
+      CoupletIntro_origin = #{record.coupletintroOrigin,jdbcType=VARCHAR},
+      CoupletIntro_Image = #{record.coupletintroImage,jdbcType=VARCHAR},
+      CoupletIntro_name = #{record.coupletintroName,jdbcType=VARCHAR},
+      CoupletIntro_story = #{record.coupletintroStory,jdbcType=LONGVARCHAR},
+      CoupletIntro_JSNR = #{record.coupletintroJsnr,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update coupletintro
+    set CoupletsExisted_id = #{record.coupletsexistedId,jdbcType=CHAR},
+      CoupletIntro_origin = #{record.coupletintroOrigin,jdbcType=VARCHAR},
+      CoupletIntro_Image = #{record.coupletintroImage,jdbcType=VARCHAR},
+      CoupletIntro_name = #{record.coupletintroName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.CoupletintroWithBLOBs" >
+    update coupletintro
+    <set >
+      <if test="coupletintroOrigin != null" >
+        CoupletIntro_origin = #{coupletintroOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletintroImage != null" >
+        CoupletIntro_Image = #{coupletintroImage,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletintroName != null" >
+        CoupletIntro_name = #{coupletintroName,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletintroStory != null" >
+        CoupletIntro_story = #{coupletintroStory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="coupletintroJsnr != null" >
+        CoupletIntro_JSNR = #{coupletintroJsnr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.CoupletintroWithBLOBs" >
+    update coupletintro
+    set CoupletIntro_origin = #{coupletintroOrigin,jdbcType=VARCHAR},
+      CoupletIntro_Image = #{coupletintroImage,jdbcType=VARCHAR},
+      CoupletIntro_name = #{coupletintroName,jdbcType=VARCHAR},
+      CoupletIntro_story = #{coupletintroStory,jdbcType=LONGVARCHAR},
+      CoupletIntro_JSNR = #{coupletintroJsnr,jdbcType=LONGVARCHAR}
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Coupletintro" >
+    update coupletintro
+    set CoupletIntro_origin = #{coupletintroOrigin,jdbcType=VARCHAR},
+      CoupletIntro_Image = #{coupletintroImage,jdbcType=VARCHAR},
+      CoupletIntro_name = #{coupletintroName,jdbcType=VARCHAR}
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </update>
+</mapper>

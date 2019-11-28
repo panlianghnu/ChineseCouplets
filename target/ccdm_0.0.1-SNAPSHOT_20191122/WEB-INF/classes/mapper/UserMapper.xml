@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.User" >
+    <id column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_Portrait" property="userPortrait" jdbcType="VARCHAR" />
+    <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
+    <result column="user_Name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_Age" property="userAge" jdbcType="INTEGER" />
+    <result column="user_birthday" property="userBirthday" jdbcType="DATE" />
+    <result column="user_location" property="userLocation" jdbcType="VARCHAR" />
+    <result column="user_Place" property="userPlace" jdbcType="VARCHAR" />
+    <result column="user_Label" property="userLabel" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_Number" property="userNumber" jdbcType="CHAR" />
+    <result column="user_Time" property="userTime" jdbcType="TIMESTAMP" />
+    <result column="user_vip" property="userVip" jdbcType="VARCHAR" />
+    <result column="user_ofAssociation" property="userOfassociation" jdbcType="VARCHAR" />
+    <result column="user_Date" property="userDate" jdbcType="DATE" />
+    <result column="user_score" property="userScore" jdbcType="INTEGER" />
+    <result column="user_honoraryOfMember" property="userHonoraryofmember" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_account, user_password, user_Portrait, user_nickname, user_Name, user_Age, user_birthday, 
+    user_location, user_Place, user_Label, user_email, user_Number, user_Time, user_vip, 
+    user_ofAssociation, user_Date, user_score, user_honoraryOfMember
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_account = #{userAccount,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where user_account = #{userAccount,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.User" >
+    insert into user (user_account, user_password, user_Portrait, 
+      user_nickname, user_Name, user_Age, 
+      user_birthday, user_location, user_Place, 
+      user_Label, user_email, user_Number, 
+      user_Time, user_vip, user_ofAssociation, 
+      user_Date, user_score, user_honoraryOfMember
+      )
+    values (#{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, #{userPortrait,jdbcType=VARCHAR}, 
+      #{userNickname,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userAge,jdbcType=INTEGER}, 
+      #{userBirthday,jdbcType=DATE}, #{userLocation,jdbcType=VARCHAR}, #{userPlace,jdbcType=VARCHAR}, 
+      #{userLabel,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userNumber,jdbcType=CHAR}, 
+      #{userTime,jdbcType=TIMESTAMP}, #{userVip,jdbcType=VARCHAR}, #{userOfassociation,jdbcType=VARCHAR}, 
+      #{userDate,jdbcType=DATE}, #{userScore,jdbcType=INTEGER}, #{userHonoraryofmember,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userPortrait != null" >
+        user_Portrait,
+      </if>
+      <if test="userNickname != null" >
+        user_nickname,
+      </if>
+      <if test="userName != null" >
+        user_Name,
+      </if>
+      <if test="userAge != null" >
+        user_Age,
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday,
+      </if>
+      <if test="userLocation != null" >
+        user_location,
+      </if>
+      <if test="userPlace != null" >
+        user_Place,
+      </if>
+      <if test="userLabel != null" >
+        user_Label,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userNumber != null" >
+        user_Number,
+      </if>
+      <if test="userTime != null" >
+        user_Time,
+      </if>
+      <if test="userVip != null" >
+        user_vip,
+      </if>
+      <if test="userOfassociation != null" >
+        user_ofAssociation,
+      </if>
+      <if test="userDate != null" >
+        user_Date,
+      </if>
+      <if test="userScore != null" >
+        user_score,
+      </if>
+      <if test="userHonoraryofmember != null" >
+        user_honoraryOfMember,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPortrait != null" >
+        #{userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null" >
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userBirthday != null" >
+        #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userLocation != null" >
+        #{userLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="userPlace != null" >
+        #{userPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="userLabel != null" >
+        #{userLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userNumber != null" >
+        #{userNumber,jdbcType=CHAR},
+      </if>
+      <if test="userTime != null" >
+        #{userTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userVip != null" >
+        #{userVip,jdbcType=VARCHAR},
+      </if>
+      <if test="userOfassociation != null" >
+        #{userOfassociation,jdbcType=VARCHAR},
+      </if>
+      <if test="userDate != null" >
+        #{userDate,jdbcType=DATE},
+      </if>
+      <if test="userScore != null" >
+        #{userScore,jdbcType=INTEGER},
+      </if>
+      <if test="userHonoraryofmember != null" >
+        #{userHonoraryofmember,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPortrait != null" >
+        user_Portrait = #{record.userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNickname != null" >
+        user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_Name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAge != null" >
+        user_Age = #{record.userAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.userBirthday != null" >
+        user_birthday = #{record.userBirthday,jdbcType=DATE},
+      </if>
+      <if test="record.userLocation != null" >
+        user_location = #{record.userLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPlace != null" >
+        user_Place = #{record.userPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLabel != null" >
+        user_Label = #{record.userLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNumber != null" >
+        user_Number = #{record.userNumber,jdbcType=CHAR},
+      </if>
+      <if test="record.userTime != null" >
+        user_Time = #{record.userTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userVip != null" >
+        user_vip = #{record.userVip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userOfassociation != null" >
+        user_ofAssociation = #{record.userOfassociation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userDate != null" >
+        user_Date = #{record.userDate,jdbcType=DATE},
+      </if>
+      <if test="record.userScore != null" >
+        user_score = #{record.userScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.userHonoraryofmember != null" >
+        user_honoraryOfMember = #{record.userHonoraryofmember,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set user_account = #{record.userAccount,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_Portrait = #{record.userPortrait,jdbcType=VARCHAR},
+      user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      user_Name = #{record.userName,jdbcType=VARCHAR},
+      user_Age = #{record.userAge,jdbcType=INTEGER},
+      user_birthday = #{record.userBirthday,jdbcType=DATE},
+      user_location = #{record.userLocation,jdbcType=VARCHAR},
+      user_Place = #{record.userPlace,jdbcType=VARCHAR},
+      user_Label = #{record.userLabel,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_Number = #{record.userNumber,jdbcType=CHAR},
+      user_Time = #{record.userTime,jdbcType=TIMESTAMP},
+      user_vip = #{record.userVip,jdbcType=VARCHAR},
+      user_ofAssociation = #{record.userOfassociation,jdbcType=VARCHAR},
+      user_Date = #{record.userDate,jdbcType=DATE},
+      user_score = #{record.userScore,jdbcType=INTEGER},
+      user_honoraryOfMember = #{record.userHonoraryofmember,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.User" >
+    update user
+    <set >
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPortrait != null" >
+        user_Portrait = #{userPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null" >
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_Name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        user_Age = #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday = #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userLocation != null" >
+        user_location = #{userLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="userPlace != null" >
+        user_Place = #{userPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="userLabel != null" >
+        user_Label = #{userLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userNumber != null" >
+        user_Number = #{userNumber,jdbcType=CHAR},
+      </if>
+      <if test="userTime != null" >
+        user_Time = #{userTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userVip != null" >
+        user_vip = #{userVip,jdbcType=VARCHAR},
+      </if>
+      <if test="userOfassociation != null" >
+        user_ofAssociation = #{userOfassociation,jdbcType=VARCHAR},
+      </if>
+      <if test="userDate != null" >
+        user_Date = #{userDate,jdbcType=DATE},
+      </if>
+      <if test="userScore != null" >
+        user_score = #{userScore,jdbcType=INTEGER},
+      </if>
+      <if test="userHonoraryofmember != null" >
+        user_honoraryOfMember = #{userHonoraryofmember,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_account = #{userAccount,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.User" >
+    update user
+    set user_password = #{userPassword,jdbcType=VARCHAR},
+      user_Portrait = #{userPortrait,jdbcType=VARCHAR},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_Name = #{userName,jdbcType=VARCHAR},
+      user_Age = #{userAge,jdbcType=INTEGER},
+      user_birthday = #{userBirthday,jdbcType=DATE},
+      user_location = #{userLocation,jdbcType=VARCHAR},
+      user_Place = #{userPlace,jdbcType=VARCHAR},
+      user_Label = #{userLabel,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_Number = #{userNumber,jdbcType=CHAR},
+      user_Time = #{userTime,jdbcType=TIMESTAMP},
+      user_vip = #{userVip,jdbcType=VARCHAR},
+      user_ofAssociation = #{userOfassociation,jdbcType=VARCHAR},
+      user_Date = #{userDate,jdbcType=DATE},
+      user_score = #{userScore,jdbcType=INTEGER},
+      user_honoraryOfMember = #{userHonoraryofmember,jdbcType=VARCHAR}
+    where user_account = #{userAccount,jdbcType=VARCHAR}
+  </update>
+</mapper>

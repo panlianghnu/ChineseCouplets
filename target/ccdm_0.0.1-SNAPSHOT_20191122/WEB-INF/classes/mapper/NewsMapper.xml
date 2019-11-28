@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.News" >
+    <id column="news_XWBH" property="newsXwbh" jdbcType="VARCHAR" />
+    <result column="association_no" property="associationNo" jdbcType="VARCHAR" />
+    <result column="admin_ID" property="adminId" jdbcType="CHAR" />
+    <result column="news_XWBT" property="newsXwbt" jdbcType="VARCHAR" />
+    <result column="news_YCZZ" property="newsYczz" jdbcType="VARCHAR" />
+    <result column="news_BJR" property="newsBjr" jdbcType="VARCHAR" />
+    <result column="news_SHR" property="newsShr" jdbcType="VARCHAR" />
+    <result column="news_BCSJ" property="newsBcsj" jdbcType="TIMESTAMP" />
+    <result column="news_XGSJ" property="newsXgsj" jdbcType="TIMESTAMP" />
+    <result column="news_FBSJ" property="newsFbsj" jdbcType="TIMESTAMP" />
+    <result column="news_TSDX" property="newsTsdx" jdbcType="VARCHAR" />
+    <result column="news_XWLB" property="newsXwlb" jdbcType="VARCHAR" />
+    <result column="news_SSXH" property="newsSsxh" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.News" extends="BaseResultMap" >
+    <result column="news_XWNR" property="newsXwnr" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    news_XWBH, association_no, admin_ID, news_XWBT, news_YCZZ, news_BJR, news_SHR, news_BCSJ, 
+    news_XGSJ, news_FBSJ, news_TSDX, news_XWLB, news_SSXH
+  </sql>
+  <sql id="Blob_Column_List" >
+    news_XWNR
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.NewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.NewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    where news_XWBH = #{newsXwbh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from news
+    where news_XWBH = #{newsXwbh,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.NewsExample" >
+    delete from news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.News" >
+    insert into news (news_XWBH, association_no, admin_ID, 
+      news_XWBT, news_YCZZ, news_BJR, 
+      news_SHR, news_BCSJ, news_XGSJ, 
+      news_FBSJ, news_TSDX, news_XWLB, 
+      news_SSXH, news_XWNR)
+    values (#{newsXwbh,jdbcType=VARCHAR}, #{associationNo,jdbcType=VARCHAR}, #{adminId,jdbcType=CHAR}, 
+      #{newsXwbt,jdbcType=VARCHAR}, #{newsYczz,jdbcType=VARCHAR}, #{newsBjr,jdbcType=VARCHAR}, 
+      #{newsShr,jdbcType=VARCHAR}, #{newsBcsj,jdbcType=TIMESTAMP}, #{newsXgsj,jdbcType=TIMESTAMP}, 
+      #{newsFbsj,jdbcType=TIMESTAMP}, #{newsTsdx,jdbcType=VARCHAR}, #{newsXwlb,jdbcType=VARCHAR}, 
+      #{newsSsxh,jdbcType=VARCHAR}, #{newsXwnr,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newsXwbh != null" >
+        news_XWBH,
+      </if>
+      <if test="associationNo != null" >
+        association_no,
+      </if>
+      <if test="adminId != null" >
+        admin_ID,
+      </if>
+      <if test="newsXwbt != null" >
+        news_XWBT,
+      </if>
+      <if test="newsYczz != null" >
+        news_YCZZ,
+      </if>
+      <if test="newsBjr != null" >
+        news_BJR,
+      </if>
+      <if test="newsShr != null" >
+        news_SHR,
+      </if>
+      <if test="newsBcsj != null" >
+        news_BCSJ,
+      </if>
+      <if test="newsXgsj != null" >
+        news_XGSJ,
+      </if>
+      <if test="newsFbsj != null" >
+        news_FBSJ,
+      </if>
+      <if test="newsTsdx != null" >
+        news_TSDX,
+      </if>
+      <if test="newsXwlb != null" >
+        news_XWLB,
+      </if>
+      <if test="newsSsxh != null" >
+        news_SSXH,
+      </if>
+      <if test="newsXwnr != null" >
+        news_XWNR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newsXwbh != null" >
+        #{newsXwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="associationNo != null" >
+        #{associationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="newsXwbt != null" >
+        #{newsXwbt,jdbcType=VARCHAR},
+      </if>
+      <if test="newsYczz != null" >
+        #{newsYczz,jdbcType=VARCHAR},
+      </if>
+      <if test="newsBjr != null" >
+        #{newsBjr,jdbcType=VARCHAR},
+      </if>
+      <if test="newsShr != null" >
+        #{newsShr,jdbcType=VARCHAR},
+      </if>
+      <if test="newsBcsj != null" >
+        #{newsBcsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsXgsj != null" >
+        #{newsXgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsFbsj != null" >
+        #{newsFbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsTsdx != null" >
+        #{newsTsdx,jdbcType=VARCHAR},
+      </if>
+      <if test="newsXwlb != null" >
+        #{newsXwlb,jdbcType=VARCHAR},
+      </if>
+      <if test="newsSsxh != null" >
+        #{newsSsxh,jdbcType=VARCHAR},
+      </if>
+      <if test="newsXwnr != null" >
+        #{newsXwnr,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.NewsExample" resultType="java.lang.Integer" >
+    select count(*) from news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update news
+    <set >
+      <if test="record.newsXwbh != null" >
+        news_XWBH = #{record.newsXwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.associationNo != null" >
+        association_no = #{record.associationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null" >
+        admin_ID = #{record.adminId,jdbcType=CHAR},
+      </if>
+      <if test="record.newsXwbt != null" >
+        news_XWBT = #{record.newsXwbt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsYczz != null" >
+        news_YCZZ = #{record.newsYczz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsBjr != null" >
+        news_BJR = #{record.newsBjr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsShr != null" >
+        news_SHR = #{record.newsShr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsBcsj != null" >
+        news_BCSJ = #{record.newsBcsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.newsXgsj != null" >
+        news_XGSJ = #{record.newsXgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.newsFbsj != null" >
+        news_FBSJ = #{record.newsFbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.newsTsdx != null" >
+        news_TSDX = #{record.newsTsdx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsXwlb != null" >
+        news_XWLB = #{record.newsXwlb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsSsxh != null" >
+        news_SSXH = #{record.newsSsxh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsXwnr != null" >
+        news_XWNR = #{record.newsXwnr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update news
+    set news_XWBH = #{record.newsXwbh,jdbcType=VARCHAR},
+      association_no = #{record.associationNo,jdbcType=VARCHAR},
+      admin_ID = #{record.adminId,jdbcType=CHAR},
+      news_XWBT = #{record.newsXwbt,jdbcType=VARCHAR},
+      news_YCZZ = #{record.newsYczz,jdbcType=VARCHAR},
+      news_BJR = #{record.newsBjr,jdbcType=VARCHAR},
+      news_SHR = #{record.newsShr,jdbcType=VARCHAR},
+      news_BCSJ = #{record.newsBcsj,jdbcType=TIMESTAMP},
+      news_XGSJ = #{record.newsXgsj,jdbcType=TIMESTAMP},
+      news_FBSJ = #{record.newsFbsj,jdbcType=TIMESTAMP},
+      news_TSDX = #{record.newsTsdx,jdbcType=VARCHAR},
+      news_XWLB = #{record.newsXwlb,jdbcType=VARCHAR},
+      news_SSXH = #{record.newsSsxh,jdbcType=VARCHAR},
+      news_XWNR = #{record.newsXwnr,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update news
+    set news_XWBH = #{record.newsXwbh,jdbcType=VARCHAR},
+      association_no = #{record.associationNo,jdbcType=VARCHAR},
+      admin_ID = #{record.adminId,jdbcType=CHAR},
+      news_XWBT = #{record.newsXwbt,jdbcType=VARCHAR},
+      news_YCZZ = #{record.newsYczz,jdbcType=VARCHAR},
+      news_BJR = #{record.newsBjr,jdbcType=VARCHAR},
+      news_SHR = #{record.newsShr,jdbcType=VARCHAR},
+      news_BCSJ = #{record.newsBcsj,jdbcType=TIMESTAMP},
+      news_XGSJ = #{record.newsXgsj,jdbcType=TIMESTAMP},
+      news_FBSJ = #{record.newsFbsj,jdbcType=TIMESTAMP},
+      news_TSDX = #{record.newsTsdx,jdbcType=VARCHAR},
+      news_XWLB = #{record.newsXwlb,jdbcType=VARCHAR},
+      news_SSXH = #{record.newsSsxh,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.News" >
+    update news
+    <set >
+      <if test="associationNo != null" >
+        association_no = #{associationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        admin_ID = #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="newsXwbt != null" >
+        news_XWBT = #{newsXwbt,jdbcType=VARCHAR},
+      </if>
+      <if test="newsYczz != null" >
+        news_YCZZ = #{newsYczz,jdbcType=VARCHAR},
+      </if>
+      <if test="newsBjr != null" >
+        news_BJR = #{newsBjr,jdbcType=VARCHAR},
+      </if>
+      <if test="newsShr != null" >
+        news_SHR = #{newsShr,jdbcType=VARCHAR},
+      </if>
+      <if test="newsBcsj != null" >
+        news_BCSJ = #{newsBcsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsXgsj != null" >
+        news_XGSJ = #{newsXgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsFbsj != null" >
+        news_FBSJ = #{newsFbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsTsdx != null" >
+        news_TSDX = #{newsTsdx,jdbcType=VARCHAR},
+      </if>
+      <if test="newsXwlb != null" >
+        news_XWLB = #{newsXwlb,jdbcType=VARCHAR},
+      </if>
+      <if test="newsSsxh != null" >
+        news_SSXH = #{newsSsxh,jdbcType=VARCHAR},
+      </if>
+      <if test="newsXwnr != null" >
+        news_XWNR = #{newsXwnr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where news_XWBH = #{newsXwbh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.News" >
+    update news
+    set association_no = #{associationNo,jdbcType=VARCHAR},
+      admin_ID = #{adminId,jdbcType=CHAR},
+      news_XWBT = #{newsXwbt,jdbcType=VARCHAR},
+      news_YCZZ = #{newsYczz,jdbcType=VARCHAR},
+      news_BJR = #{newsBjr,jdbcType=VARCHAR},
+      news_SHR = #{newsShr,jdbcType=VARCHAR},
+      news_BCSJ = #{newsBcsj,jdbcType=TIMESTAMP},
+      news_XGSJ = #{newsXgsj,jdbcType=TIMESTAMP},
+      news_FBSJ = #{newsFbsj,jdbcType=TIMESTAMP},
+      news_TSDX = #{newsTsdx,jdbcType=VARCHAR},
+      news_XWLB = #{newsXwlb,jdbcType=VARCHAR},
+      news_SSXH = #{newsSsxh,jdbcType=VARCHAR},
+      news_XWNR = #{newsXwnr,jdbcType=LONGVARCHAR}
+    where news_XWBH = #{newsXwbh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.News" >
+    update news
+    set association_no = #{associationNo,jdbcType=VARCHAR},
+      admin_ID = #{adminId,jdbcType=CHAR},
+      news_XWBT = #{newsXwbt,jdbcType=VARCHAR},
+      news_YCZZ = #{newsYczz,jdbcType=VARCHAR},
+      news_BJR = #{newsBjr,jdbcType=VARCHAR},
+      news_SHR = #{newsShr,jdbcType=VARCHAR},
+      news_BCSJ = #{newsBcsj,jdbcType=TIMESTAMP},
+      news_XGSJ = #{newsXgsj,jdbcType=TIMESTAMP},
+      news_FBSJ = #{newsFbsj,jdbcType=TIMESTAMP},
+      news_TSDX = #{newsTsdx,jdbcType=VARCHAR},
+      news_XWLB = #{newsXwlb,jdbcType=VARCHAR},
+      news_SSXH = #{newsSsxh,jdbcType=VARCHAR}
+    where news_XWBH = #{newsXwbh,jdbcType=VARCHAR}
+  </update>
+</mapper>

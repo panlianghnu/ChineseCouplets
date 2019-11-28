@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Admin" >
+    <id column="admin_ID" property="adminId" jdbcType="CHAR" />
+    <result column="admin_UserName" property="adminUsername" jdbcType="VARCHAR" />
+    <result column="admin_AccessLevel" property="adminAccesslevel" jdbcType="CHAR" />
+    <result column="admin_AssociationNO" property="adminAssociationno" jdbcType="CHAR" />
+    <result column="admin_Name" property="adminName" jdbcType="VARCHAR" />
+    <result column="admin_Sex" property="adminSex" jdbcType="CHAR" />
+    <result column="admin_Region" property="adminRegion" jdbcType="VARCHAR" />
+    <result column="admin_Birthday2" property="adminBirthday2" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    admin_ID, admin_UserName, admin_AccessLevel, admin_AssociationNO, admin_Name, admin_Sex, 
+    admin_Region, admin_Birthday2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.AdminExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_ID = #{adminId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from admin
+    where admin_ID = #{adminId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.AdminExample" >
+    delete from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Admin" >
+    insert into admin (admin_ID, admin_UserName, admin_AccessLevel, 
+      admin_AssociationNO, admin_Name, admin_Sex, 
+      admin_Region, admin_Birthday2)
+    values (#{adminId,jdbcType=CHAR}, #{adminUsername,jdbcType=VARCHAR}, #{adminAccesslevel,jdbcType=CHAR}, 
+      #{adminAssociationno,jdbcType=CHAR}, #{adminName,jdbcType=VARCHAR}, #{adminSex,jdbcType=CHAR}, 
+      #{adminRegion,jdbcType=VARCHAR}, #{adminBirthday2,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_ID,
+      </if>
+      <if test="adminUsername != null" >
+        admin_UserName,
+      </if>
+      <if test="adminAccesslevel != null" >
+        admin_AccessLevel,
+      </if>
+      <if test="adminAssociationno != null" >
+        admin_AssociationNO,
+      </if>
+      <if test="adminName != null" >
+        admin_Name,
+      </if>
+      <if test="adminSex != null" >
+        admin_Sex,
+      </if>
+      <if test="adminRegion != null" >
+        admin_Region,
+      </if>
+      <if test="adminBirthday2 != null" >
+        admin_Birthday2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="adminUsername != null" >
+        #{adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAccesslevel != null" >
+        #{adminAccesslevel,jdbcType=CHAR},
+      </if>
+      <if test="adminAssociationno != null" >
+        #{adminAssociationno,jdbcType=CHAR},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null" >
+        #{adminSex,jdbcType=CHAR},
+      </if>
+      <if test="adminRegion != null" >
+        #{adminRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="adminBirthday2 != null" >
+        #{adminBirthday2,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.AdminExample" resultType="java.lang.Integer" >
+    select count(*) from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admin
+    <set >
+      <if test="record.adminId != null" >
+        admin_ID = #{record.adminId,jdbcType=CHAR},
+      </if>
+      <if test="record.adminUsername != null" >
+        admin_UserName = #{record.adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminAccesslevel != null" >
+        admin_AccessLevel = #{record.adminAccesslevel,jdbcType=CHAR},
+      </if>
+      <if test="record.adminAssociationno != null" >
+        admin_AssociationNO = #{record.adminAssociationno,jdbcType=CHAR},
+      </if>
+      <if test="record.adminName != null" >
+        admin_Name = #{record.adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminSex != null" >
+        admin_Sex = #{record.adminSex,jdbcType=CHAR},
+      </if>
+      <if test="record.adminRegion != null" >
+        admin_Region = #{record.adminRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminBirthday2 != null" >
+        admin_Birthday2 = #{record.adminBirthday2,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admin
+    set admin_ID = #{record.adminId,jdbcType=CHAR},
+      admin_UserName = #{record.adminUsername,jdbcType=VARCHAR},
+      admin_AccessLevel = #{record.adminAccesslevel,jdbcType=CHAR},
+      admin_AssociationNO = #{record.adminAssociationno,jdbcType=CHAR},
+      admin_Name = #{record.adminName,jdbcType=VARCHAR},
+      admin_Sex = #{record.adminSex,jdbcType=CHAR},
+      admin_Region = #{record.adminRegion,jdbcType=VARCHAR},
+      admin_Birthday2 = #{record.adminBirthday2,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Admin" >
+    update admin
+    <set >
+      <if test="adminUsername != null" >
+        admin_UserName = #{adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAccesslevel != null" >
+        admin_AccessLevel = #{adminAccesslevel,jdbcType=CHAR},
+      </if>
+      <if test="adminAssociationno != null" >
+        admin_AssociationNO = #{adminAssociationno,jdbcType=CHAR},
+      </if>
+      <if test="adminName != null" >
+        admin_Name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null" >
+        admin_Sex = #{adminSex,jdbcType=CHAR},
+      </if>
+      <if test="adminRegion != null" >
+        admin_Region = #{adminRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="adminBirthday2 != null" >
+        admin_Birthday2 = #{adminBirthday2,jdbcType=DATE},
+      </if>
+    </set>
+    where admin_ID = #{adminId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Admin" >
+    update admin
+    set admin_UserName = #{adminUsername,jdbcType=VARCHAR},
+      admin_AccessLevel = #{adminAccesslevel,jdbcType=CHAR},
+      admin_AssociationNO = #{adminAssociationno,jdbcType=CHAR},
+      admin_Name = #{adminName,jdbcType=VARCHAR},
+      admin_Sex = #{adminSex,jdbcType=CHAR},
+      admin_Region = #{adminRegion,jdbcType=VARCHAR},
+      admin_Birthday2 = #{adminBirthday2,jdbcType=DATE}
+    where admin_ID = #{adminId,jdbcType=CHAR}
+  </update>
+</mapper>

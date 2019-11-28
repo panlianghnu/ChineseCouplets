@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ccdm:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>ccdm</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="ccdm_0.0.1-SNAPSHOT_20191127.war">
+      <element id="artifact" artifact-name="ccdm:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.CoupletsexistedMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Coupletsexisted" >
+    <id column="CoupletsExisted_id" property="coupletsexistedId" jdbcType="CHAR" />
+    <result column="Cou_CoupletsExisted_id" property="couCoupletsexistedId" jdbcType="CHAR" />
+    <result column="CoupletsExisted_title" property="coupletsexistedTitle" jdbcType="VARCHAR" />
+    <result column="CoupletsExisted_upCouplets" property="coupletsexistedUpcouplets" jdbcType="VARCHAR" />
+    <result column="CoupletsExisted_downCouplets" property="coupletsexistedDowncouplets" jdbcType="VARCHAR" />
+    <result column="CoupletsExisted_broseCount" property="coupletsexistedBrosecount" jdbcType="INTEGER" />
+    <result column="CoupletsExisted_InputDate" property="coupletsexistedInputdate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CoupletsExisted_id, Cou_CoupletsExisted_id, CoupletsExisted_title, CoupletsExisted_upCouplets, 
+    CoupletsExisted_downCouplets, CoupletsExisted_broseCount, CoupletsExisted_InputDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.CoupletsexistedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from coupletsexisted
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from coupletsexisted
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from coupletsexisted
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.CoupletsexistedExample" >
+    delete from coupletsexisted
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Coupletsexisted" >
+    insert into coupletsexisted (CoupletsExisted_id, Cou_CoupletsExisted_id, 
+      CoupletsExisted_title, CoupletsExisted_upCouplets, 
+      CoupletsExisted_downCouplets, CoupletsExisted_broseCount, 
+      CoupletsExisted_InputDate)
+    values (#{coupletsexistedId,jdbcType=CHAR}, #{couCoupletsexistedId,jdbcType=CHAR}, 
+      #{coupletsexistedTitle,jdbcType=VARCHAR}, #{coupletsexistedUpcouplets,jdbcType=VARCHAR}, 
+      #{coupletsexistedDowncouplets,jdbcType=VARCHAR}, #{coupletsexistedBrosecount,jdbcType=INTEGER}, 
+      #{coupletsexistedInputdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Coupletsexisted" >
+    insert into coupletsexisted
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coupletsexistedId != null" >
+        CoupletsExisted_id,
+      </if>
+      <if test="couCoupletsexistedId != null" >
+        Cou_CoupletsExisted_id,
+      </if>
+      <if test="coupletsexistedTitle != null" >
+        CoupletsExisted_title,
+      </if>
+      <if test="coupletsexistedUpcouplets != null" >
+        CoupletsExisted_upCouplets,
+      </if>
+      <if test="coupletsexistedDowncouplets != null" >
+        CoupletsExisted_downCouplets,
+      </if>
+      <if test="coupletsexistedBrosecount != null" >
+        CoupletsExisted_broseCount,
+      </if>
+      <if test="coupletsexistedInputdate != null" >
+        CoupletsExisted_InputDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coupletsexistedId != null" >
+        #{coupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="couCoupletsexistedId != null" >
+        #{couCoupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="coupletsexistedTitle != null" >
+        #{coupletsexistedTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsexistedUpcouplets != null" >
+        #{coupletsexistedUpcouplets,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsexistedDowncouplets != null" >
+        #{coupletsexistedDowncouplets,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsexistedBrosecount != null" >
+        #{coupletsexistedBrosecount,jdbcType=INTEGER},
+      </if>
+      <if test="coupletsexistedInputdate != null" >
+        #{coupletsexistedInputdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.CoupletsexistedExample" resultType="java.lang.Integer" >
+    select count(*) from coupletsexisted
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update coupletsexisted
+    <set >
+      <if test="record.coupletsexistedId != null" >
+        CoupletsExisted_id = #{record.coupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="record.couCoupletsexistedId != null" >
+        Cou_CoupletsExisted_id = #{record.couCoupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="record.coupletsexistedTitle != null" >
+        CoupletsExisted_title = #{record.coupletsexistedTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletsexistedUpcouplets != null" >
+        CoupletsExisted_upCouplets = #{record.coupletsexistedUpcouplets,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletsexistedDowncouplets != null" >
+        CoupletsExisted_downCouplets = #{record.coupletsexistedDowncouplets,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletsexistedBrosecount != null" >
+        CoupletsExisted_broseCount = #{record.coupletsexistedBrosecount,jdbcType=INTEGER},
+      </if>
+      <if test="record.coupletsexistedInputdate != null" >
+        CoupletsExisted_InputDate = #{record.coupletsexistedInputdate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update coupletsexisted
+    set CoupletsExisted_id = #{record.coupletsexistedId,jdbcType=CHAR},
+      Cou_CoupletsExisted_id = #{record.couCoupletsexistedId,jdbcType=CHAR},
+      CoupletsExisted_title = #{record.coupletsexistedTitle,jdbcType=VARCHAR},
+      CoupletsExisted_upCouplets = #{record.coupletsexistedUpcouplets,jdbcType=VARCHAR},
+      CoupletsExisted_downCouplets = #{record.coupletsexistedDowncouplets,jdbcType=VARCHAR},
+      CoupletsExisted_broseCount = #{record.coupletsexistedBrosecount,jdbcType=INTEGER},
+      CoupletsExisted_InputDate = #{record.coupletsexistedInputdate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Coupletsexisted" >
+    update coupletsexisted
+    <set >
+      <if test="couCoupletsexistedId != null" >
+        Cou_CoupletsExisted_id = #{couCoupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="coupletsexistedTitle != null" >
+        CoupletsExisted_title = #{coupletsexistedTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsexistedUpcouplets != null" >
+        CoupletsExisted_upCouplets = #{coupletsexistedUpcouplets,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsexistedDowncouplets != null" >
+        CoupletsExisted_downCouplets = #{coupletsexistedDowncouplets,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsexistedBrosecount != null" >
+        CoupletsExisted_broseCount = #{coupletsexistedBrosecount,jdbcType=INTEGER},
+      </if>
+      <if test="coupletsexistedInputdate != null" >
+        CoupletsExisted_InputDate = #{coupletsexistedInputdate,jdbcType=DATE},
+      </if>
+    </set>
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Coupletsexisted" >
+    update coupletsexisted
+    set Cou_CoupletsExisted_id = #{couCoupletsexistedId,jdbcType=CHAR},
+      CoupletsExisted_title = #{coupletsexistedTitle,jdbcType=VARCHAR},
+      CoupletsExisted_upCouplets = #{coupletsexistedUpcouplets,jdbcType=VARCHAR},
+      CoupletsExisted_downCouplets = #{coupletsexistedDowncouplets,jdbcType=VARCHAR},
+      CoupletsExisted_broseCount = #{coupletsexistedBrosecount,jdbcType=INTEGER},
+      CoupletsExisted_InputDate = #{coupletsexistedInputdate,jdbcType=DATE}
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+  </update>
+</mapper>

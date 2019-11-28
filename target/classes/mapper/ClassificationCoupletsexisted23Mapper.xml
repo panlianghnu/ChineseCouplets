@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.ClassificationCoupletsexisted23Mapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.ClassificationCoupletsexisted23Key" >
+    <id column="CoupletsExisted_id" property="coupletsexistedId" jdbcType="CHAR" />
+    <id column="Classification_classificationId" property="classificationClassificationid" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CoupletsExisted_id, Classification_classificationId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.ClassificationCoupletsexisted23Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from classification_coupletsexisted_23
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.hnu.ccdm.entity.ClassificationCoupletsexisted23Key" >
+    delete from classification_coupletsexisted_23
+    where CoupletsExisted_id = #{coupletsexistedId,jdbcType=CHAR}
+      and Classification_classificationId = #{classificationClassificationid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.ClassificationCoupletsexisted23Example" >
+    delete from classification_coupletsexisted_23
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.ClassificationCoupletsexisted23Key" >
+    insert into classification_coupletsexisted_23 (CoupletsExisted_id, Classification_classificationId
+      )
+    values (#{coupletsexistedId,jdbcType=CHAR}, #{classificationClassificationid,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.ClassificationCoupletsexisted23Key" >
+    insert into classification_coupletsexisted_23
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coupletsexistedId != null" >
+        CoupletsExisted_id,
+      </if>
+      <if test="classificationClassificationid != null" >
+        Classification_classificationId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coupletsexistedId != null" >
+        #{coupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="classificationClassificationid != null" >
+        #{classificationClassificationid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.ClassificationCoupletsexisted23Example" resultType="java.lang.Integer" >
+    select count(*) from classification_coupletsexisted_23
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update classification_coupletsexisted_23
+    <set >
+      <if test="record.coupletsexistedId != null" >
+        CoupletsExisted_id = #{record.coupletsexistedId,jdbcType=CHAR},
+      </if>
+      <if test="record.classificationClassificationid != null" >
+        Classification_classificationId = #{record.classificationClassificationid,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update classification_coupletsexisted_23
+    set CoupletsExisted_id = #{record.coupletsexistedId,jdbcType=CHAR},
+      Classification_classificationId = #{record.classificationClassificationid,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

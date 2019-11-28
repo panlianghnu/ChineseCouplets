@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.NotificationMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Notification" >
+    <id column="notification_id" property="notificationId" jdbcType="VARCHAR" />
+    <result column="admin_ID" property="adminId" jdbcType="CHAR" />
+    <result column="notification_title" property="notificationTitle" jdbcType="VARCHAR" />
+    <result column="notification_time" property="notificationTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.Notification" extends="BaseResultMap" >
+    <result column="notification_Content" property="notificationContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    notification_id, admin_ID, notification_title, notification_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    notification_Content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.NotificationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.NotificationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from notification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notification
+    where notification_id = #{notificationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from notification
+    where notification_id = #{notificationId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.NotificationExample" >
+    delete from notification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Notification" >
+    insert into notification (notification_id, admin_ID, notification_title, 
+      notification_time, notification_Content
+      )
+    values (#{notificationId,jdbcType=VARCHAR}, #{adminId,jdbcType=CHAR}, #{notificationTitle,jdbcType=VARCHAR}, 
+      #{notificationTime,jdbcType=TIMESTAMP}, #{notificationContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Notification" >
+    insert into notification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="notificationId != null" >
+        notification_id,
+      </if>
+      <if test="adminId != null" >
+        admin_ID,
+      </if>
+      <if test="notificationTitle != null" >
+        notification_title,
+      </if>
+      <if test="notificationTime != null" >
+        notification_time,
+      </if>
+      <if test="notificationContent != null" >
+        notification_Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="notificationId != null" >
+        #{notificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="notificationTitle != null" >
+        #{notificationTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="notificationTime != null" >
+        #{notificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notificationContent != null" >
+        #{notificationContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.NotificationExample" resultType="java.lang.Integer" >
+    select count(*) from notification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update notification
+    <set >
+      <if test="record.notificationId != null" >
+        notification_id = #{record.notificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null" >
+        admin_ID = #{record.adminId,jdbcType=CHAR},
+      </if>
+      <if test="record.notificationTitle != null" >
+        notification_title = #{record.notificationTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notificationTime != null" >
+        notification_time = #{record.notificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.notificationContent != null" >
+        notification_Content = #{record.notificationContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update notification
+    set notification_id = #{record.notificationId,jdbcType=VARCHAR},
+      admin_ID = #{record.adminId,jdbcType=CHAR},
+      notification_title = #{record.notificationTitle,jdbcType=VARCHAR},
+      notification_time = #{record.notificationTime,jdbcType=TIMESTAMP},
+      notification_Content = #{record.notificationContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update notification
+    set notification_id = #{record.notificationId,jdbcType=VARCHAR},
+      admin_ID = #{record.adminId,jdbcType=CHAR},
+      notification_title = #{record.notificationTitle,jdbcType=VARCHAR},
+      notification_time = #{record.notificationTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Notification" >
+    update notification
+    <set >
+      <if test="adminId != null" >
+        admin_ID = #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="notificationTitle != null" >
+        notification_title = #{notificationTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="notificationTime != null" >
+        notification_time = #{notificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notificationContent != null" >
+        notification_Content = #{notificationContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where notification_id = #{notificationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.Notification" >
+    update notification
+    set admin_ID = #{adminId,jdbcType=CHAR},
+      notification_title = #{notificationTitle,jdbcType=VARCHAR},
+      notification_time = #{notificationTime,jdbcType=TIMESTAMP},
+      notification_Content = #{notificationContent,jdbcType=LONGVARCHAR}
+    where notification_id = #{notificationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Notification" >
+    update notification
+    set admin_ID = #{adminId,jdbcType=CHAR},
+      notification_title = #{notificationTitle,jdbcType=VARCHAR},
+      notification_time = #{notificationTime,jdbcType=TIMESTAMP}
+    where notification_id = #{notificationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

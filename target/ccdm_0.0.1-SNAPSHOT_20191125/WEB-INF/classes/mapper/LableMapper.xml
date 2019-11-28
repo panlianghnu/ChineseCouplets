@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.LableMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Lable" >
+    <id column="lable_content" property="lableContent" jdbcType="VARCHAR" />
+    <result column="lable_Name" property="lableName" jdbcType="VARCHAR" />
+    <result column="lable_Remarks" property="lableRemarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    lable_content, lable_Name, lable_Remarks
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.LableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from lable
+    where lable_content = #{lableContent,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from lable
+    where lable_content = #{lableContent,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.LableExample" >
+    delete from lable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Lable" >
+    insert into lable (lable_content, lable_Name, lable_Remarks
+      )
+    values (#{lableContent,jdbcType=VARCHAR}, #{lableName,jdbcType=VARCHAR}, #{lableRemarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Lable" >
+    insert into lable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lableContent != null" >
+        lable_content,
+      </if>
+      <if test="lableName != null" >
+        lable_Name,
+      </if>
+      <if test="lableRemarks != null" >
+        lable_Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lableContent != null" >
+        #{lableContent,jdbcType=VARCHAR},
+      </if>
+      <if test="lableName != null" >
+        #{lableName,jdbcType=VARCHAR},
+      </if>
+      <if test="lableRemarks != null" >
+        #{lableRemarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.LableExample" resultType="java.lang.Integer" >
+    select count(*) from lable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lable
+    <set >
+      <if test="record.lableContent != null" >
+        lable_content = #{record.lableContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lableName != null" >
+        lable_Name = #{record.lableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lableRemarks != null" >
+        lable_Remarks = #{record.lableRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lable
+    set lable_content = #{record.lableContent,jdbcType=VARCHAR},
+      lable_Name = #{record.lableName,jdbcType=VARCHAR},
+      lable_Remarks = #{record.lableRemarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Lable" >
+    update lable
+    <set >
+      <if test="lableName != null" >
+        lable_Name = #{lableName,jdbcType=VARCHAR},
+      </if>
+      <if test="lableRemarks != null" >
+        lable_Remarks = #{lableRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lable_content = #{lableContent,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Lable" >
+    update lable
+    set lable_Name = #{lableName,jdbcType=VARCHAR},
+      lable_Remarks = #{lableRemarks,jdbcType=VARCHAR}
+    where lable_content = #{lableContent,jdbcType=VARCHAR}
+  </update>
+</mapper>

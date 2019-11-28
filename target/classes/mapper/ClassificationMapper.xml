@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.ClassificationMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Classification" >
+    <id column="Classification_classificationId" property="classificationClassificationid" jdbcType="CHAR" />
+    <result column="Classification_classificationName" property="classificationClassificationname" jdbcType="VARCHAR" />
+    <result column="Classification_classificationIntroduction" property="classificationClassificationintroduction" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Classification_classificationId, Classification_classificationName, Classification_classificationIntroduction
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.ClassificationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from classification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from classification
+    where Classification_classificationId = #{classificationClassificationid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from classification
+    where Classification_classificationId = #{classificationClassificationid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.ClassificationExample" >
+    delete from classification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Classification" >
+    insert into classification (Classification_classificationId, Classification_classificationName, 
+      Classification_classificationIntroduction)
+    values (#{classificationClassificationid,jdbcType=CHAR}, #{classificationClassificationname,jdbcType=VARCHAR}, 
+      #{classificationClassificationintroduction,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Classification" >
+    insert into classification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classificationClassificationid != null" >
+        Classification_classificationId,
+      </if>
+      <if test="classificationClassificationname != null" >
+        Classification_classificationName,
+      </if>
+      <if test="classificationClassificationintroduction != null" >
+        Classification_classificationIntroduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classificationClassificationid != null" >
+        #{classificationClassificationid,jdbcType=CHAR},
+      </if>
+      <if test="classificationClassificationname != null" >
+        #{classificationClassificationname,jdbcType=VARCHAR},
+      </if>
+      <if test="classificationClassificationintroduction != null" >
+        #{classificationClassificationintroduction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.ClassificationExample" resultType="java.lang.Integer" >
+    select count(*) from classification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update classification
+    <set >
+      <if test="record.classificationClassificationid != null" >
+        Classification_classificationId = #{record.classificationClassificationid,jdbcType=CHAR},
+      </if>
+      <if test="record.classificationClassificationname != null" >
+        Classification_classificationName = #{record.classificationClassificationname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classificationClassificationintroduction != null" >
+        Classification_classificationIntroduction = #{record.classificationClassificationintroduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update classification
+    set Classification_classificationId = #{record.classificationClassificationid,jdbcType=CHAR},
+      Classification_classificationName = #{record.classificationClassificationname,jdbcType=VARCHAR},
+      Classification_classificationIntroduction = #{record.classificationClassificationintroduction,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Classification" >
+    update classification
+    <set >
+      <if test="classificationClassificationname != null" >
+        Classification_classificationName = #{classificationClassificationname,jdbcType=VARCHAR},
+      </if>
+      <if test="classificationClassificationintroduction != null" >
+        Classification_classificationIntroduction = #{classificationClassificationintroduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Classification_classificationId = #{classificationClassificationid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Classification" >
+    update classification
+    set Classification_classificationName = #{classificationClassificationname,jdbcType=VARCHAR},
+      Classification_classificationIntroduction = #{classificationClassificationintroduction,jdbcType=VARCHAR}
+    where Classification_classificationId = #{classificationClassificationid,jdbcType=CHAR}
+  </update>
+</mapper>

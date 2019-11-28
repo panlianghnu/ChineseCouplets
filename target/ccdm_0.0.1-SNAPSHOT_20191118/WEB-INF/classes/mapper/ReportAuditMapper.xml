@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.ReportAuditMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.ReportAudit" >
+    <id column="report_audit_ReportNO" property="reportAuditReportno" jdbcType="VARCHAR" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="report_audit_InformerID" property="reportAuditInformerid" jdbcType="VARCHAR" />
+    <result column="report_audit_PostID" property="reportAuditPostid" jdbcType="VARCHAR" />
+    <result column="report_audit_BReportID" property="reportAuditBreportid" jdbcType="VARCHAR" />
+    <result column="report_audit_ReportTime" property="reportAuditReporttime" jdbcType="TIMESTAMP" />
+    <result column="report_audit_AdminID" property="reportAuditAdminid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.ReportAudit" extends="BaseResultMap" >
+    <result column="report_audit_ReportReason" property="reportAuditReportreason" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    report_audit_ReportNO, user_account, report_audit_InformerID, report_audit_PostID, 
+    report_audit_BReportID, report_audit_ReportTime, report_audit_AdminID
+  </sql>
+  <sql id="Blob_Column_List" >
+    report_audit_ReportReason
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.ReportAuditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from report_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.ReportAuditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from report_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from report_audit
+    where report_audit_ReportNO = #{reportAuditReportno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from report_audit
+    where report_audit_ReportNO = #{reportAuditReportno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.ReportAuditExample" >
+    delete from report_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.ReportAudit" >
+    insert into report_audit (report_audit_ReportNO, user_account, 
+      report_audit_InformerID, report_audit_PostID, 
+      report_audit_BReportID, report_audit_ReportTime, 
+      report_audit_AdminID, report_audit_ReportReason
+      )
+    values (#{reportAuditReportno,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, 
+      #{reportAuditInformerid,jdbcType=VARCHAR}, #{reportAuditPostid,jdbcType=VARCHAR}, 
+      #{reportAuditBreportid,jdbcType=VARCHAR}, #{reportAuditReporttime,jdbcType=TIMESTAMP}, 
+      #{reportAuditAdminid,jdbcType=VARCHAR}, #{reportAuditReportreason,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.ReportAudit" >
+    insert into report_audit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportAuditReportno != null" >
+        report_audit_ReportNO,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="reportAuditInformerid != null" >
+        report_audit_InformerID,
+      </if>
+      <if test="reportAuditPostid != null" >
+        report_audit_PostID,
+      </if>
+      <if test="reportAuditBreportid != null" >
+        report_audit_BReportID,
+      </if>
+      <if test="reportAuditReporttime != null" >
+        report_audit_ReportTime,
+      </if>
+      <if test="reportAuditAdminid != null" >
+        report_audit_AdminID,
+      </if>
+      <if test="reportAuditReportreason != null" >
+        report_audit_ReportReason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportAuditReportno != null" >
+        #{reportAuditReportno,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditInformerid != null" >
+        #{reportAuditInformerid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditPostid != null" >
+        #{reportAuditPostid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditBreportid != null" >
+        #{reportAuditBreportid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditReporttime != null" >
+        #{reportAuditReporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportAuditAdminid != null" >
+        #{reportAuditAdminid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditReportreason != null" >
+        #{reportAuditReportreason,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.ReportAuditExample" resultType="java.lang.Integer" >
+    select count(*) from report_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update report_audit
+    <set >
+      <if test="record.reportAuditReportno != null" >
+        report_audit_ReportNO = #{record.reportAuditReportno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportAuditInformerid != null" >
+        report_audit_InformerID = #{record.reportAuditInformerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportAuditPostid != null" >
+        report_audit_PostID = #{record.reportAuditPostid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportAuditBreportid != null" >
+        report_audit_BReportID = #{record.reportAuditBreportid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportAuditReporttime != null" >
+        report_audit_ReportTime = #{record.reportAuditReporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reportAuditAdminid != null" >
+        report_audit_AdminID = #{record.reportAuditAdminid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportAuditReportreason != null" >
+        report_audit_ReportReason = #{record.reportAuditReportreason,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update report_audit
+    set report_audit_ReportNO = #{record.reportAuditReportno,jdbcType=VARCHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      report_audit_InformerID = #{record.reportAuditInformerid,jdbcType=VARCHAR},
+      report_audit_PostID = #{record.reportAuditPostid,jdbcType=VARCHAR},
+      report_audit_BReportID = #{record.reportAuditBreportid,jdbcType=VARCHAR},
+      report_audit_ReportTime = #{record.reportAuditReporttime,jdbcType=TIMESTAMP},
+      report_audit_AdminID = #{record.reportAuditAdminid,jdbcType=VARCHAR},
+      report_audit_ReportReason = #{record.reportAuditReportreason,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update report_audit
+    set report_audit_ReportNO = #{record.reportAuditReportno,jdbcType=VARCHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      report_audit_InformerID = #{record.reportAuditInformerid,jdbcType=VARCHAR},
+      report_audit_PostID = #{record.reportAuditPostid,jdbcType=VARCHAR},
+      report_audit_BReportID = #{record.reportAuditBreportid,jdbcType=VARCHAR},
+      report_audit_ReportTime = #{record.reportAuditReporttime,jdbcType=TIMESTAMP},
+      report_audit_AdminID = #{record.reportAuditAdminid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.ReportAudit" >
+    update report_audit
+    <set >
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditInformerid != null" >
+        report_audit_InformerID = #{reportAuditInformerid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditPostid != null" >
+        report_audit_PostID = #{reportAuditPostid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditBreportid != null" >
+        report_audit_BReportID = #{reportAuditBreportid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditReporttime != null" >
+        report_audit_ReportTime = #{reportAuditReporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportAuditAdminid != null" >
+        report_audit_AdminID = #{reportAuditAdminid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportAuditReportreason != null" >
+        report_audit_ReportReason = #{reportAuditReportreason,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where report_audit_ReportNO = #{reportAuditReportno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.ReportAudit" >
+    update report_audit
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      report_audit_InformerID = #{reportAuditInformerid,jdbcType=VARCHAR},
+      report_audit_PostID = #{reportAuditPostid,jdbcType=VARCHAR},
+      report_audit_BReportID = #{reportAuditBreportid,jdbcType=VARCHAR},
+      report_audit_ReportTime = #{reportAuditReporttime,jdbcType=TIMESTAMP},
+      report_audit_AdminID = #{reportAuditAdminid,jdbcType=VARCHAR},
+      report_audit_ReportReason = #{reportAuditReportreason,jdbcType=LONGVARCHAR}
+    where report_audit_ReportNO = #{reportAuditReportno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.ReportAudit" >
+    update report_audit
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      report_audit_InformerID = #{reportAuditInformerid,jdbcType=VARCHAR},
+      report_audit_PostID = #{reportAuditPostid,jdbcType=VARCHAR},
+      report_audit_BReportID = #{reportAuditBreportid,jdbcType=VARCHAR},
+      report_audit_ReportTime = #{reportAuditReporttime,jdbcType=TIMESTAMP},
+      report_audit_AdminID = #{reportAuditAdminid,jdbcType=VARCHAR}
+    where report_audit_ReportNO = #{reportAuditReportno,jdbcType=VARCHAR}
+  </update>
+</mapper>

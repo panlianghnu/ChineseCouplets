@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.ViewhistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Viewhistory" >
+    <id column="viewHistory_id" property="viewhistoryId" jdbcType="VARCHAR" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="viewHistory_date" property="viewhistoryDate" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.Viewhistory" extends="BaseResultMap" >
+    <result column="viewHistory_Content" property="viewhistoryContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    viewHistory_id, user_account, viewHistory_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    viewHistory_Content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.ViewhistoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from viewhistory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.ViewhistoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from viewhistory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from viewhistory
+    where viewHistory_id = #{viewhistoryId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from viewhistory
+    where viewHistory_id = #{viewhistoryId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.ViewhistoryExample" >
+    delete from viewhistory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Viewhistory" >
+    insert into viewhistory (viewHistory_id, user_account, viewHistory_date, 
+      viewHistory_Content)
+    values (#{viewhistoryId,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{viewhistoryDate,jdbcType=DATE}, 
+      #{viewhistoryContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Viewhistory" >
+    insert into viewhistory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="viewhistoryId != null" >
+        viewHistory_id,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="viewhistoryDate != null" >
+        viewHistory_date,
+      </if>
+      <if test="viewhistoryContent != null" >
+        viewHistory_Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="viewhistoryId != null" >
+        #{viewhistoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="viewhistoryDate != null" >
+        #{viewhistoryDate,jdbcType=DATE},
+      </if>
+      <if test="viewhistoryContent != null" >
+        #{viewhistoryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.ViewhistoryExample" resultType="java.lang.Integer" >
+    select count(*) from viewhistory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update viewhistory
+    <set >
+      <if test="record.viewhistoryId != null" >
+        viewHistory_id = #{record.viewhistoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.viewhistoryDate != null" >
+        viewHistory_date = #{record.viewhistoryDate,jdbcType=DATE},
+      </if>
+      <if test="record.viewhistoryContent != null" >
+        viewHistory_Content = #{record.viewhistoryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update viewhistory
+    set viewHistory_id = #{record.viewhistoryId,jdbcType=VARCHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      viewHistory_date = #{record.viewhistoryDate,jdbcType=DATE},
+      viewHistory_Content = #{record.viewhistoryContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update viewhistory
+    set viewHistory_id = #{record.viewhistoryId,jdbcType=VARCHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      viewHistory_date = #{record.viewhistoryDate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Viewhistory" >
+    update viewhistory
+    <set >
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="viewhistoryDate != null" >
+        viewHistory_date = #{viewhistoryDate,jdbcType=DATE},
+      </if>
+      <if test="viewhistoryContent != null" >
+        viewHistory_Content = #{viewhistoryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where viewHistory_id = #{viewhistoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.Viewhistory" >
+    update viewhistory
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      viewHistory_date = #{viewhistoryDate,jdbcType=DATE},
+      viewHistory_Content = #{viewhistoryContent,jdbcType=LONGVARCHAR}
+    where viewHistory_id = #{viewhistoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Viewhistory" >
+    update viewhistory
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      viewHistory_date = #{viewhistoryDate,jdbcType=DATE}
+    where viewHistory_id = #{viewhistoryId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.Collection1Mapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Collection1" >
+    <id column="collection_id" property="collectionId" jdbcType="VARCHAR" />
+    <result column="collection_postaccount" property="collectionPostaccount" jdbcType="CHAR" />
+    <result column="collection_postsid" property="collectionPostsid" jdbcType="INTEGER" />
+    <result column="collection_collectdate" property="collectionCollectdate" jdbcType="TIMESTAMP" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    collection_id, collection_postaccount, collection_postsid, collection_collectdate, 
+    user_account
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.Collection1Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from collection1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from collection1
+    where collection_id = #{collectionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from collection1
+    where collection_id = #{collectionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.Collection1Example" >
+    delete from collection1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Collection1" >
+    insert into collection1 (collection_id, collection_postaccount, 
+      collection_postsid, collection_collectdate, 
+      user_account)
+    values (#{collectionId,jdbcType=VARCHAR}, #{collectionPostaccount,jdbcType=CHAR}, 
+      #{collectionPostsid,jdbcType=INTEGER}, #{collectionCollectdate,jdbcType=TIMESTAMP}, 
+      #{userAccount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Collection1" >
+    insert into collection1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        collection_id,
+      </if>
+      <if test="collectionPostaccount != null" >
+        collection_postaccount,
+      </if>
+      <if test="collectionPostsid != null" >
+        collection_postsid,
+      </if>
+      <if test="collectionCollectdate != null" >
+        collection_collectdate,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        #{collectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionPostaccount != null" >
+        #{collectionPostaccount,jdbcType=CHAR},
+      </if>
+      <if test="collectionPostsid != null" >
+        #{collectionPostsid,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCollectdate != null" >
+        #{collectionCollectdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.Collection1Example" resultType="java.lang.Integer" >
+    select count(*) from collection1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update collection1
+    <set >
+      <if test="record.collectionId != null" >
+        collection_id = #{record.collectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectionPostaccount != null" >
+        collection_postaccount = #{record.collectionPostaccount,jdbcType=CHAR},
+      </if>
+      <if test="record.collectionPostsid != null" >
+        collection_postsid = #{record.collectionPostsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectionCollectdate != null" >
+        collection_collectdate = #{record.collectionCollectdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update collection1
+    set collection_id = #{record.collectionId,jdbcType=VARCHAR},
+      collection_postaccount = #{record.collectionPostaccount,jdbcType=CHAR},
+      collection_postsid = #{record.collectionPostsid,jdbcType=INTEGER},
+      collection_collectdate = #{record.collectionCollectdate,jdbcType=TIMESTAMP},
+      user_account = #{record.userAccount,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Collection1" >
+    update collection1
+    <set >
+      <if test="collectionPostaccount != null" >
+        collection_postaccount = #{collectionPostaccount,jdbcType=CHAR},
+      </if>
+      <if test="collectionPostsid != null" >
+        collection_postsid = #{collectionPostsid,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCollectdate != null" >
+        collection_collectdate = #{collectionCollectdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where collection_id = #{collectionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Collection1" >
+    update collection1
+    set collection_postaccount = #{collectionPostaccount,jdbcType=CHAR},
+      collection_postsid = #{collectionPostsid,jdbcType=INTEGER},
+      collection_collectdate = #{collectionCollectdate,jdbcType=TIMESTAMP},
+      user_account = #{userAccount,jdbcType=VARCHAR}
+    where collection_id = #{collectionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

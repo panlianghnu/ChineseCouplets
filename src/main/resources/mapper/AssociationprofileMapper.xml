@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.AssociationprofileMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Associationprofile" >
+    <id column="AssociationProfile_id" property="associationprofileId" jdbcType="VARCHAR" />
+    <result column="admin_ID" property="adminId" jdbcType="CHAR" />
+    <result column="association_no" property="associationNo" jdbcType="VARCHAR" />
+    <result column="AssociationProfile_time" property="associationprofileTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.Associationprofile" extends="BaseResultMap" >
+    <result column="AssociationProfile_Content" property="associationprofileContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AssociationProfile_id, admin_ID, association_no, AssociationProfile_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    AssociationProfile_Content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.AssociationprofileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from associationprofile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.AssociationprofileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from associationprofile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from associationprofile
+    where AssociationProfile_id = #{associationprofileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from associationprofile
+    where AssociationProfile_id = #{associationprofileId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.AssociationprofileExample" >
+    delete from associationprofile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Associationprofile" >
+    insert into associationprofile (AssociationProfile_id, admin_ID, association_no, 
+      AssociationProfile_time, AssociationProfile_Content
+      )
+    values (#{associationprofileId,jdbcType=VARCHAR}, #{adminId,jdbcType=CHAR}, #{associationNo,jdbcType=VARCHAR}, 
+      #{associationprofileTime,jdbcType=TIMESTAMP}, #{associationprofileContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Associationprofile" >
+    insert into associationprofile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="associationprofileId != null" >
+        AssociationProfile_id,
+      </if>
+      <if test="adminId != null" >
+        admin_ID,
+      </if>
+      <if test="associationNo != null" >
+        association_no,
+      </if>
+      <if test="associationprofileTime != null" >
+        AssociationProfile_time,
+      </if>
+      <if test="associationprofileContent != null" >
+        AssociationProfile_Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="associationprofileId != null" >
+        #{associationprofileId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="associationNo != null" >
+        #{associationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="associationprofileTime != null" >
+        #{associationprofileTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="associationprofileContent != null" >
+        #{associationprofileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.AssociationprofileExample" resultType="java.lang.Integer" >
+    select count(*) from associationprofile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update associationprofile
+    <set >
+      <if test="record.associationprofileId != null" >
+        AssociationProfile_id = #{record.associationprofileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null" >
+        admin_ID = #{record.adminId,jdbcType=CHAR},
+      </if>
+      <if test="record.associationNo != null" >
+        association_no = #{record.associationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.associationprofileTime != null" >
+        AssociationProfile_time = #{record.associationprofileTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.associationprofileContent != null" >
+        AssociationProfile_Content = #{record.associationprofileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update associationprofile
+    set AssociationProfile_id = #{record.associationprofileId,jdbcType=VARCHAR},
+      admin_ID = #{record.adminId,jdbcType=CHAR},
+      association_no = #{record.associationNo,jdbcType=VARCHAR},
+      AssociationProfile_time = #{record.associationprofileTime,jdbcType=TIMESTAMP},
+      AssociationProfile_Content = #{record.associationprofileContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update associationprofile
+    set AssociationProfile_id = #{record.associationprofileId,jdbcType=VARCHAR},
+      admin_ID = #{record.adminId,jdbcType=CHAR},
+      association_no = #{record.associationNo,jdbcType=VARCHAR},
+      AssociationProfile_time = #{record.associationprofileTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Associationprofile" >
+    update associationprofile
+    <set >
+      <if test="adminId != null" >
+        admin_ID = #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="associationNo != null" >
+        association_no = #{associationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="associationprofileTime != null" >
+        AssociationProfile_time = #{associationprofileTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="associationprofileContent != null" >
+        AssociationProfile_Content = #{associationprofileContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where AssociationProfile_id = #{associationprofileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.Associationprofile" >
+    update associationprofile
+    set admin_ID = #{adminId,jdbcType=CHAR},
+      association_no = #{associationNo,jdbcType=VARCHAR},
+      AssociationProfile_time = #{associationprofileTime,jdbcType=TIMESTAMP},
+      AssociationProfile_Content = #{associationprofileContent,jdbcType=LONGVARCHAR}
+    where AssociationProfile_id = #{associationprofileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Associationprofile" >
+    update associationprofile
+    set admin_ID = #{adminId,jdbcType=CHAR},
+      association_no = #{associationNo,jdbcType=VARCHAR},
+      AssociationProfile_time = #{associationprofileTime,jdbcType=TIMESTAMP}
+    where AssociationProfile_id = #{associationprofileId,jdbcType=VARCHAR}
+  </update>
+</mapper>

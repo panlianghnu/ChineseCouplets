@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.FollowMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Follow" >
+    <id column="follow_followedaccount" property="followFollowedaccount" jdbcType="CHAR" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="follow_followtime" property="followFollowtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    follow_followedaccount, user_account, follow_followtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.FollowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from follow
+    where follow_followedaccount = #{followFollowedaccount,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from follow
+    where follow_followedaccount = #{followFollowedaccount,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.FollowExample" >
+    delete from follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Follow" >
+    insert into follow (follow_followedaccount, user_account, 
+      follow_followtime)
+    values (#{followFollowedaccount,jdbcType=CHAR}, #{userAccount,jdbcType=VARCHAR}, 
+      #{followFollowtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Follow" >
+    insert into follow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="followFollowedaccount != null" >
+        follow_followedaccount,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="followFollowtime != null" >
+        follow_followtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="followFollowedaccount != null" >
+        #{followFollowedaccount,jdbcType=CHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="followFollowtime != null" >
+        #{followFollowtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.FollowExample" resultType="java.lang.Integer" >
+    select count(*) from follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update follow
+    <set >
+      <if test="record.followFollowedaccount != null" >
+        follow_followedaccount = #{record.followFollowedaccount,jdbcType=CHAR},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.followFollowtime != null" >
+        follow_followtime = #{record.followFollowtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update follow
+    set follow_followedaccount = #{record.followFollowedaccount,jdbcType=CHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      follow_followtime = #{record.followFollowtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Follow" >
+    update follow
+    <set >
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="followFollowtime != null" >
+        follow_followtime = #{followFollowtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where follow_followedaccount = #{followFollowedaccount,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Follow" >
+    update follow
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      follow_followtime = #{followFollowtime,jdbcType=TIMESTAMP}
+    where follow_followedaccount = #{followFollowedaccount,jdbcType=CHAR}
+  </update>
+</mapper>

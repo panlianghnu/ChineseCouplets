@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.DraftMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Draft" >
+    <id column="draft_No" property="draftNo" jdbcType="VARCHAR" />
+    <result column="admin_ID" property="adminId" jdbcType="CHAR" />
+    <result column="draft_Author" property="draftAuthor" jdbcType="VARCHAR" />
+    <result column="draft_Time" property="draftTime" jdbcType="TIMESTAMP" />
+    <result column="draft_Type" property="draftType" jdbcType="VARCHAR" />
+    <result column="draft_Title" property="draftTitle" jdbcType="VARCHAR" />
+    <result column="draft_Enclosure" property="draftEnclosure" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.Draft" extends="BaseResultMap" >
+    <result column="draft_Content" property="draftContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    draft_No, admin_ID, draft_Author, draft_Time, draft_Type, draft_Title, draft_Enclosure
+  </sql>
+  <sql id="Blob_Column_List" >
+    draft_Content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.DraftExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from draft
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.DraftExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from draft
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from draft
+    where draft_No = #{draftNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from draft
+    where draft_No = #{draftNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.DraftExample" >
+    delete from draft
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Draft" >
+    insert into draft (draft_No, admin_ID, draft_Author, 
+      draft_Time, draft_Type, draft_Title, 
+      draft_Enclosure, draft_Content)
+    values (#{draftNo,jdbcType=VARCHAR}, #{adminId,jdbcType=CHAR}, #{draftAuthor,jdbcType=VARCHAR}, 
+      #{draftTime,jdbcType=TIMESTAMP}, #{draftType,jdbcType=VARCHAR}, #{draftTitle,jdbcType=VARCHAR}, 
+      #{draftEnclosure,jdbcType=VARCHAR}, #{draftContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Draft" >
+    insert into draft
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="draftNo != null" >
+        draft_No,
+      </if>
+      <if test="adminId != null" >
+        admin_ID,
+      </if>
+      <if test="draftAuthor != null" >
+        draft_Author,
+      </if>
+      <if test="draftTime != null" >
+        draft_Time,
+      </if>
+      <if test="draftType != null" >
+        draft_Type,
+      </if>
+      <if test="draftTitle != null" >
+        draft_Title,
+      </if>
+      <if test="draftEnclosure != null" >
+        draft_Enclosure,
+      </if>
+      <if test="draftContent != null" >
+        draft_Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="draftNo != null" >
+        #{draftNo,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="draftAuthor != null" >
+        #{draftAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="draftTime != null" >
+        #{draftTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="draftType != null" >
+        #{draftType,jdbcType=VARCHAR},
+      </if>
+      <if test="draftTitle != null" >
+        #{draftTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="draftEnclosure != null" >
+        #{draftEnclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="draftContent != null" >
+        #{draftContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.DraftExample" resultType="java.lang.Integer" >
+    select count(*) from draft
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update draft
+    <set >
+      <if test="record.draftNo != null" >
+        draft_No = #{record.draftNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminId != null" >
+        admin_ID = #{record.adminId,jdbcType=CHAR},
+      </if>
+      <if test="record.draftAuthor != null" >
+        draft_Author = #{record.draftAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.draftTime != null" >
+        draft_Time = #{record.draftTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.draftType != null" >
+        draft_Type = #{record.draftType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.draftTitle != null" >
+        draft_Title = #{record.draftTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.draftEnclosure != null" >
+        draft_Enclosure = #{record.draftEnclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.draftContent != null" >
+        draft_Content = #{record.draftContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update draft
+    set draft_No = #{record.draftNo,jdbcType=VARCHAR},
+      admin_ID = #{record.adminId,jdbcType=CHAR},
+      draft_Author = #{record.draftAuthor,jdbcType=VARCHAR},
+      draft_Time = #{record.draftTime,jdbcType=TIMESTAMP},
+      draft_Type = #{record.draftType,jdbcType=VARCHAR},
+      draft_Title = #{record.draftTitle,jdbcType=VARCHAR},
+      draft_Enclosure = #{record.draftEnclosure,jdbcType=VARCHAR},
+      draft_Content = #{record.draftContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update draft
+    set draft_No = #{record.draftNo,jdbcType=VARCHAR},
+      admin_ID = #{record.adminId,jdbcType=CHAR},
+      draft_Author = #{record.draftAuthor,jdbcType=VARCHAR},
+      draft_Time = #{record.draftTime,jdbcType=TIMESTAMP},
+      draft_Type = #{record.draftType,jdbcType=VARCHAR},
+      draft_Title = #{record.draftTitle,jdbcType=VARCHAR},
+      draft_Enclosure = #{record.draftEnclosure,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Draft" >
+    update draft
+    <set >
+      <if test="adminId != null" >
+        admin_ID = #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="draftAuthor != null" >
+        draft_Author = #{draftAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="draftTime != null" >
+        draft_Time = #{draftTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="draftType != null" >
+        draft_Type = #{draftType,jdbcType=VARCHAR},
+      </if>
+      <if test="draftTitle != null" >
+        draft_Title = #{draftTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="draftEnclosure != null" >
+        draft_Enclosure = #{draftEnclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="draftContent != null" >
+        draft_Content = #{draftContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where draft_No = #{draftNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.Draft" >
+    update draft
+    set admin_ID = #{adminId,jdbcType=CHAR},
+      draft_Author = #{draftAuthor,jdbcType=VARCHAR},
+      draft_Time = #{draftTime,jdbcType=TIMESTAMP},
+      draft_Type = #{draftType,jdbcType=VARCHAR},
+      draft_Title = #{draftTitle,jdbcType=VARCHAR},
+      draft_Enclosure = #{draftEnclosure,jdbcType=VARCHAR},
+      draft_Content = #{draftContent,jdbcType=LONGVARCHAR}
+    where draft_No = #{draftNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Draft" >
+    update draft
+    set admin_ID = #{adminId,jdbcType=CHAR},
+      draft_Author = #{draftAuthor,jdbcType=VARCHAR},
+      draft_Time = #{draftTime,jdbcType=TIMESTAMP},
+      draft_Type = #{draftType,jdbcType=VARCHAR},
+      draft_Title = #{draftTitle,jdbcType=VARCHAR},
+      draft_Enclosure = #{draftEnclosure,jdbcType=VARCHAR}
+    where draft_No = #{draftNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

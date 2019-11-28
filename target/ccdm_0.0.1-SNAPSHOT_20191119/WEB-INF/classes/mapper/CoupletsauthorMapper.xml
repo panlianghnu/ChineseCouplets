@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.CoupletsauthorMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Coupletsauthor" >
+    <id column="CoupletsAuthor_id" property="coupletsauthorId" jdbcType="CHAR" />
+    <result column="CoupletsAuthor_Name" property="coupletsauthorName" jdbcType="VARCHAR" />
+    <result column="CoupletsAuthor_Sex" property="coupletsauthorSex" jdbcType="CHAR" />
+    <result column="CoupletsAuthor_Dynasty" property="coupletsauthorDynasty" jdbcType="VARCHAR" />
+    <result column="CoupletsAuthor_Style" property="coupletsauthorStyle" jdbcType="VARCHAR" />
+    <result column="CoupletsAuthor_Remarks" property="coupletsauthorRemarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CoupletsAuthor_id, CoupletsAuthor_Name, CoupletsAuthor_Sex, CoupletsAuthor_Dynasty, 
+    CoupletsAuthor_Style, CoupletsAuthor_Remarks
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.CoupletsauthorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from coupletsauthor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from coupletsauthor
+    where CoupletsAuthor_id = #{coupletsauthorId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from coupletsauthor
+    where CoupletsAuthor_id = #{coupletsauthorId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.CoupletsauthorExample" >
+    delete from coupletsauthor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Coupletsauthor" >
+    insert into coupletsauthor (CoupletsAuthor_id, CoupletsAuthor_Name, 
+      CoupletsAuthor_Sex, CoupletsAuthor_Dynasty, 
+      CoupletsAuthor_Style, CoupletsAuthor_Remarks
+      )
+    values (#{coupletsauthorId,jdbcType=CHAR}, #{coupletsauthorName,jdbcType=VARCHAR}, 
+      #{coupletsauthorSex,jdbcType=CHAR}, #{coupletsauthorDynasty,jdbcType=VARCHAR}, 
+      #{coupletsauthorStyle,jdbcType=VARCHAR}, #{coupletsauthorRemarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Coupletsauthor" >
+    insert into coupletsauthor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coupletsauthorId != null" >
+        CoupletsAuthor_id,
+      </if>
+      <if test="coupletsauthorName != null" >
+        CoupletsAuthor_Name,
+      </if>
+      <if test="coupletsauthorSex != null" >
+        CoupletsAuthor_Sex,
+      </if>
+      <if test="coupletsauthorDynasty != null" >
+        CoupletsAuthor_Dynasty,
+      </if>
+      <if test="coupletsauthorStyle != null" >
+        CoupletsAuthor_Style,
+      </if>
+      <if test="coupletsauthorRemarks != null" >
+        CoupletsAuthor_Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coupletsauthorId != null" >
+        #{coupletsauthorId,jdbcType=CHAR},
+      </if>
+      <if test="coupletsauthorName != null" >
+        #{coupletsauthorName,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsauthorSex != null" >
+        #{coupletsauthorSex,jdbcType=CHAR},
+      </if>
+      <if test="coupletsauthorDynasty != null" >
+        #{coupletsauthorDynasty,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsauthorStyle != null" >
+        #{coupletsauthorStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsauthorRemarks != null" >
+        #{coupletsauthorRemarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.CoupletsauthorExample" resultType="java.lang.Integer" >
+    select count(*) from coupletsauthor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update coupletsauthor
+    <set >
+      <if test="record.coupletsauthorId != null" >
+        CoupletsAuthor_id = #{record.coupletsauthorId,jdbcType=CHAR},
+      </if>
+      <if test="record.coupletsauthorName != null" >
+        CoupletsAuthor_Name = #{record.coupletsauthorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletsauthorSex != null" >
+        CoupletsAuthor_Sex = #{record.coupletsauthorSex,jdbcType=CHAR},
+      </if>
+      <if test="record.coupletsauthorDynasty != null" >
+        CoupletsAuthor_Dynasty = #{record.coupletsauthorDynasty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletsauthorStyle != null" >
+        CoupletsAuthor_Style = #{record.coupletsauthorStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupletsauthorRemarks != null" >
+        CoupletsAuthor_Remarks = #{record.coupletsauthorRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update coupletsauthor
+    set CoupletsAuthor_id = #{record.coupletsauthorId,jdbcType=CHAR},
+      CoupletsAuthor_Name = #{record.coupletsauthorName,jdbcType=VARCHAR},
+      CoupletsAuthor_Sex = #{record.coupletsauthorSex,jdbcType=CHAR},
+      CoupletsAuthor_Dynasty = #{record.coupletsauthorDynasty,jdbcType=VARCHAR},
+      CoupletsAuthor_Style = #{record.coupletsauthorStyle,jdbcType=VARCHAR},
+      CoupletsAuthor_Remarks = #{record.coupletsauthorRemarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Coupletsauthor" >
+    update coupletsauthor
+    <set >
+      <if test="coupletsauthorName != null" >
+        CoupletsAuthor_Name = #{coupletsauthorName,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsauthorSex != null" >
+        CoupletsAuthor_Sex = #{coupletsauthorSex,jdbcType=CHAR},
+      </if>
+      <if test="coupletsauthorDynasty != null" >
+        CoupletsAuthor_Dynasty = #{coupletsauthorDynasty,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsauthorStyle != null" >
+        CoupletsAuthor_Style = #{coupletsauthorStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="coupletsauthorRemarks != null" >
+        CoupletsAuthor_Remarks = #{coupletsauthorRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CoupletsAuthor_id = #{coupletsauthorId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Coupletsauthor" >
+    update coupletsauthor
+    set CoupletsAuthor_Name = #{coupletsauthorName,jdbcType=VARCHAR},
+      CoupletsAuthor_Sex = #{coupletsauthorSex,jdbcType=CHAR},
+      CoupletsAuthor_Dynasty = #{coupletsauthorDynasty,jdbcType=VARCHAR},
+      CoupletsAuthor_Style = #{coupletsauthorStyle,jdbcType=VARCHAR},
+      CoupletsAuthor_Remarks = #{coupletsauthorRemarks,jdbcType=VARCHAR}
+    where CoupletsAuthor_id = #{coupletsauthorId,jdbcType=CHAR}
+  </update>
+</mapper>
