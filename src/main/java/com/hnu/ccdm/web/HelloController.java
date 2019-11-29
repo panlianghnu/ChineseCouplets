@@ -25,6 +25,7 @@ public class HelloController {
         long lt = new Date().getTime();
         Date date = new Date(lt);
         res = simpleDateFormat.format(date);
+        System.out.println(res);
 
         return res;
     }
