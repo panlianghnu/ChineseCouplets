@@ -121,6 +121,8 @@ public class CoupletsExistedController {
     @ResponseBody
     @RequestMapping("getCoupletDetailById")
     CoupletDetail getCoupletDetailById(String id) {
+        coupletsExistedService.autoIncreaseBroseCount(id);       //浏览量++
+
         CoupletDetail toBack = new CoupletDetail();
         //通过楹联id找到它的内容、作者、简介
         Coupletsexisted coupletsexisted = coupletsExistedService.getCoupletById(id);  //找到对应楹联

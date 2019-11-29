@@ -35,4 +35,11 @@ public class CoupletsExistedServiceImpl implements CoupletsExistedService {
         return coupletsexistedMapper.selectByExample(new CoupletsexistedExample());
     }
 
+    @Override
+    public int autoIncreaseBroseCount(String id) {
+        Coupletsexisted coupletsexisted = coupletsexistedMapper.selectByPrimaryKey(id);
+        coupletsexisted.setCoupletsexistedBrosecount(coupletsexisted.getCoupletsexistedBrosecount()+1);
+        return coupletsexistedMapper.updateByPrimaryKeySelective(coupletsexisted);
+    }
+
 }

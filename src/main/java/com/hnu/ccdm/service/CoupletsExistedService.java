@@ -17,4 +17,5 @@ public interface CoupletsExistedService {
     // 用户列表
     List<Coupletsexisted> getCoupletList();
 
+    int autoIncreaseBroseCount(String id);
 }
