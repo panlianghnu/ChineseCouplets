@@ -34,5 +34,6 @@ public class CoupletintroImpl implements CoupletIntroService {
     @Override
     public List<CoupletintroWithBLOBs> getCoupletintroWithBLOBsList() {
         return coupletintroMapper.selectByExampleWithBLOBs(new CoupletintroExample());
+
     }
 }
