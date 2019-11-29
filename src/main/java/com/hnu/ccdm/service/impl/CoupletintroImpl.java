@@ -27,12 +27,12 @@ public class CoupletintroImpl implements CoupletIntroService {
     }
 
     @Override
-    public Coupletintro getCoupletintroById(String coupletintroId){
+    public CoupletintroWithBLOBs getCoupletintroById(String coupletintroId){
         return coupletintroMapper.selectByPrimaryKey(coupletintroId);
     }
 
     @Override
-    public List<Coupletintro> getCoupletintroList() {
-        return coupletintroMapper.selectByExample(new CoupletintroExample());
+    public List<CoupletintroWithBLOBs> getCoupletintroWithBLOBsList() {
+        return coupletintroMapper.selectByExampleWithBLOBs(new CoupletintroExample());
     }
 }

@@ -132,11 +132,12 @@ public class CoupletsExistedController {
         toBack.setCoupletsexistedUpcouplets(coupletsexisted.getCoupletsexistedUpcouplets());   //设置上联
         toBack.setCoupletsexistedDowncouplets(coupletsexisted.getCoupletsexistedDowncouplets());//设置下联
 
-        Coupletintro coupletintro = coupletIntroService.getCoupletintroById(id);      //找到对应楹联简介
+        CoupletintroWithBLOBs coupletintro = coupletIntroService.getCoupletintroById(id);      //找到对应楹联简介
         if (coupletintro != null) {
             toBack.setCoupletintroImage(coupletintro.getCoupletintroImage());
             toBack.setCoupletintroName(coupletintro.getCoupletintroName());
             toBack.setCoupletintroOrigin(coupletintro.getCoupletintroOrigin());
+            toBack.setCoupletintroJSNR(coupletintro.getCoupletintroJsnr());
         }
 
         List<CoupletsexistedCoupletsauthor22Key> list = coupletsexistedCoupletsauthor22Seivice.getCoupletsAuthorList();

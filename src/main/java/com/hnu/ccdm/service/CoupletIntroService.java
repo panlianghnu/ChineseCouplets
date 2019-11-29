@@ -11,7 +11,7 @@ public interface CoupletIntroService {
     int deleteCoupletintroById(String coupletintroId);
 
 
-    Coupletintro getCoupletintroById(String coupletintroId);
+    CoupletintroWithBLOBs getCoupletintroById(String coupletintroId);
 
-    List<Coupletintro> getCoupletintroList();
+    List<CoupletintroWithBLOBs> getCoupletintroWithBLOBsList();
 }

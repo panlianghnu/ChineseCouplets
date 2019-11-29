@@ -1,6 +1,7 @@
 package com.hnu.ccdm.web;
 
 import com.hnu.ccdm.entity.Coupletintro;
+import com.hnu.ccdm.entity.CoupletintroWithBLOBs;
 import com.hnu.ccdm.service.CoupletIntroService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ public class CoupletIntroController {
    @ResponseBody
    @RequestMapping("/coupletIntro")
     public Coupletintro retCoupletIntro(String id){
-       List<Coupletintro> list=coupletIntroService.getCoupletintroList();
+       List<CoupletintroWithBLOBs> list=coupletIntroService.getCoupletintroWithBLOBsList();
        for(Coupletintro x:list){
            if(x.getCoupletsexistedId().equals(id))
                return x;

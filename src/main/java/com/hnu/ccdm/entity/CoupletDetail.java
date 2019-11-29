@@ -3,35 +3,37 @@ package com.hnu.ccdm.entity;
 import java.util.Date;
 
 public class CoupletDetail {
-    private String coupletsexistedId;
+    private String coupletsexistedId;            //楹联ID
 
-    private String coupletsexistedTitle;
+    private String coupletsexistedTitle;         //标题
 
-    private String coupletsexistedUpcouplets;
+    private String coupletsexistedUpcouplets;    //上联
 
-    private String coupletsexistedDowncouplets;
+    private String coupletsexistedDowncouplets;  //下联
 
-    private Integer coupletsexistedBrosecount;
+    private Integer coupletsexistedBrosecount;   //浏览量
 
-    private Date coupletsexistedInputdate;
+    private Date coupletsexistedInputdate;       //录入日期
 
-    private String coupletsauthorId;
+    private String coupletsauthorId;             //作者ID
 
-    private String coupletsauthorName;
+    private String coupletsauthorName;           //作者姓名
 
-    private String coupletsauthorSex;
+    private String coupletsauthorSex;            //作者性别
 
-    private String coupletsauthorDynasty;
+    private String coupletsauthorDynasty;        //作者朝代
 
-    private String coupletsauthorStyle;
+    private String coupletsauthorStyle;          //作者风格
 
-    private String coupletsauthorRemarks;
+    private String coupletsauthorRemarks;        //作者
 
-    private String coupletintroOrigin;
+    private String coupletintroOrigin;           //楹联简介-来源
 
-    private String coupletintroImage;
+    private String coupletintroImage;            //楹联简介-图片
 
-    private String coupletintroName;
+    private String coupletintroName;             //楹联简介-名称
+
+    private String coupletintroJSNR;             //楹联简介-鉴赏
 
     public String getCoupletsexistedId() {
         return coupletsexistedId;
@@ -153,4 +155,11 @@ public class CoupletDetail {
         this.coupletintroName = coupletintroName;
     }
 
+    public String getCoupletintroJSNR() {
+        return coupletintroJSNR;
+    }
+
+    public void setCoupletintroJSNR(String coupletintroJSNR) {
+        this.coupletintroJSNR = coupletintroJSNR;
+    }
 }
