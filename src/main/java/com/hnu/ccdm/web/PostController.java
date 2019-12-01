@@ -82,6 +82,7 @@ public class PostController {
             postWithAuthor.setPostTime(item.getPostTime());                   // 发帖时间
             postWithAuthor.setPostTitle(item.getPostTitle());                 // 帖子标题
             postWithAuthor.setPostTop(item.getPostTop());                     // 是否置顶
+            postWithAuthor.setLabelContent(item.getLableContent());           // 标签ID
 
             for(User x : userList){
                 if(x.getUserAccount().equals(item.getUserAccount())){         // 找到了发帖人， 读取发帖人信息
