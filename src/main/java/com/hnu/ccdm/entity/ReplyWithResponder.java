@@ -2,7 +2,7 @@ package com.hnu.ccdm.entity;
 
 import java.util.Date;
 
-public class ReplyWithResponder {
+public class ReplyWithResponder implements Comparable<ReplyWithResponder>{
     private String replyId;
 
     private String userAccount;
@@ -71,5 +71,10 @@ public class ReplyWithResponder {
 
     public void setReplyId(String replyId) {
         this.replyId = replyId;
+    }
+
+    @Override
+    public int compareTo(ReplyWithResponder o) {
+        return this.replyTime.compareTo(o.getReplyTime());
     }
 }

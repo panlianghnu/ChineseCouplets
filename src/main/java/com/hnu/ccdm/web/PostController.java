@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -120,6 +121,7 @@ public class PostController {
                 toBack.add(replyWithResponder);
             }
         }
+        Collections.sort(toBack);
         return toBack;
     }
 
