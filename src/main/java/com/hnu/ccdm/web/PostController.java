@@ -1,9 +1,9 @@
 package com.hnu.ccdm.web;
 
-import com.hnu.ccdm.entity.Post;
-import com.hnu.ccdm.entity.Reply;
+import com.hnu.ccdm.entity.*;
 import com.hnu.ccdm.service.PostService;
 import com.hnu.ccdm.service.ReplyService;
+import com.hnu.ccdm.service.UserService;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +25,9 @@ public class PostController {
 
     @Autowired
     private ReplyService replyService;
+
+    @Autowired
+    private UserService userService;
 
     @ResponseBody
     @RequestMapping("getPostById")
@@ -54,6 +57,72 @@ public class PostController {
         }
         return toBack;
     }
+
+    @ResponseBody
+    @RequestMapping("/getTenPostsWithAuthor")
+    List<PostWithAuthor> getTenPostsWithAuthor(String num){
+        int index = Integer.valueOf(num);
+        List<Post> list = postService.getPostList();
+        if(list.size() <= index){
+            return null;
+        }
+        List<PostWithAuthor> toBack = new LinkedList<>();
+        List<User> userList = userService.getUserList();                  // 从userList中找到发帖的人
+        //从index开始  ， 传最多10个帖子过去
+        for(int i=index ; i<list.size() && i < index+10 ; i++){
+            Post item = list.get(i);                                          // 读取帖子信息
+            PostWithAuthor postWithAuthor = new PostWithAuthor();             // 临时变量
+            postWithAuthor.setPostId(item.getPostId());                       // 帖子ID
+            postWithAuthor.setPostContent(item.getPostContent());             // 帖子内容
+            postWithAuthor.setPostIsessence(item.getPostIsessence());         // 是否加精
+            postWithAuthor.setPostPsum(item.getPostPsum());                   // 点赞量
+            postWithAuthor.setPostRsum(item.getPostRsum());                   // 回复量
+            postWithAuthor.setPostViewnum(item.getPostViewnum());             // 浏览量
+            postWithAuthor.setPostTime(item.getPostTime());                   // 发帖时间
+            postWithAuthor.setPostTitle(item.getPostTitle());                 // 帖子标题
+            postWithAuthor.setPostTop(item.getPostTop());                     // 是否置顶
+
+            for(User x : userList){
+                if(x.getUserAccount().equals(item.getUserAccount())){         // 找到了发帖人， 读取发帖人信息
+                    postWithAuthor.setUserAccount(x.getUserAccount());        // 发帖人ID
+                    postWithAuthor.setUserNickname(x.getUserNickname());      // 发帖人昵称
+                    postWithAuthor.setUserPortrait(x.getUserPortrait());      // 发帖人头像
+                    break;
+                }
+            }
+            toBack.add(postWithAuthor);
+        }
+        return toBack;
+    }
+
+    @ResponseBody
+    @RequestMapping("getPostReplyByPostId")
+    List<ReplyWithResponder> getPostReplyByPostId(String id){
+        List<ReplyWithResponder> toBack = new LinkedList<>();
+        List<Reply> replyList = replyService.getReplyList();
+        List<User> userList = userService.getUserList();
+        for(Reply x : replyList){
+            if(x.getPostId().equals(id)){                  //从ReplyList中找出postId为传入的postId的
+                ReplyWithResponder replyWithResponder = new ReplyWithResponder(); // 读取回复信息
+                                                                                  //
+                replyWithResponder.setPostId(x.getPostId());                      // 帖子ID
+                replyWithResponder.setReplyId(x.getReplyId());                    // 回复ID
+                replyWithResponder.setReplyContent(x.getReplyContent());          // 回复内容
+                replyWithResponder.setReplyTime(x.getReplyTime());                // 回复时间
+                replyWithResponder.setUserAccount(x.getUserAccount());            // 用户ID
+                // 根据 UserAccount 寻找 UserNickName 和 UserPortrait
+                for(User y : userList){                                           //
+                    if(y.getUserAccount().equals(x.getUserAccount())){            //
+                        replyWithResponder.setUserNickname(y.getUserNickname());  // 用户昵称
+                        replyWithResponder.setUserPortrait(y.getUserPortrait());  // 用户头像
+                    }
+                }
+                toBack.add(replyWithResponder);
+            }
+        }
+        return toBack;
+    }
+
 
     @ResponseBody
     @RequestMapping("getPostsByAuthorId")
