@@ -29,6 +29,8 @@ public class PostWithAuthor {
 
     private String postContent;
 
+    private String userLabel;
+
     public String getPostId() {
         return postId;
     }
@@ -131,5 +133,13 @@ public class PostWithAuthor {
 
     public void setPostContent(String postContent) {
         this.postContent = postContent;
+    }
+
+    public String getUserLabel() {
+        return userLabel;
+    }
+
+    public void setUserLabel(String userLabel) {
+        this.userLabel = userLabel;
     }
 }

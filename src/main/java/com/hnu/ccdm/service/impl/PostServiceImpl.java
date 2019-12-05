@@ -33,4 +33,25 @@ public class PostServiceImpl implements PostService {
     public int deletePostById(String id) {
         return postMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int viewNumAutoIncrease(String id) {
+        Post post = postMapper.selectByPrimaryKey(id);
+        post.setPostViewnum(post.getPostViewnum()+1);
+        return postMapper.updateByPrimaryKey(post);
+    }
+
+    @Override
+    public int rSumAutoIncrease(String id) {
+        Post post = postMapper.selectByPrimaryKey(id);
+        post.setPostRsum(post.getPostRsum()+1);
+        return postMapper.updateByPrimaryKey(post);
+    }
+
+    @Override
+    public int pSumAutoIncrease(String id) {
+        Post post = postMapper.selectByPrimaryKey(id);
+        post.setPostPsum(post.getPostPsum()+1);
+        return postMapper.updateByPrimaryKey(post);
+    }
 }

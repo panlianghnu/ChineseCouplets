@@ -15,4 +15,10 @@ public interface PostService {
     List<Post> getPostList ();
 
     int deletePostById(String id);
+
+    int viewNumAutoIncrease(String id);
+
+    int rSumAutoIncrease(String id);
+
+    int pSumAutoIncrease(String id);
 }

@@ -89,6 +89,7 @@ public class PostController {
                     postWithAuthor.setUserAccount(x.getUserAccount());        // 发帖人ID
                     postWithAuthor.setUserNickname(x.getUserNickname());      // 发帖人昵称
                     postWithAuthor.setUserPortrait(x.getUserPortrait());      // 发帖人头像
+                    postWithAuthor.setUserLabel(x.getUserLabel());
                     break;
                 }
             }
@@ -98,8 +99,9 @@ public class PostController {
     }
 
     @ResponseBody
-    @RequestMapping("getPostReplyByPostId")
+    @RequestMapping("getPostReplyByPostId")             //postDetail  浏览量会+1
     List<ReplyWithResponder> getPostReplyByPostId(String id){
+        postService.viewNumAutoIncrease(id);
         List<ReplyWithResponder> toBack = new LinkedList<>();
         List<Reply> replyList = replyService.getReplyList();
         List<User> userList = userService.getUserList();
@@ -185,9 +187,19 @@ public class PostController {
         reply.setReplyTime(new Date());
         reply.setReplyContent(content);
         reply.setReplyId(userId+(new Date().getTime()));
-        if(replyService.addReply(reply) > 0)
+        if(replyService.addReply(reply) > 0){            //回复成功，帖子的回复量+1
+            postService.rSumAutoIncrease(postId);
             return "回复成功";
+        }
         return "回复失败";
+    }
+
+    @ResponseBody
+    @RequestMapping("like")
+    String likePost(String postId){
+        if(postService.pSumAutoIncrease(postId) > 0)
+            return "点赞成功";
+        return "点赞失败";
     }
 
 }

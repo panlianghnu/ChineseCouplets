@@ -58,7 +58,7 @@ public class CollectionController {
 
     @ResponseBody
     @RequestMapping("/addCollection")
-    public String addCollection(String account,String postId){
+    public String addCollection(String account,String postId){      //postId是帖子ID       postAccount是帖子作者
         Collection1 collection1=new Collection1();
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -76,7 +76,7 @@ public class CollectionController {
 
         collection1.setCollectionCollectdate(new Date());
         collection1.setCollectionPostaccount(postAccount);
-        collection1.setCollectionPostsid(Integer.valueOf(postId));
+        collection1.setCollectionPostsid(postId);
         collection1.setCollectionId(collectionId);
         collection1.setUserAccount(account);
 
@@ -91,7 +91,7 @@ public class CollectionController {
     public String deleteCollection(String account,String postId){
         List<Collection1> collection1List=collection1Service.getCollectionList();
         for (Collection1 x:collection1List){
-            if (x.getUserAccount().equals(account)&&x.getCollectionPostsid()==Integer.valueOf(postId)){
+            if (x.getUserAccount().equals(account)&&x.getCollectionPostsid().equals(postId)){
                 collection1Service.deleteCollectionById(x.getCollectionId());
                 return "删除收藏成功";
             }

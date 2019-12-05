@@ -7,7 +7,7 @@ public class Collection1 {
 
     private String collectionPostaccount;
 
-    private Integer collectionPostsid;
+    private String collectionPostsid;
 
     private Date collectionCollectdate;
 
@@ -29,11 +29,11 @@ public class Collection1 {
         this.collectionPostaccount = collectionPostaccount == null ? null : collectionPostaccount.trim();
     }
 
-    public Integer getCollectionPostsid() {
+    public String getCollectionPostsid() {
         return collectionPostsid;
     }
 
-    public void setCollectionPostsid(Integer collectionPostsid) {
+    public void setCollectionPostsid(String collectionPostsid) {
         this.collectionPostsid = collectionPostsid;
     }
 
