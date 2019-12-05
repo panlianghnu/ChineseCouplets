@@ -98,4 +98,14 @@ public class CollectionController {
         }
         return "删除收藏失败";
     }
+    @ResponseBody
+    @RequestMapping("/judgeCollection")
+    public String judgeCollecion(String account,String postId){
+        List<Collection1> collection1List=collection1Service.getCollectionList();
+        for(Collection1 x:collection1List){
+            if (postId.equals(x.getCollectionPostsid())&&account.equals(x.getUserAccount()))
+                return "已收藏";
+        }
+        return "未收藏";
+    }
 }
