@@ -202,4 +202,11 @@ public class PostController {
         return "点赞失败";
     }
 
+    /*
+    @ResponseBody
+    @RequestMapping("cancelLike")
+    String cancelLike(String postId){
+
+    }*/
+
 }
