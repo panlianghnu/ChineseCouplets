@@ -1,10 +1,7 @@
 package com.hnu.ccdm.web;
 
 import com.hnu.ccdm.entity.*;
-import com.hnu.ccdm.service.PostService;
-import com.hnu.ccdm.service.ReplyService;
-import com.hnu.ccdm.service.UserService;
-import com.hnu.ccdm.service.UserlikeKeyService;
+import com.hnu.ccdm.service.*;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +31,9 @@ public class PostController {
 
     @Autowired
     private UserlikeKeyService userlikeKeyService;
+
+    @Autowired
+    private IntegralService integralService;
 
     @ResponseBody
     @RequestMapping("getPostById")
@@ -179,7 +179,7 @@ public class PostController {
             default: post.setLableContent("2");break;
         }
         if(postService.addPost(post) > 0){
-            new ScoreController().addScore(userId,"10","10");
+            addScore(userId,"10","10");      //发帖加10分  sourceId=10
             return "发贴成功";
         }
 
@@ -198,7 +198,7 @@ public class PostController {
         reply.setReplyId(userId+date.getTime()); // 回复ID由 userId+date.getTime() 构成
         if(replyService.addReply(reply) > 0){            //回复成功，帖子的回复量+1
             postService.rSumAutoIncrease(postId);
-            new ScoreController().addScore(userId,"1","1");      //回复的sourceId 定义为 1
+            addScore(userId,"1","1");      //回复的sourceId 定义为 1
             return "回复成功";
         }
         return "回复失败";
@@ -250,4 +250,26 @@ public class PostController {
         return "未点赞";
     }
 
+    String addScore(String account,String score,String source){
+        List<User> userList=userService.getUserList();
+        for(User x:userList){
+            if (x.getUserAccount().equals(account)){
+                int scoreTemp=x.getUserScore()+Integer.valueOf(score);
+                userService.setScoreByAccount(account,scoreTemp);
+
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                String integralId=account+df.format(new Date());
+
+                Integral integral=new Integral();
+                integral.setIntegralId(integralId);
+                integral.setIntegralSum(Integer.valueOf(score));
+                integral.setIntegralSourceId(source);
+                integral.setIntegralTime(new Date());
+                integral.setUserAccount(account);
+                integralService.addIntegral(integral);
+                return "增加积分成功";
+            }
+        }
+        return "增加积分失败";
+    }
 }
