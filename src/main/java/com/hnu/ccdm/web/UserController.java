@@ -194,24 +194,7 @@ public class UserController {
         return "设置身份证号失败";
     }
 
-    @ResponseBody
-    @RequestMapping("/setScore")//设置积分
-    public String setScore(String id, String score,String type)  {
-        int scoreint=Integer.valueOf(score);
-        List<User> list = userService.getUserList();
-        for (User x : list) {
-            if (x.getUserAccount().equals(id)) {
-                if(type.equals("1"))
-                    scoreint+=x.getUserScore();
-                else
-                    scoreint=x.getUserScore()-scoreint;
-                if (userService.setScoreByAccount(id,scoreint)>0){
-                    return "设置积分成功";
-                }
-            }
-        }
-        return "设置积分失败";
-    }
+
 
     @ResponseBody
     @RequestMapping("/setPassword")
