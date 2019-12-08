@@ -178,8 +178,11 @@ public class PostController {
             case "凤求凰":post.setLableContent("3");break;
             default: post.setLableContent("2");break;
         }
-        if(postService.addPost(post) > 0)
+        if(postService.addPost(post) > 0){
+            new ScoreController().addScore(userId,"10","10");
             return "发贴成功";
+        }
+
         return "发帖失败";
     }
 
@@ -195,6 +198,7 @@ public class PostController {
         reply.setReplyId(userId+date.getTime()); // 回复ID由 userId+date.getTime() 构成
         if(replyService.addReply(reply) > 0){            //回复成功，帖子的回复量+1
             postService.rSumAutoIncrease(postId);
+            new ScoreController().addScore(userId,"1","1");      //回复的sourceId 定义为 1
             return "回复成功";
         }
         return "回复失败";

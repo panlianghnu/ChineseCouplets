@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/score")
-public class scoreController {
+public class ScoreController {
 
     @Autowired
     private UserService userService;
