@@ -4,9 +4,11 @@ import com.hnu.ccdm.entity.*;
 import com.hnu.ccdm.service.PostService;
 import com.hnu.ccdm.service.ReplyService;
 import com.hnu.ccdm.service.UserService;
+import com.hnu.ccdm.service.UserlikeKeyService;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,6 +31,9 @@ public class PostController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserlikeKeyService userlikeKeyService;
 
     @ResponseBody
     @RequestMapping("getPostById")
@@ -181,12 +186,13 @@ public class PostController {
     @ResponseBody
     @RequestMapping("reply")
     String reply(String userId, String postId, String content){
+        Date date = new Date();
         Reply reply = new Reply();
         reply.setPostId(postId);
         reply.setUserAccount(userId);
-        reply.setReplyTime(new Date());
+        reply.setReplyTime(date);
         reply.setReplyContent(content);
-        reply.setReplyId(userId+(new Date().getTime()));
+        reply.setReplyId(userId+date.getTime()); // 回复ID由 userId+date.getTime() 构成
         if(replyService.addReply(reply) > 0){            //回复成功，帖子的回复量+1
             postService.rSumAutoIncrease(postId);
             return "回复成功";
@@ -195,18 +201,49 @@ public class PostController {
     }
 
     @ResponseBody
+    @RequestMapping("cancelReply")
+    String cancelReply(String replyId){
+        Reply reply = replyService.getReplyById(replyId);
+        if(replyService.deleteReplyById(replyId) > 0){
+            postService.rSumAutoDecrease(reply.getPostId());
+            return "删除回复成功";
+        }
+        return "删除回复失败";
+    }
+
+    @ResponseBody
     @RequestMapping("like")
-    String likePost(String postId){
-        if(postService.pSumAutoIncrease(postId) > 0)
+    String likePost(String userId, String postId){
+        if(userlikeKeyService.addUserLike(userId,postId) > 0){
+            postService.pSumAutoIncrease(postId);
             return "点赞成功";
+
+        }
+
         return "点赞失败";
     }
 
-    /*
     @ResponseBody
     @RequestMapping("cancelLike")
-    String cancelLike(String postId){
+    String cancelLike(String userId, String postId){
+        if(userlikeKeyService.deleteUserLike(userId,postId) > 0){
+            postService.pSumAutoDecrease(postId);
+            return "取消点赞成功";
+        }
 
-    }*/
+        return "取消点赞失败";
+    }
+
+    @ResponseBody
+    @RequestMapping("/judgeUserLike")
+    String judgeUserLike(String userId, String postId){
+        List<UserlikeKey> userlikeKeyList = userlikeKeyService.getUserLikeList();
+        for(UserlikeKey x : userlikeKeyList){
+            if(x.getPostid().equals(postId) && x.getUseraccount().equals(userId)){
+                return "已点赞";
+            }
+        }
+        return "未点赞";
+    }
 
 }

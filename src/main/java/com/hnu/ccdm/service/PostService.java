@@ -20,5 +20,9 @@ public interface PostService {
 
     int rSumAutoIncrease(String id);
 
+    int rSumAutoDecrease(String id);
+
     int pSumAutoIncrease(String id);
+
+    int pSumAutoDecrease(String id);
 }

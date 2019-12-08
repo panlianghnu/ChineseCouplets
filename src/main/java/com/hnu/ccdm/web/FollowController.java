@@ -40,4 +40,17 @@ public class FollowController {
         }
         return "取消关注失败";
     }
+
+    @ResponseBody
+    @RequestMapping("judgeFollow")
+    int judgeFollow(String id,String followId){
+        if(id.equals(followId)) return 0;
+        List<Follow> followList = followService.getFollowList();
+        for(Follow x : followList){
+            if(x.getUserAccount().equals(id) && x.getFollowFollowedaccount().equals(followId)){
+                return 1;    //关注过返回1
+            }
+        }
+        return -1;       //未关注返回-1
+    }
 }
