@@ -1,9 +1,9 @@
 package com.hnu.ccdm.web;
 
-import com.hnu.ccdm.entity.Collection1;
-import com.hnu.ccdm.entity.Post;
+import com.hnu.ccdm.entity.*;
 import com.hnu.ccdm.service.Collection1Service;
 import com.hnu.ccdm.service.PostService;
+import com.hnu.ccdm.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,30 +30,47 @@ public class CollectionController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private UserService userService;
+
     @ResponseBody
-    @RequestMapping("/getCollectionPostsByUserId")//通过账号返回收藏
-    List<Post> getCollectionPostsByUserId(String id){
-        List<Post> toBack=new LinkedList<>();
-        List<Collection1> collectionList=collection1Service.getCollectionList();
+    @RequestMapping("/getCollectionList")
+    List<PostWithAuthor> getCollectionList(String account){
+        List<Collection1> collection1List=collection1Service.getCollectionList();
         List<Post> postList=postService.getPostList();
-        LOG.info(""+collectionList.size());
-        LOG.info(""+postList.size());
-        for(Collection1 x:collectionList)
-        {
-            if(x.getUserAccount().equals(id))
-            {
-                for(Post y:postList)
-                {
-                    String postId=String.valueOf(x.getCollectionPostsid());
-                    if(y.getPostId().equals(postId))
-                    {
-                        toBack.add(y);
-                        break;
+        List<User> userList=userService.getUserList();
+        List<PostWithAuthor> toback=new ArrayList<>();
+        for (Collection1 x:collection1List){
+            if (x.getUserAccount().equals(account)){
+                for (Post y:postList){
+                    if (x.getCollectionPostsid().equals(y.getPostId())){
+                        PostWithAuthor postWithAuthor = new PostWithAuthor();             // 临时变量
+                        postWithAuthor.setPostId(y.getPostId());                       // 帖子ID
+                        postWithAuthor.setPostContent(y.getPostContent());             // 帖子内容
+                        postWithAuthor.setPostIsessence(y.getPostIsessence());         // 是否加精
+                        postWithAuthor.setPostPsum(y.getPostPsum());                   // 点赞量
+                        postWithAuthor.setPostRsum(y.getPostRsum());                   // 回复量
+                        postWithAuthor.setPostViewnum(y.getPostViewnum());             // 浏览量
+                        postWithAuthor.setPostTime(y.getPostTime());                   // 发帖时间
+                        postWithAuthor.setPostTitle(y.getPostTitle());                 // 帖子标题
+                        postWithAuthor.setPostTop(y.getPostTop());                     // 是否置顶
+                        postWithAuthor.setLabelContent(y.getLableContent());           // 标签ID
+
+                        for(User z : userList){
+                            if(z.getUserAccount().equals(y.getUserAccount())){         // 找到了发帖人， 读取发帖人信息
+                                postWithAuthor.setUserAccount(z.getUserAccount());        // 发帖人ID
+                                postWithAuthor.setUserNickname(z.getUserNickname());      // 发帖人昵称
+                                postWithAuthor.setUserPortrait(z.getUserPortrait());      // 发帖人头像
+                                postWithAuthor.setUserLabel(z.getUserLabel());
+                                break;
+                            }
+                        }
+                        toback.add(postWithAuthor);
                     }
                 }
             }
         }
-        return toBack;
+        return toback;
     }
 
     @ResponseBody

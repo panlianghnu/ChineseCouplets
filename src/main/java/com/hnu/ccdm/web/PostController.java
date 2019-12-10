@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/post")
@@ -248,6 +245,46 @@ public class PostController {
             }
         }
         return "未点赞";
+    }
+
+    @ResponseBody
+    @RequestMapping("/getUserLikeList")
+    List<PostWithAuthor> getUserLikeList(String account){
+        List<UserlikeKey> userlikeKeyList=userlikeKeyService.getUserLikeList();
+        List<Post> postList=postService.getPostList();
+        List<User> userList=userService.getUserList();
+        List<PostWithAuthor> toback=new ArrayList<>();
+        for (UserlikeKey x:userlikeKeyList){
+            if (x.getUseraccount().equals(account)){
+                for (Post y:postList){
+                    if (x.getPostid().equals(y.getPostId())){
+                        PostWithAuthor postWithAuthor = new PostWithAuthor();             // 临时变量
+                        postWithAuthor.setPostId(y.getPostId());                       // 帖子ID
+                        postWithAuthor.setPostContent(y.getPostContent());             // 帖子内容
+                        postWithAuthor.setPostIsessence(y.getPostIsessence());         // 是否加精
+                        postWithAuthor.setPostPsum(y.getPostPsum());                   // 点赞量
+                        postWithAuthor.setPostRsum(y.getPostRsum());                   // 回复量
+                        postWithAuthor.setPostViewnum(y.getPostViewnum());             // 浏览量
+                        postWithAuthor.setPostTime(y.getPostTime());                   // 发帖时间
+                        postWithAuthor.setPostTitle(y.getPostTitle());                 // 帖子标题
+                        postWithAuthor.setPostTop(y.getPostTop());                     // 是否置顶
+                        postWithAuthor.setLabelContent(y.getLableContent());           // 标签ID
+
+                        for(User z : userList){
+                            if(z.getUserAccount().equals(y.getUserAccount())){         // 找到了发帖人， 读取发帖人信息
+                                postWithAuthor.setUserAccount(z.getUserAccount());        // 发帖人ID
+                                postWithAuthor.setUserNickname(z.getUserNickname());      // 发帖人昵称
+                                postWithAuthor.setUserPortrait(z.getUserPortrait());      // 发帖人头像
+                                postWithAuthor.setUserLabel(z.getUserLabel());
+                                break;
+                            }
+                        }
+                        toback.add(postWithAuthor);
+                    }
+                }
+            }
+        }
+        return toback;
     }
 
     String addScore(String account,String score,String source){
