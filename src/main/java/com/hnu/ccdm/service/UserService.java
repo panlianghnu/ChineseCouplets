@@ -48,5 +48,5 @@ public interface UserService {
 
     int setScoreByAccount(String userAccount,int score);
 
-
+    int setPortraitByAccount(String userAccount, String portrait);
 }

@@ -146,4 +146,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
+    @Override
+    public int setPortraitByAccount(String userAccount, String portrait) {
+        User user = new User();
+        user.setUserAccount(userAccount);
+        user.setUserPortrait(portrait);
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
 }

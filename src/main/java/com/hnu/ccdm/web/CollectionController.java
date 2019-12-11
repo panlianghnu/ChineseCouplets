@@ -44,7 +44,7 @@ public class CollectionController {
             if (x.getUserAccount().equals(account)){
                 for (Post y:postList){
                     if (x.getCollectionPostsid().equals(y.getPostId())){
-                        PostWithAuthor postWithAuthor = new PostWithAuthor();             // 临时变量
+                        PostWithAuthor postWithAuthor = new PostWithAuthor();          // 临时变量
                         postWithAuthor.setPostId(y.getPostId());                       // 帖子ID
                         postWithAuthor.setPostContent(y.getPostContent());             // 帖子内容
                         postWithAuthor.setPostIsessence(y.getPostIsessence());         // 是否加精
