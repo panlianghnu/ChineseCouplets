@@ -1,8 +1,10 @@
 package com.hnu.ccdm.web;
 
 import com.hnu.ccdm.entity.Integral;
+import com.hnu.ccdm.entity.Sign;
 import com.hnu.ccdm.entity.User;
 import com.hnu.ccdm.service.IntegralService;
+import com.hnu.ccdm.service.SignService;
 import com.hnu.ccdm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +25,11 @@ public class ScoreController {
     @Autowired
     private IntegralService integralService;
 
+    @Autowired
+    private SignService signService;
+
     @ResponseBody
-    @RequestMapping("/addScore")
+    @RequestMapping("/addSignScore")
     public String addScore(String account,String score,String source){
         List<User> userList=userService.getUserList();
         for(User x:userList){
@@ -42,10 +47,18 @@ public class ScoreController {
                 integral.setIntegralTime(new Date());
                 integral.setUserAccount(account);
                 integralService.addIntegral(integral);
-                return "增加积分成功";
+
+                Sign sign=new Sign();
+                sign.setSignAccount(account);
+                sign.setSignDate(new Date());
+                sign.setSignId(account+new Date());
+                if (signService.addSign(sign)>0){
+                    return "签到成功";
+                }
+
             }
         }
-        return "增加积分失败";
+        return "签到失败";
     }
 
     @ResponseBody
