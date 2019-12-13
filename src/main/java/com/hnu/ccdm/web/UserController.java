@@ -79,6 +79,7 @@ public class UserController {
         tmp.setUserAccount(phone);
         tmp.setUserTime(new Date());
         tmp.setUserNickname("默认昵称");
+        tmp.setUserPortrait("http://106.54.206.129:8080/pictures/saber.jpg");   //默认头像
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         tmp.setUserTime(date);
