@@ -1,7 +1,6 @@
 package com.hnu.ccdm.web;
 
 import com.hnu.ccdm.entity.*;
-import com.hnu.ccdm.mapper.CoupletsexistedCoupletsauthor22Mapper;
 import com.hnu.ccdm.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,16 +38,16 @@ public class CoupletsExistedController {
 
     @ResponseBody
     @RequestMapping("/getTenCouplets")
-    List<Coupletsexisted> getTenCouplets(String num){
+    List<Coupletsexisted> getTenCouplets(String num) {
         int index = Integer.valueOf(num);
         List<Coupletsexisted> list = coupletsExistedService.getCoupletList();
-        if(list.size() <= index){
+        if (list.size() <= index) {
             return null;
         }
         List<Coupletsexisted> toBack = new LinkedList<>();
         //从index开始  ， 传最多10条楹联过去
-        for(int i=index ; i<list.size() && i < index+10 ; i++){
-            toBack.add( list.get(i) );
+        for (int i = index; i < list.size() && i < index + 10; i++) {
+            toBack.add(list.get(i));
         }
         return toBack;
     }
@@ -102,15 +101,15 @@ public class CoupletsExistedController {
 
     @ResponseBody
     @RequestMapping("getClassificationsByCoupletId")
-    List<Classification> getClassificationsByCoupletId(String id){
+    List<Classification> getClassificationsByCoupletId(String id) {
         List<ClassificationCoupletsexisted23Key> list = classificationCoupletsexisted23KeyService.getClassificationWithCouplets();
         //list 是所有的分类和现有楹联的映射关系
         List<Classification> list1 = classificationService.getClassificationList();
         List<Classification> toBack = new LinkedList<>();
-        for(ClassificationCoupletsexisted23Key x : list){
-            if(x.getCoupletsexistedId().equals(id)){       //在分类映射关系中找到对应的楹联
-                for(Classification y : list1){             //遍历所有的分类、把映射关系映射到分类中
-                    if(x.getClassificationClassificationid().equals(y.getClassificationClassificationid()))
+        for (ClassificationCoupletsexisted23Key x : list) {
+            if (x.getCoupletsexistedId().equals(id)) {       //在分类映射关系中找到对应的楹联
+                for (Classification y : list1) {             //遍历所有的分类、把映射关系映射到分类中
+                    if (x.getClassificationClassificationid().equals(y.getClassificationClassificationid()))
                         toBack.add(y);                     //保存这个分类
                 }
             }
@@ -156,7 +155,6 @@ public class CoupletsExistedController {
                 break;
             }
         }
-
         return toBack;
     }
 }
