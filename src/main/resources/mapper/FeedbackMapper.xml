@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.FeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Feedback" >
+    <id column="feedbackId" property="feedbackid" jdbcType="VARCHAR" />
+    <result column="feedbackAccount" property="feedbackaccount" jdbcType="VARCHAR" />
+    <result column="feedbackTime" property="feedbacktime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.Feedback" extends="BaseResultMap" >
+    <result column="feedbackContent" property="feedbackcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    feedbackId, feedbackAccount, feedbackTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    feedbackContent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.FeedbackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.FeedbackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from feedback
+    where feedbackId = #{feedbackid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from feedback
+    where feedbackId = #{feedbackid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.FeedbackExample" >
+    delete from feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Feedback" >
+    insert into feedback (feedbackId, feedbackAccount, feedbackTime, 
+      feedbackContent)
+    values (#{feedbackid,jdbcType=VARCHAR}, #{feedbackaccount,jdbcType=VARCHAR}, #{feedbacktime,jdbcType=TIMESTAMP}, 
+      #{feedbackcontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Feedback" >
+    insert into feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="feedbackid != null" >
+        feedbackId,
+      </if>
+      <if test="feedbackaccount != null" >
+        feedbackAccount,
+      </if>
+      <if test="feedbacktime != null" >
+        feedbackTime,
+      </if>
+      <if test="feedbackcontent != null" >
+        feedbackContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="feedbackid != null" >
+        #{feedbackid,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackaccount != null" >
+        #{feedbackaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbacktime != null" >
+        #{feedbacktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedbackcontent != null" >
+        #{feedbackcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.FeedbackExample" resultType="java.lang.Integer" >
+    select count(*) from feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update feedback
+    <set >
+      <if test="record.feedbackid != null" >
+        feedbackId = #{record.feedbackid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackaccount != null" >
+        feedbackAccount = #{record.feedbackaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbacktime != null" >
+        feedbackTime = #{record.feedbacktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.feedbackcontent != null" >
+        feedbackContent = #{record.feedbackcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update feedback
+    set feedbackId = #{record.feedbackid,jdbcType=VARCHAR},
+      feedbackAccount = #{record.feedbackaccount,jdbcType=VARCHAR},
+      feedbackTime = #{record.feedbacktime,jdbcType=TIMESTAMP},
+      feedbackContent = #{record.feedbackcontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update feedback
+    set feedbackId = #{record.feedbackid,jdbcType=VARCHAR},
+      feedbackAccount = #{record.feedbackaccount,jdbcType=VARCHAR},
+      feedbackTime = #{record.feedbacktime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Feedback" >
+    update feedback
+    <set >
+      <if test="feedbackaccount != null" >
+        feedbackAccount = #{feedbackaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbacktime != null" >
+        feedbackTime = #{feedbacktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedbackcontent != null" >
+        feedbackContent = #{feedbackcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where feedbackId = #{feedbackid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.Feedback" >
+    update feedback
+    set feedbackAccount = #{feedbackaccount,jdbcType=VARCHAR},
+      feedbackTime = #{feedbacktime,jdbcType=TIMESTAMP},
+      feedbackContent = #{feedbackcontent,jdbcType=LONGVARCHAR}
+    where feedbackId = #{feedbackid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Feedback" >
+    update feedback
+    set feedbackAccount = #{feedbackaccount,jdbcType=VARCHAR},
+      feedbackTime = #{feedbacktime,jdbcType=TIMESTAMP}
+    where feedbackId = #{feedbackid,jdbcType=VARCHAR}
+  </update>
+</mapper>
