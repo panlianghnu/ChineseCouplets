@@ -2,7 +2,6 @@ package com.hnu.ccdm.web;
 
 import com.hnu.ccdm.entity.*;
 import com.hnu.ccdm.service.*;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -31,6 +30,9 @@ public class PostController {
 
     @Autowired
     private IntegralService integralService;
+
+    @Autowired
+    private Collection1Service collection1Service;
 
     @ResponseBody
     @RequestMapping("getPostById")
@@ -146,8 +148,38 @@ public class PostController {
     @ResponseBody
     @RequestMapping("deletePostById")
     String deletePostById(String id){
-        if(postService.deletePostById(id)>0)
+        boolean flag = false;
+        List<Post> postList = postService.getPostList();
+        for(Post x : postList){
+            if(x.getPostId().equals(id)){
+                flag = true;
+            }
+        }
+        if(flag){
+            //删除所有收藏
+            List<Collection1> collection1List = collection1Service.getCollectionList();
+            for(Collection1 x : collection1List){
+                if(x.getCollectionPostsid().equals(id)){   //保存所有收藏这个帖子的表中对象
+                    collection1Service.deleteCollectionById(x.getCollectionId());
+                }
+            }
+            //删除所有点赞
+            List<UserlikeKey> userlikeKeyList = userlikeKeyService.getUserLikeList();
+            for(UserlikeKey x : userlikeKeyList){
+                if(x.getPostid().equals(id)){
+                    userlikeKeyService.deleteUserLike(x.getUseraccount(),x.getPostid());
+                }
+            }
+            //删除所有回复
+            List<Reply> replyList = replyService.getReplyList();
+            for(Reply x :replyList){
+                if(x.getPostId().equals(id)){
+                    replyService.deleteReplyById(x.getReplyId());
+                }
+            }
+            postService.deletePostById(id);
             return "成功";
+        }
         //删除了post之后一定要删除收藏表
         return "删除失败";
     }

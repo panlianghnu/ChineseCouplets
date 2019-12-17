@@ -4,7 +4,6 @@ import com.hnu.ccdm.entity.Post;
 import com.hnu.ccdm.entity.PostExample;
 import com.hnu.ccdm.mapper.PostMapper;
 import com.hnu.ccdm.service.PostService;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

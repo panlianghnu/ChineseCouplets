@@ -38,7 +38,7 @@ public class SearchController {
     public List searchUser(String searchContent) {
         List<User> userList = userService.getUserList();
         searchContent = searchContent.replace(" ", "");
-        System.out.println(searchContent);
+        //System.out.println(searchContent);
         List toback = new ArrayList();
         for (User x : userList) {
             if (x.getUserNickname().contains(searchContent) || x.getUserAccount().contains(searchContent) || (x.getUserName() != null && x.getUserName().contains(searchContent))) {
@@ -57,7 +57,11 @@ public class SearchController {
         searchContent = searchContent.replace(" ", "");
         List<PostWithAuthor> toback = new ArrayList();
         for (Post x : postList) {
-            if (x.getPostTitle().contains(searchContent) || x.getPostContent().contains(searchContent)) {
+            User user = userService.getUserByAccount(x.getUserAccount());
+            //System.out.println(user.getUserAccount());
+            //匹配帖子的标题，内容,作者的姓名，作者的昵称
+            if (x.getPostTitle().contains(searchContent) || x.getPostContent().contains(searchContent)
+                || (user.getUserName()!=null && user.getUserName().contains(searchContent)) || user.getUserNickname().contains(searchContent)) {
                 PostWithAuthor postWithAuthor = new PostWithAuthor();             // 临时变量
                 postWithAuthor.setPostId(x.getPostId());                       // 帖子ID
                 postWithAuthor.setPostContent(x.getPostContent());             // 帖子内容
