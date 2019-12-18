@@ -38,7 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUserList() {
-        return userMapper.selectByExample(new UserExample());
+        UserExample userExample = new UserExample();
+        userExample.setOrderByClause("user_vip desc");
+        return userMapper.selectByExample(userExample);
     }
 
     @Override
