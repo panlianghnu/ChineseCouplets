@@ -6,7 +6,45 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd597638-db17-429a-a104-dce655e7021f" name="Default Changelist" comment="" />
+    <list default="true" id="cd597638-db17-429a-a104-dce655e7021f" name="Default Changelist" comment="sign">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/service/CharpterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/service/StudyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/service/impl/CharpterImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/service/impl/StudyImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/web/StudyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ccdm_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ccdm_war.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ccdm_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ccdm_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ccdm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ccdm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/entity/Charpter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/Aliyun/PhoneCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/Aliyun/PhoneCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/cache/RedisClusterCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/cache/RedisClusterCache.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/entity/Collection1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/entity/Collection1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/entity/CoupletDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/entity/CoupletDetail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/entity/Reply.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/entity/Reply.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/ClassificationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/ClassificationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/CoupletIntroService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/CoupletIntroService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/CoupletsExistedService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/CoupletsExistedService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/PostService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/ClassificationImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/ClassificationImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/CoupletintroImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/CoupletintroImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/CoupletsExistedServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/CoupletsExistedServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/PostServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/util/ProtoStuffSerializerUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/util/ProtoStuffSerializerUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/util/TimeUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/util/TimeUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/CollectionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/CollectionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/CoupletIntroController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/CoupletIntroController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/CoupletsExistedController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/CoupletsExistedController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/FollowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/FollowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/HelloController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/PostController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hnu/ccdm/web/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/Collection1Mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/Collection1Mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/spring/spring-web.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,19 +87,35 @@
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
+        <option name="jdkForImporter" value="8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectId" id="1TYHdkAGuf8LJRrLm0ULjFeyMte" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/mapper" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="project.structure.proportion" value="0.33691406" />
+    <property name="project.structure.side.proportion" value="0.12468827" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/mapper" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/mapper" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/entity" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/hnu/ccdm/entity" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -76,13 +130,14 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Tomcat 9.0" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+    <configuration name="Tomcat 9.0.29" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.29" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8081/" />
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="ccdm:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/ccdm_war_exploded" />
+            <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
@@ -277,10 +332,136 @@
       <workItem from="1574899305976" duration="764000" />
       <workItem from="1574917721596" duration="6302000" />
       <workItem from="1574934376127" duration="484000" />
+      <workItem from="1575803598194" duration="299000" />
+      <workItem from="1575804216268" duration="3712000" />
+      <workItem from="1575809015705" duration="1059000" />
+      <workItem from="1575964689382" duration="5402000" />
+      <workItem from="1575974044663" duration="69000" />
+      <workItem from="1575974133990" duration="129000" />
+      <workItem from="1576041897356" duration="2101000" />
+      <workItem from="1576049427232" duration="1034000" />
+      <workItem from="1576200276240" duration="1057000" />
+      <workItem from="1576208279621" duration="2018000" />
+      <workItem from="1576223196839" duration="1727000" />
+      <workItem from="1576225576144" duration="1401000" />
+      <workItem from="1576236903507" duration="336000" />
+      <workItem from="1576315626410" duration="277000" />
+      <workItem from="1576493295370" duration="1236000" />
+      <workItem from="1576500099052" duration="1951000" />
+      <workItem from="1576502169056" duration="2661000" />
+      <workItem from="1576576106660" duration="655000" />
+      <workItem from="1576650880244" duration="103000" />
+      <workItem from="1576662125452" duration="15000" />
+      <workItem from="1576663422113" duration="3342000" />
     </task>
+    <task id="LOCAL-00001" summary="score">
+      <created>1575810045284</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1575810045284</updated>
+    </task>
+    <task id="LOCAL-00002" summary="sign">
+      <created>1575967138926</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575967138926</updated>
+    </task>
+    <task id="LOCAL-00003" summary="collection">
+      <created>1575968979558</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575968979559</updated>
+    </task>
+    <task id="LOCAL-00004" summary="sign">
+      <created>1575969113432</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1575969113432</updated>
+    </task>
+    <task id="LOCAL-00005" summary="sign">
+      <created>1575974071395</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1575974071395</updated>
+    </task>
+    <task id="LOCAL-00006" summary="sign">
+      <created>1575974218697</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1575974218698</updated>
+    </task>
+    <task id="LOCAL-00007" summary="sign">
+      <created>1575974247915</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1575974247915</updated>
+    </task>
+    <task id="LOCAL-00008" summary="search">
+      <created>1576043554834</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1576043554835</updated>
+    </task>
+    <task id="LOCAL-00009" summary="sign">
+      <created>1576050449211</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1576050449211</updated>
+    </task>
+    <task id="LOCAL-00010" summary="sign">
+      <created>1576223359567</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1576223359567</updated>
+    </task>
+    <task id="LOCAL-00011" summary="sign">
+      <created>1576224218549</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1576224218549</updated>
+    </task>
+    <task id="LOCAL-00012" summary="sign">
+      <created>1576664068926</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1576664068926</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="score" />
+    <MESSAGE value="collection" />
+    <MESSAGE value="search" />
+    <MESSAGE value="sign" />
+    <option name="LAST_COMMIT_MESSAGE" value="sign" />
   </component>
 </project>

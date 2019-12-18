@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Collection1" >
     <id column="collection_id" property="collectionId" jdbcType="VARCHAR" />
     <result column="collection_postaccount" property="collectionPostaccount" jdbcType="CHAR" />
-    <result column="collection_postsid" property="collectionPostsid" jdbcType="INTEGER" />
+    <result column="collection_postsid" property="collectionPostsid" jdbcType="VARCHAR" />
     <result column="collection_collectdate" property="collectionCollectdate" jdbcType="TIMESTAMP" />
     <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
   </resultMap>
@@ -105,7 +105,7 @@
       collection_postsid, collection_collectdate, 
       user_account)
     values (#{collectionId,jdbcType=VARCHAR}, #{collectionPostaccount,jdbcType=CHAR}, 
-      #{collectionPostsid,jdbcType=INTEGER}, #{collectionCollectdate,jdbcType=TIMESTAMP}, 
+      #{collectionPostsid,jdbcType=VARCHAR}, #{collectionCollectdate,jdbcType=TIMESTAMP},
       #{userAccount,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Collection1" >
@@ -135,7 +135,7 @@
         #{collectionPostaccount,jdbcType=CHAR},
       </if>
       <if test="collectionPostsid != null" >
-        #{collectionPostsid,jdbcType=INTEGER},
+        #{collectionPostsid,jdbcType=VARCHAR},
       </if>
       <if test="collectionCollectdate != null" >
         #{collectionCollectdate,jdbcType=TIMESTAMP},
@@ -161,7 +161,7 @@
         collection_postaccount = #{record.collectionPostaccount,jdbcType=CHAR},
       </if>
       <if test="record.collectionPostsid != null" >
-        collection_postsid = #{record.collectionPostsid,jdbcType=INTEGER},
+        collection_postsid = #{record.collectionPostsid,jdbcType=VARCHAR},
       </if>
       <if test="record.collectionCollectdate != null" >
         collection_collectdate = #{record.collectionCollectdate,jdbcType=TIMESTAMP},
@@ -178,7 +178,7 @@
     update collection1
     set collection_id = #{record.collectionId,jdbcType=VARCHAR},
       collection_postaccount = #{record.collectionPostaccount,jdbcType=CHAR},
-      collection_postsid = #{record.collectionPostsid,jdbcType=INTEGER},
+      collection_postsid = #{record.collectionPostsid,jdbcType=VARCHAR},
       collection_collectdate = #{record.collectionCollectdate,jdbcType=TIMESTAMP},
       user_account = #{record.userAccount,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -192,7 +192,7 @@
         collection_postaccount = #{collectionPostaccount,jdbcType=CHAR},
       </if>
       <if test="collectionPostsid != null" >
-        collection_postsid = #{collectionPostsid,jdbcType=INTEGER},
+        collection_postsid = #{collectionPostsid,jdbcType=VARCHAR},
       </if>
       <if test="collectionCollectdate != null" >
         collection_collectdate = #{collectionCollectdate,jdbcType=TIMESTAMP},
@@ -206,7 +206,7 @@
   <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Collection1" >
     update collection1
     set collection_postaccount = #{collectionPostaccount,jdbcType=CHAR},
-      collection_postsid = #{collectionPostsid,jdbcType=INTEGER},
+      collection_postsid = #{collectionPostsid,jdbcType=VARCHAR},
       collection_collectdate = #{collectionCollectdate,jdbcType=TIMESTAMP},
       user_account = #{userAccount,jdbcType=VARCHAR}
     where collection_id = #{collectionId,jdbcType=VARCHAR}

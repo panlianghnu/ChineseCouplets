@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="ccdm_0.0.1-SNAPSHOT_20191127.war">
+    <root id="archive" name="ccdm_0.0.1-SNAPSHOT_20191211.war">
       <element id="artifact" artifact-name="ccdm:war exploded" />
     </root>
   </artifact>
