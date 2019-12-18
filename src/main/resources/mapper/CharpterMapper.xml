@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.CharpterMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Charpter" >
+    <id column="charpterId" property="charpterid" jdbcType="VARCHAR" />
+    <result column="charpterName" property="charptername" jdbcType="VARCHAR" />
+    <result column="charpterStudyId" property="charpterstudyid" jdbcType="VARCHAR" />
+    <result column="charpterNumber" property="charpternumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.Charpter" extends="BaseResultMap" >
+    <result column="charpterContent" property="charptercontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    charpterId, charpterName, charpterStudyId, charpterNumber
+  </sql>
+  <sql id="Blob_Column_List" >
+    charpterContent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.CharpterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from charpter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.CharpterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from charpter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from charpter
+    where charpterId = #{charpterid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from charpter
+    where charpterId = #{charpterid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.CharpterExample" >
+    delete from charpter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Charpter" >
+    insert into charpter (charpterId, charpterName, charpterStudyId, 
+      charpterNumber, charpterContent)
+    values (#{charpterid,jdbcType=VARCHAR}, #{charptername,jdbcType=VARCHAR}, #{charpterstudyid,jdbcType=VARCHAR}, 
+      #{charpternumber,jdbcType=VARCHAR}, #{charptercontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Charpter" >
+    insert into charpter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="charpterid != null" >
+        charpterId,
+      </if>
+      <if test="charptername != null" >
+        charpterName,
+      </if>
+      <if test="charpterstudyid != null" >
+        charpterStudyId,
+      </if>
+      <if test="charpternumber != null" >
+        charpterNumber,
+      </if>
+      <if test="charptercontent != null" >
+        charpterContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="charpterid != null" >
+        #{charpterid,jdbcType=VARCHAR},
+      </if>
+      <if test="charptername != null" >
+        #{charptername,jdbcType=VARCHAR},
+      </if>
+      <if test="charpterstudyid != null" >
+        #{charpterstudyid,jdbcType=VARCHAR},
+      </if>
+      <if test="charpternumber != null" >
+        #{charpternumber,jdbcType=VARCHAR},
+      </if>
+      <if test="charptercontent != null" >
+        #{charptercontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.CharpterExample" resultType="java.lang.Integer" >
+    select count(*) from charpter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update charpter
+    <set >
+      <if test="record.charpterid != null" >
+        charpterId = #{record.charpterid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.charptername != null" >
+        charpterName = #{record.charptername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.charpterstudyid != null" >
+        charpterStudyId = #{record.charpterstudyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.charpternumber != null" >
+        charpterNumber = #{record.charpternumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.charptercontent != null" >
+        charpterContent = #{record.charptercontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update charpter
+    set charpterId = #{record.charpterid,jdbcType=VARCHAR},
+      charpterName = #{record.charptername,jdbcType=VARCHAR},
+      charpterStudyId = #{record.charpterstudyid,jdbcType=VARCHAR},
+      charpterNumber = #{record.charpternumber,jdbcType=VARCHAR},
+      charpterContent = #{record.charptercontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update charpter
+    set charpterId = #{record.charpterid,jdbcType=VARCHAR},
+      charpterName = #{record.charptername,jdbcType=VARCHAR},
+      charpterStudyId = #{record.charpterstudyid,jdbcType=VARCHAR},
+      charpterNumber = #{record.charpternumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Charpter" >
+    update charpter
+    <set >
+      <if test="charptername != null" >
+        charpterName = #{charptername,jdbcType=VARCHAR},
+      </if>
+      <if test="charpterstudyid != null" >
+        charpterStudyId = #{charpterstudyid,jdbcType=VARCHAR},
+      </if>
+      <if test="charpternumber != null" >
+        charpterNumber = #{charpternumber,jdbcType=VARCHAR},
+      </if>
+      <if test="charptercontent != null" >
+        charpterContent = #{charptercontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where charpterId = #{charpterid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.Charpter" >
+    update charpter
+    set charpterName = #{charptername,jdbcType=VARCHAR},
+      charpterStudyId = #{charpterstudyid,jdbcType=VARCHAR},
+      charpterNumber = #{charpternumber,jdbcType=VARCHAR},
+      charpterContent = #{charptercontent,jdbcType=LONGVARCHAR}
+    where charpterId = #{charpterid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Charpter" >
+    update charpter
+    set charpterName = #{charptername,jdbcType=VARCHAR},
+      charpterStudyId = #{charpterstudyid,jdbcType=VARCHAR},
+      charpterNumber = #{charpternumber,jdbcType=VARCHAR}
+    where charpterId = #{charpterid,jdbcType=VARCHAR}
+  </update>
+</mapper>

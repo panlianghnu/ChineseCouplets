@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface ClassificationService {
     List<Classification> getClassificationList ();
+
+    int addClassification(Classification classification);
+    int deleteClassification(String id);
 }

@@ -17,4 +17,14 @@ public class ClassificationImpl implements ClassificationService {
     public List<Classification> getClassificationList() {
         return classificationMapper.selectByExample(new ClassificationExample());
     }
+
+    @Override
+    public int addClassification(Classification classification) {
+        return classificationMapper.insert(classification);
+    }
+
+    @Override
+    public int deleteClassification(String id) {
+        return classificationMapper.deleteByPrimaryKey(id);
+    }
 }

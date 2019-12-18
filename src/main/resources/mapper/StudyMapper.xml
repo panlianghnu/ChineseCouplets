@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.StudyMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Study" >
+    <id column="studyId" property="studyid" jdbcType="VARCHAR" />
+    <result column="studyAuthor" property="studyauthor" jdbcType="VARCHAR" />
+    <result column="studyName" property="studyname" jdbcType="VARCHAR" />
+    <result column="studyPhoto" property="studyphoto" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hnu.ccdm.entity.Study" extends="BaseResultMap" >
+    <result column="studyIntroduction" property="studyintroduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    studyId, studyAuthor, studyName, studyPhoto
+  </sql>
+  <sql id="Blob_Column_List" >
+    studyIntroduction
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hnu.ccdm.entity.StudyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.StudyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from study
+    where studyId = #{studyid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from study
+    where studyId = #{studyid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.StudyExample" >
+    delete from study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Study" >
+    insert into study (studyId, studyAuthor, studyName, 
+      studyPhoto, studyIntroduction)
+    values (#{studyid,jdbcType=VARCHAR}, #{studyauthor,jdbcType=VARCHAR}, #{studyname,jdbcType=VARCHAR}, 
+      #{studyphoto,jdbcType=VARCHAR}, #{studyintroduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Study" >
+    insert into study
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studyid != null" >
+        studyId,
+      </if>
+      <if test="studyauthor != null" >
+        studyAuthor,
+      </if>
+      <if test="studyname != null" >
+        studyName,
+      </if>
+      <if test="studyphoto != null" >
+        studyPhoto,
+      </if>
+      <if test="studyintroduction != null" >
+        studyIntroduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studyid != null" >
+        #{studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="studyauthor != null" >
+        #{studyauthor,jdbcType=VARCHAR},
+      </if>
+      <if test="studyname != null" >
+        #{studyname,jdbcType=VARCHAR},
+      </if>
+      <if test="studyphoto != null" >
+        #{studyphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="studyintroduction != null" >
+        #{studyintroduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.StudyExample" resultType="java.lang.Integer" >
+    select count(*) from study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update study
+    <set >
+      <if test="record.studyid != null" >
+        studyId = #{record.studyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyauthor != null" >
+        studyAuthor = #{record.studyauthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyname != null" >
+        studyName = #{record.studyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyphoto != null" >
+        studyPhoto = #{record.studyphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyintroduction != null" >
+        studyIntroduction = #{record.studyintroduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update study
+    set studyId = #{record.studyid,jdbcType=VARCHAR},
+      studyAuthor = #{record.studyauthor,jdbcType=VARCHAR},
+      studyName = #{record.studyname,jdbcType=VARCHAR},
+      studyPhoto = #{record.studyphoto,jdbcType=VARCHAR},
+      studyIntroduction = #{record.studyintroduction,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update study
+    set studyId = #{record.studyid,jdbcType=VARCHAR},
+      studyAuthor = #{record.studyauthor,jdbcType=VARCHAR},
+      studyName = #{record.studyname,jdbcType=VARCHAR},
+      studyPhoto = #{record.studyphoto,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Study" >
+    update study
+    <set >
+      <if test="studyauthor != null" >
+        studyAuthor = #{studyauthor,jdbcType=VARCHAR},
+      </if>
+      <if test="studyname != null" >
+        studyName = #{studyname,jdbcType=VARCHAR},
+      </if>
+      <if test="studyphoto != null" >
+        studyPhoto = #{studyphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="studyintroduction != null" >
+        studyIntroduction = #{studyintroduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where studyId = #{studyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hnu.ccdm.entity.Study" >
+    update study
+    set studyAuthor = #{studyauthor,jdbcType=VARCHAR},
+      studyName = #{studyname,jdbcType=VARCHAR},
+      studyPhoto = #{studyphoto,jdbcType=VARCHAR},
+      studyIntroduction = #{studyintroduction,jdbcType=LONGVARCHAR}
+    where studyId = #{studyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Study" >
+    update study
+    set studyAuthor = #{studyauthor,jdbcType=VARCHAR},
+      studyName = #{studyname,jdbcType=VARCHAR},
+      studyPhoto = #{studyphoto,jdbcType=VARCHAR}
+    where studyId = #{studyid,jdbcType=VARCHAR}
+  </update>
+</mapper>
