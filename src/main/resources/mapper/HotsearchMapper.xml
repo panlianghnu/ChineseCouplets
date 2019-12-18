@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnu.ccdm.mapper.HotsearchMapper" >
+  <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Hotsearch" >
+    <id column="hotSearchId" property="hotsearchid" jdbcType="VARCHAR" />
+    <result column="hotSearchKeyWords" property="hotsearchkeywords" jdbcType="VARCHAR" />
+    <result column="hotSearchTime" property="hotsearchtime" jdbcType="TIME" />
+    <result column="hotSearchNumber" property="hotsearchnumber" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hotSearchId, hotSearchKeyWords, hotSearchTime, hotSearchNumber
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hnu.ccdm.entity.HotsearchExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hotSearch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from hotSearch
+    where hotSearchId = #{hotsearchid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hotSearch
+    where hotSearchId = #{hotsearchid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hnu.ccdm.entity.HotsearchExample" >
+    delete from hotSearch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hnu.ccdm.entity.Hotsearch" >
+    insert into hotSearch (hotSearchId, hotSearchKeyWords, hotSearchTime, 
+      hotSearchNumber)
+    values (#{hotsearchid,jdbcType=VARCHAR}, #{hotsearchkeywords,jdbcType=VARCHAR}, #{hotsearchtime,jdbcType=TIME}, 
+      #{hotsearchnumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Hotsearch" >
+    insert into hotSearch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hotsearchid != null" >
+        hotSearchId,
+      </if>
+      <if test="hotsearchkeywords != null" >
+        hotSearchKeyWords,
+      </if>
+      <if test="hotsearchtime != null" >
+        hotSearchTime,
+      </if>
+      <if test="hotsearchnumber != null" >
+        hotSearchNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hotsearchid != null" >
+        #{hotsearchid,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsearchkeywords != null" >
+        #{hotsearchkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsearchtime != null" >
+        #{hotsearchtime,jdbcType=TIME},
+      </if>
+      <if test="hotsearchnumber != null" >
+        #{hotsearchnumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hnu.ccdm.entity.HotsearchExample" resultType="java.lang.Integer" >
+    select count(*) from hotSearch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hotSearch
+    <set >
+      <if test="record.hotsearchid != null" >
+        hotSearchId = #{record.hotsearchid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotsearchkeywords != null" >
+        hotSearchKeyWords = #{record.hotsearchkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotsearchtime != null" >
+        hotSearchTime = #{record.hotsearchtime,jdbcType=TIME},
+      </if>
+      <if test="record.hotsearchnumber != null" >
+        hotSearchNumber = #{record.hotsearchnumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hotSearch
+    set hotSearchId = #{record.hotsearchid,jdbcType=VARCHAR},
+      hotSearchKeyWords = #{record.hotsearchkeywords,jdbcType=VARCHAR},
+      hotSearchTime = #{record.hotsearchtime,jdbcType=TIME},
+      hotSearchNumber = #{record.hotsearchnumber,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hnu.ccdm.entity.Hotsearch" >
+    update hotSearch
+    <set >
+      <if test="hotsearchkeywords != null" >
+        hotSearchKeyWords = #{hotsearchkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="hotsearchtime != null" >
+        hotSearchTime = #{hotsearchtime,jdbcType=TIME},
+      </if>
+      <if test="hotsearchnumber != null" >
+        hotSearchNumber = #{hotsearchnumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hotSearchId = #{hotsearchid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Hotsearch" >
+    update hotSearch
+    set hotSearchKeyWords = #{hotsearchkeywords,jdbcType=VARCHAR},
+      hotSearchTime = #{hotsearchtime,jdbcType=TIME},
+      hotSearchNumber = #{hotsearchnumber,jdbcType=INTEGER}
+    where hotSearchId = #{hotsearchid,jdbcType=VARCHAR}
+  </update>
+</mapper>
