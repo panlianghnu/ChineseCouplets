@@ -2,7 +2,6 @@ package com.hnu.ccdm.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class LasthotsearchExample {
@@ -106,32 +105,6 @@ public class LasthotsearchExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        protected void addCriterionForJDBCTime(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Time(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCTime(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Time> timeList = new ArrayList<java.sql.Time>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                timeList.add(new java.sql.Time(iter.next().getTime()));
-            }
-            addCriterion(condition, timeList, property);
-        }
-
-        protected void addCriterionForJDBCTime(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Time(value1.getTime()), new java.sql.Time(value2.getTime()), property);
-        }
-
         public Criteria andLasthotsearchidIsNull() {
             addCriterion("lastHotSearchId is null");
             return (Criteria) this;
@@ -213,52 +186,52 @@ public class LasthotsearchExample {
         }
 
         public Criteria andLasthotsearchtimeEqualTo(Date value) {
-            addCriterionForJDBCTime("lastHotSearchTime =", value, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime =", value, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeNotEqualTo(Date value) {
-            addCriterionForJDBCTime("lastHotSearchTime <>", value, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime <>", value, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeGreaterThan(Date value) {
-            addCriterionForJDBCTime("lastHotSearchTime >", value, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime >", value, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCTime("lastHotSearchTime >=", value, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime >=", value, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeLessThan(Date value) {
-            addCriterionForJDBCTime("lastHotSearchTime <", value, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime <", value, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCTime("lastHotSearchTime <=", value, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime <=", value, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeIn(List<Date> values) {
-            addCriterionForJDBCTime("lastHotSearchTime in", values, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime in", values, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeNotIn(List<Date> values) {
-            addCriterionForJDBCTime("lastHotSearchTime not in", values, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime not in", values, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCTime("lastHotSearchTime between", value1, value2, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime between", value1, value2, "lasthotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andLasthotsearchtimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCTime("lastHotSearchTime not between", value1, value2, "lasthotsearchtime");
+            addCriterion("lastHotSearchTime not between", value1, value2, "lasthotsearchtime");
             return (Criteria) this;
         }
     }

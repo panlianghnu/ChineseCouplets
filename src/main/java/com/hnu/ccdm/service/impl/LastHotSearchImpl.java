@@ -6,9 +6,10 @@ import com.hnu.ccdm.mapper.LasthotsearchMapper;
 
 import com.hnu.ccdm.service.LastHotSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class LastHotSearchImpl implements LastHotSearchService {
     @Autowired
     private LasthotsearchMapper lasthotsearchMapper;

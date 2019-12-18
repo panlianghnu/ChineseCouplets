@@ -8,4 +8,5 @@ public interface HotSearchService {
     int addHotSearch(Hotsearch hotsearch);
     int deleteHotSearch(String id);
     List<Hotsearch> getHotSearchList();
+    int updateByPrimarKey(Hotsearch hotsearch);
 }

@@ -2,7 +2,6 @@ package com.hnu.ccdm.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class HotsearchExample {
@@ -104,32 +103,6 @@ public class HotsearchExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCTime(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Time(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCTime(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Time> timeList = new ArrayList<java.sql.Time>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                timeList.add(new java.sql.Time(iter.next().getTime()));
-            }
-            addCriterion(condition, timeList, property);
-        }
-
-        protected void addCriterionForJDBCTime(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Time(value1.getTime()), new java.sql.Time(value2.getTime()), property);
         }
 
         public Criteria andHotsearchidIsNull() {
@@ -283,52 +256,52 @@ public class HotsearchExample {
         }
 
         public Criteria andHotsearchtimeEqualTo(Date value) {
-            addCriterionForJDBCTime("hotSearchTime =", value, "hotsearchtime");
+            addCriterion("hotSearchTime =", value, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeNotEqualTo(Date value) {
-            addCriterionForJDBCTime("hotSearchTime <>", value, "hotsearchtime");
+            addCriterion("hotSearchTime <>", value, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeGreaterThan(Date value) {
-            addCriterionForJDBCTime("hotSearchTime >", value, "hotsearchtime");
+            addCriterion("hotSearchTime >", value, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCTime("hotSearchTime >=", value, "hotsearchtime");
+            addCriterion("hotSearchTime >=", value, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeLessThan(Date value) {
-            addCriterionForJDBCTime("hotSearchTime <", value, "hotsearchtime");
+            addCriterion("hotSearchTime <", value, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCTime("hotSearchTime <=", value, "hotsearchtime");
+            addCriterion("hotSearchTime <=", value, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeIn(List<Date> values) {
-            addCriterionForJDBCTime("hotSearchTime in", values, "hotsearchtime");
+            addCriterion("hotSearchTime in", values, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeNotIn(List<Date> values) {
-            addCriterionForJDBCTime("hotSearchTime not in", values, "hotsearchtime");
+            addCriterion("hotSearchTime not in", values, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCTime("hotSearchTime between", value1, value2, "hotsearchtime");
+            addCriterion("hotSearchTime between", value1, value2, "hotsearchtime");
             return (Criteria) this;
         }
 
         public Criteria andHotsearchtimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCTime("hotSearchTime not between", value1, value2, "hotsearchtime");
+            addCriterion("hotSearchTime not between", value1, value2, "hotsearchtime");
             return (Criteria) this;
         }
 

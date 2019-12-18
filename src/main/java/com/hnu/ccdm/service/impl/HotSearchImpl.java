@@ -5,9 +5,10 @@ import com.hnu.ccdm.entity.HotsearchExample;
 import com.hnu.ccdm.mapper.HotsearchMapper;
 import com.hnu.ccdm.service.HotSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class HotSearchImpl implements HotSearchService {
 
     @Autowired
@@ -26,5 +27,10 @@ public class HotSearchImpl implements HotSearchService {
     @Override
     public List<Hotsearch> getHotSearchList(){
         return hotsearchMapper.selectByExample(new HotsearchExample());
+    }
+
+    @Override
+    public int updateByPrimarKey(Hotsearch hotsearch) {
+        return hotsearchMapper.updateByPrimaryKey(hotsearch);
     }
 }

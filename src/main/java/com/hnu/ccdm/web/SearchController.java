@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -33,9 +34,44 @@ public class SearchController {
     @Autowired
     private ClassificationCoupletsexisted23KeyService classificationCoupletsexisted23KeyService;
 
+    @Autowired
+    private HotSearchService hotSearchService;
+
+    public void updateKeyWords(String searchContent){
+
+        List<Hotsearch> hotsearchList=hotSearchService.getHotSearchList();
+        System.out.println(hotsearchList.size());
+        if (hotsearchList.isEmpty()){
+            Hotsearch hotsearch=new Hotsearch();
+            int number = (int)(Math.random()*10000)+1;
+            hotsearch.setHotsearchid(String.valueOf(number)+new Date());
+            hotsearch.setHotsearchkeywords(searchContent);
+            hotsearch.setHotsearchtime(new Date());
+            hotsearch.setHotsearchnumber(1);
+            hotSearchService.addHotSearch(hotsearch);
+            return;
+        }
+        for (Hotsearch x:hotsearchList){
+            if (x.getHotsearchkeywords().contains(searchContent)){
+                x.setHotsearchnumber(x.getHotsearchnumber()+1);
+                hotSearchService.updateByPrimarKey(x);
+                return;
+            }
+            else if (searchContent.contains(x.getHotsearchkeywords())){
+                x.setHotsearchnumber(x.getHotsearchnumber()+1);
+                x.setHotsearchkeywords(searchContent);
+                hotSearchService.updateByPrimarKey(x);
+
+            }
+
+        }
+        return;
+    }
+
     @ResponseBody
     @RequestMapping("searchUser")
     public List searchUser(String searchContent) {
+        updateKeyWords(searchContent);
         List<User> userList = userService.getUserList();
         searchContent = searchContent.replace(" ", "");
         //System.out.println(searchContent);
@@ -51,6 +87,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchPost")
     public List<PostWithAuthor> searchPost(String searchContent) {
+        updateKeyWords(searchContent);
         List<Post> postList = postService.getPostList();
         List<Lable> lableList = labelService.getLabelList();
         List<User> userList = userService.getUserList();
@@ -123,6 +160,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchCouplets")
     public List<Coupletsexisted> searchCouplets(String searchContent) {
+        updateKeyWords(searchContent);
         searchContent = searchContent.replace(" ", "");
         List<Coupletsexisted> coupletsexistedList = coupletsExistedService.getCoupletList();
         List<Classification> classificationList = classificationService.getClassificationList();
@@ -150,6 +188,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchLabel")
     public List<PostWithAuthor> searchLabel(String searchContent) {
+        updateKeyWords(searchContent);
         List<Post> postList = postService.getPostList();
         List<Lable> lableList = labelService.getLabelList();
         List<User> userList = userService.getUserList();
@@ -192,6 +231,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchClassificion")
     public List<Coupletsexisted> searchClassifiction(String searchContent) {
+        updateKeyWords(searchContent);
         List<Classification> classificationList = classificationService.getClassificationList();
         List<Coupletsexisted> toback = new ArrayList<>();
         List<Coupletsexisted> coupletsexistedList = coupletsExistedService.getCoupletList();
