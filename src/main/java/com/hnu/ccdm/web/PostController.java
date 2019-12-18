@@ -90,6 +90,7 @@ public class PostController {
 
             for(User x : userList){
                 if(x.getUserAccount().equals(item.getUserAccount())){         // 找到了发帖人， 读取发帖人信息
+                    postWithAuthor.setUserVip(x.getUserVip());
                     postWithAuthor.setUserAccount(x.getUserAccount());        // 发帖人ID
                     postWithAuthor.setUserNickname(x.getUserNickname());      // 发帖人昵称
                     postWithAuthor.setUserPortrait(x.getUserPortrait());      // 发帖人头像
@@ -121,6 +122,7 @@ public class PostController {
                 // 根据 UserAccount 寻找 UserNickName 和 UserPortrait
                 for(User y : userList){                                           //
                     if(y.getUserAccount().equals(x.getUserAccount())){            //
+                        replyWithResponder.setUserVip(y.getUserVip());
                         replyWithResponder.setUserNickname(y.getUserNickname());  // 用户昵称
                         replyWithResponder.setUserPortrait(y.getUserPortrait());  // 用户头像
                     }
@@ -304,6 +306,7 @@ public class PostController {
 
                         for(User z : userList){
                             if(z.getUserAccount().equals(y.getUserAccount())){         // 找到了发帖人， 读取发帖人信息
+                                postWithAuthor.setUserVip(z.getUserVip());
                                 postWithAuthor.setUserAccount(z.getUserAccount());        // 发帖人ID
                                 postWithAuthor.setUserNickname(z.getUserNickname());      // 发帖人昵称
                                 postWithAuthor.setUserPortrait(z.getUserPortrait());      // 发帖人头像

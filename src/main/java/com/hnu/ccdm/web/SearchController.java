@@ -76,6 +76,7 @@ public class SearchController {
 
                 for (User z : userList) {
                     if (z.getUserAccount().equals(x.getUserAccount())) {         // 找到了发帖人， 读取发帖人信息
+                        postWithAuthor.setUserVip(z.getUserVip());
                         postWithAuthor.setUserAccount(z.getUserAccount());        // 发帖人ID
                         postWithAuthor.setUserNickname(z.getUserNickname());      // 发帖人昵称
                         postWithAuthor.setUserPortrait(z.getUserPortrait());      // 发帖人头像
@@ -103,6 +104,7 @@ public class SearchController {
 
                         for (User z : userList) {
                             if (z.getUserAccount().equals(x.getUserAccount())) {         // 找到了发帖人， 读取发帖人信息
+                                postWithAuthor.setUserVip(z.getUserVip());
                                 postWithAuthor.setUserAccount(z.getUserAccount());        // 发帖人ID
                                 postWithAuthor.setUserNickname(z.getUserNickname());      // 发帖人昵称
                                 postWithAuthor.setUserPortrait(z.getUserPortrait());      // 发帖人头像
@@ -171,6 +173,7 @@ public class SearchController {
 
                         for (User z : userList) {
                             if (z.getUserAccount().equals(x.getUserAccount())) {         // 找到了发帖人， 读取发帖人信息
+                                postWithAuthor.setUserVip(z.getUserVip());
                                 postWithAuthor.setUserAccount(z.getUserAccount());        // 发帖人ID
                                 postWithAuthor.setUserNickname(z.getUserNickname());      // 发帖人昵称
                                 postWithAuthor.setUserPortrait(z.getUserPortrait());      // 发帖人头像

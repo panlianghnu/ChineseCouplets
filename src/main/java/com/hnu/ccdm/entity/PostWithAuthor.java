@@ -11,6 +11,8 @@ public class PostWithAuthor {
 
     private String userPortrait;
 
+    private String userVip;
+
     private String labelContent;
 
     private Date postTime;
@@ -141,5 +143,13 @@ public class PostWithAuthor {
 
     public void setUserLabel(String userLabel) {
         this.userLabel = userLabel;
+    }
+
+    public String getUserVip() {
+        return userVip;
+    }
+
+    public void setUserVip(String userVip) {
+        this.userVip = userVip;
     }
 }

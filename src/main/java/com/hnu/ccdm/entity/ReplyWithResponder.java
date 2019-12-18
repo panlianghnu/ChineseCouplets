@@ -11,6 +11,8 @@ public class ReplyWithResponder implements Comparable<ReplyWithResponder>{
 
     private String userPortrait;
 
+    private String userVip;
+
     private String postId;
 
     private Date replyTime;
@@ -76,5 +78,13 @@ public class ReplyWithResponder implements Comparable<ReplyWithResponder>{
     @Override
     public int compareTo(ReplyWithResponder o) {
         return this.replyTime.compareTo(o.getReplyTime());
+    }
+
+    public String getUserVip() {
+        return userVip;
+    }
+
+    public void setUserVip(String userVip) {
+        this.userVip = userVip;
     }
 }
