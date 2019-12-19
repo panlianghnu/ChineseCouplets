@@ -53,6 +53,7 @@ public class HotSearchController {
         for (Hotsearch x:hotsearchList){
             if (i<10){
                 toback.add(x.getHotsearchkeywords());
+                i++;
             }
             else
             {
