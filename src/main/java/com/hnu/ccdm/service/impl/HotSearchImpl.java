@@ -31,6 +31,6 @@ public class HotSearchImpl implements HotSearchService {
 
     @Override
     public int updateByPrimarKey(Hotsearch hotsearch) {
-        return hotsearchMapper.updateByPrimaryKey(hotsearch);
+        return hotsearchMapper.updateByPrimaryKeySelective(hotsearch);
     }
 }

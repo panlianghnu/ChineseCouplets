@@ -61,10 +61,18 @@ public class SearchController {
                 x.setHotsearchnumber(x.getHotsearchnumber()+1);
                 x.setHotsearchkeywords(searchContent);
                 hotSearchService.updateByPrimarKey(x);
-
+                return;
             }
 
+
         }
+        Hotsearch hotsearch=new Hotsearch();
+        int number = (int)(Math.random()*10000)+1;
+        hotsearch.setHotsearchid(String.valueOf(number)+new Date());
+        hotsearch.setHotsearchkeywords(searchContent);
+        hotsearch.setHotsearchtime(new Date());
+        hotsearch.setHotsearchnumber(1);
+        hotSearchService.addHotSearch(hotsearch);
         return;
     }
 
