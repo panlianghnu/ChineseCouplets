@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Hotsearch" >
     <id column="hotSearchId" property="hotsearchid" jdbcType="VARCHAR" />
     <result column="hotSearchKeyWords" property="hotsearchkeywords" jdbcType="VARCHAR" />
-    <result column="hotSearchTime" property="hotsearchtime" jdbcType="TIME" />
+    <result column="hotSearchTime" property="hotsearchtime" jdbcType="TIMESTAMP" />
     <result column="hotSearchNumber" property="hotsearchnumber" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -101,7 +101,7 @@
   <insert id="insert" parameterType="com.hnu.ccdm.entity.Hotsearch" >
     insert into hotSearch (hotSearchId, hotSearchKeyWords, hotSearchTime, 
       hotSearchNumber)
-    values (#{hotsearchid,jdbcType=VARCHAR}, #{hotsearchkeywords,jdbcType=VARCHAR}, #{hotsearchtime,jdbcType=TIME}, 
+    values (#{hotsearchid,jdbcType=VARCHAR}, #{hotsearchkeywords,jdbcType=VARCHAR}, #{hotsearchtime,jdbcType=TIMESTAMP}, 
       #{hotsearchnumber,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Hotsearch" >
@@ -128,7 +128,7 @@
         #{hotsearchkeywords,jdbcType=VARCHAR},
       </if>
       <if test="hotsearchtime != null" >
-        #{hotsearchtime,jdbcType=TIME},
+        #{hotsearchtime,jdbcType=TIMESTAMP},
       </if>
       <if test="hotsearchnumber != null" >
         #{hotsearchnumber,jdbcType=INTEGER},
@@ -151,7 +151,7 @@
         hotSearchKeyWords = #{record.hotsearchkeywords,jdbcType=VARCHAR},
       </if>
       <if test="record.hotsearchtime != null" >
-        hotSearchTime = #{record.hotsearchtime,jdbcType=TIME},
+        hotSearchTime = #{record.hotsearchtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.hotsearchnumber != null" >
         hotSearchNumber = #{record.hotsearchnumber,jdbcType=INTEGER},
@@ -165,7 +165,7 @@
     update hotSearch
     set hotSearchId = #{record.hotsearchid,jdbcType=VARCHAR},
       hotSearchKeyWords = #{record.hotsearchkeywords,jdbcType=VARCHAR},
-      hotSearchTime = #{record.hotsearchtime,jdbcType=TIME},
+      hotSearchTime = #{record.hotsearchtime,jdbcType=TIMESTAMP},
       hotSearchNumber = #{record.hotsearchnumber,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -178,7 +178,7 @@
         hotSearchKeyWords = #{hotsearchkeywords,jdbcType=VARCHAR},
       </if>
       <if test="hotsearchtime != null" >
-        hotSearchTime = #{hotsearchtime,jdbcType=TIME},
+        hotSearchTime = #{hotsearchtime,jdbcType=TIMESTAMP},
       </if>
       <if test="hotsearchnumber != null" >
         hotSearchNumber = #{hotsearchnumber,jdbcType=INTEGER},
@@ -189,7 +189,7 @@
   <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Hotsearch" >
     update hotSearch
     set hotSearchKeyWords = #{hotsearchkeywords,jdbcType=VARCHAR},
-      hotSearchTime = #{hotsearchtime,jdbcType=TIME},
+      hotSearchTime = #{hotsearchtime,jdbcType=TIMESTAMP},
       hotSearchNumber = #{hotsearchnumber,jdbcType=INTEGER}
     where hotSearchId = #{hotsearchid,jdbcType=VARCHAR}
   </update>

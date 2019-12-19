@@ -3,7 +3,7 @@
 <mapper namespace="com.hnu.ccdm.mapper.LasthotsearchMapper" >
   <resultMap id="BaseResultMap" type="com.hnu.ccdm.entity.Lasthotsearch" >
     <id column="lastHotSearchId" property="lasthotsearchid" jdbcType="VARCHAR" />
-    <result column="lastHotSearchTime" property="lasthotsearchtime" jdbcType="TIME" />
+    <result column="lastHotSearchTime" property="lasthotsearchtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -97,8 +97,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hnu.ccdm.entity.Lasthotsearch" >
-    insert into lastHotSearch (lastHotSearchId, lastHotSearchTime)
-    values (#{lasthotsearchid,jdbcType=VARCHAR}, #{lasthotsearchtime,jdbcType=TIME})
+    insert into lastHotSearch (lastHotSearchId, lastHotSearchTime
+      )
+    values (#{lasthotsearchid,jdbcType=VARCHAR}, #{lasthotsearchtime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hnu.ccdm.entity.Lasthotsearch" >
     insert into lastHotSearch
@@ -115,7 +117,7 @@
         #{lasthotsearchid,jdbcType=VARCHAR},
       </if>
       <if test="lasthotsearchtime != null" >
-        #{lasthotsearchtime,jdbcType=TIME},
+        #{lasthotsearchtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -132,7 +134,7 @@
         lastHotSearchId = #{record.lasthotsearchid,jdbcType=VARCHAR},
       </if>
       <if test="record.lasthotsearchtime != null" >
-        lastHotSearchTime = #{record.lasthotsearchtime,jdbcType=TIME},
+        lastHotSearchTime = #{record.lasthotsearchtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -142,7 +144,7 @@
   <update id="updateByExample" parameterType="map" >
     update lastHotSearch
     set lastHotSearchId = #{record.lasthotsearchid,jdbcType=VARCHAR},
-      lastHotSearchTime = #{record.lasthotsearchtime,jdbcType=TIME}
+      lastHotSearchTime = #{record.lasthotsearchtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -151,14 +153,14 @@
     update lastHotSearch
     <set >
       <if test="lasthotsearchtime != null" >
-        lastHotSearchTime = #{lasthotsearchtime,jdbcType=TIME},
+        lastHotSearchTime = #{lasthotsearchtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where lastHotSearchId = #{lasthotsearchid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hnu.ccdm.entity.Lasthotsearch" >
     update lastHotSearch
-    set lastHotSearchTime = #{lasthotsearchtime,jdbcType=TIME}
+    set lastHotSearchTime = #{lasthotsearchtime,jdbcType=TIMESTAMP}
     where lastHotSearchId = #{lasthotsearchid,jdbcType=VARCHAR}
   </update>
 </mapper>
