@@ -23,7 +23,7 @@ public class HotSearchController {
         List<String> toback=new ArrayList<>();
         List<Hotsearch> hotsearchList=hotSearchService.getHotSearchList();
         if (hotsearchList==null){
-            return toback;
+            return null;
         }
         Date date=new Date();
         for (Hotsearch x:hotsearchList){
