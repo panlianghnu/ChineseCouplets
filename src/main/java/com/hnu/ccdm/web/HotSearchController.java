@@ -1,12 +1,8 @@
 package com.hnu.ccdm.web;
 
 import com.hnu.ccdm.entity.Hotsearch;
-import com.hnu.ccdm.entity.Lasthotsearch;
 import com.hnu.ccdm.service.HotSearchService;
-import com.hnu.ccdm.service.LastHotSearchService;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,9 +19,12 @@ public class HotSearchController {
     @RequestMapping("/hotSearch")
     public List<String> getHotSearch(){
 
+
         List<String> toback=new ArrayList<>();
         List<Hotsearch> hotsearchList=hotSearchService.getHotSearchList();
-        System.out.println(hotsearchList.size());
+        if (hotsearchList==null){
+            return toback;
+        }
         Date date=new Date();
         for (Hotsearch x:hotsearchList){
             SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
