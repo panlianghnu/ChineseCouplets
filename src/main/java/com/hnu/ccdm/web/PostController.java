@@ -68,6 +68,12 @@ public class PostController {
     List<PostWithAuthor> getTenPostsWithAuthor(String num){
         int index = Integer.valueOf(num);
         List<Post> list = postService.getPostList();
+        Collections.sort(list, new Comparator<Post>() {
+            @Override
+            public int compare(Post post, Post t1) {
+                return -post.getPostViewnum().compareTo(t1.getPostViewnum());
+            }
+        });
         if(list.size() <= index){
             return null;
         }
@@ -100,6 +106,54 @@ public class PostController {
             }
             toBack.add(postWithAuthor);
         }
+
+        return toBack;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getTenPostsWithAuthorByDate")
+    List<PostWithAuthor> getTenPostsWithAuthorByDate(String num){
+        int index = Integer.valueOf(num);
+        List<Post> list = postService.getPostList();
+        Collections.sort(list, new Comparator<Post>() {
+            @Override
+            public int compare(Post post, Post t1) {
+                return -post.getPostTime().compareTo(t1.getPostTime());
+            }
+        });
+        if(list.size() <= index){
+            return null;
+        }
+        List<PostWithAuthor> toBack = new LinkedList<>();
+        List<User> userList = userService.getUserList();                  // 从userList中找到发帖的人
+        //从index开始  ， 传最多10个帖子过去
+        for(int i=index ; i<list.size() && i < index+10 ; i++){
+            Post item = list.get(i);                                          // 读取帖子信息
+            PostWithAuthor postWithAuthor = new PostWithAuthor();             // 临时变量
+            postWithAuthor.setPostId(item.getPostId());                       // 帖子ID
+            postWithAuthor.setPostContent(item.getPostContent());             // 帖子内容
+            postWithAuthor.setPostIsessence(item.getPostIsessence());         // 是否加精
+            postWithAuthor.setPostPsum(item.getPostPsum());                   // 点赞量
+            postWithAuthor.setPostRsum(item.getPostRsum());                   // 回复量
+            postWithAuthor.setPostViewnum(item.getPostViewnum());             // 浏览量
+            postWithAuthor.setPostTime(item.getPostTime());                   // 发帖时间
+            postWithAuthor.setPostTitle(item.getPostTitle());                 // 帖子标题
+            postWithAuthor.setPostTop(item.getPostTop());                     // 是否置顶
+            postWithAuthor.setLabelContent(item.getLableContent());           // 标签ID
+
+            for(User x : userList){
+                if(x.getUserAccount().equals(item.getUserAccount())){         // 找到了发帖人， 读取发帖人信息
+                    postWithAuthor.setUserVip(x.getUserVip());
+                    postWithAuthor.setUserAccount(x.getUserAccount());        // 发帖人ID
+                    postWithAuthor.setUserNickname(x.getUserNickname());      // 发帖人昵称
+                    postWithAuthor.setUserPortrait(x.getUserPortrait());      // 发帖人头像
+                    postWithAuthor.setUserLabel(x.getUserLabel());
+                    break;
+                }
+            }
+            toBack.add(postWithAuthor);
+        }
+
         return toBack;
     }
 
@@ -144,6 +198,12 @@ public class PostController {
             if(x.getUserAccount().equals(id))
                 toBack.add(x);
         }
+        Collections.sort(toBack, new Comparator<Post>() {   //返回某个人发的帖子，按照时间排序
+            @Override
+            public int compare(Post post, Post t1) {
+                return -post.getPostTime().compareTo(t1.getPostTime());
+            }
+        });
         return toBack;
     }
 

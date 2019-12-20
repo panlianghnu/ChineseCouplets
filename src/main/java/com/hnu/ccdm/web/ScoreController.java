@@ -32,6 +32,7 @@ public class ScoreController {
     @RequestMapping("/addSignScore")
     public String addScore(String account,String score,String source){
         List<User> userList=userService.getUserList();
+        System.out.println(userList.get(0));
         for(User x:userList){
             if (x.getUserAccount().equals(account)){
                 int scoreTemp=x.getUserScore()+Integer.valueOf(score);

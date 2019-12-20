@@ -88,6 +88,7 @@ public class UserController {
         tmp.setUserName("  ");
         tmp.setUserNumber("  ");
         tmp.setUserPlace("  ");
+        tmp.setUserScore(0);
         tmp.setUserDate(new Date());
         tmp.setUserHonoraryofmember("  ");
         tmp.setUserOfassociation("  ");

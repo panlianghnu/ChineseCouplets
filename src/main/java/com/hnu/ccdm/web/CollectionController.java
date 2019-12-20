@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -37,6 +34,12 @@ public class CollectionController {
     @RequestMapping("/getCollectionList")
     List<PostWithAuthor> getCollectionList(String account){
         List<Collection1> collection1List=collection1Service.getCollectionList();
+        Collections.sort(collection1List, new Comparator<Collection1>() {
+            @Override
+            public int compare(Collection1 collection1, Collection1 t1) {
+                return -collection1.getCollectionCollectdate().compareTo(t1.getCollectionCollectdate());
+            }
+        });
         List<Post> postList=postService.getPostList();
         List<User> userList=userService.getUserList();
         List<PostWithAuthor> toback=new ArrayList<>();
