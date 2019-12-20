@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/coupletsExisted")
@@ -156,5 +154,27 @@ public class CoupletsExistedController {
             }
         }
         return toBack;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getClassifictionList")
+    List<Classification> getClassifictionList(){
+        List<Classification> classificationList=classificationService.getClassificationList();
+        Collections.sort(classificationList, new Comparator<Classification>() {
+            @Override
+            public int compare(Classification o1, Classification o2) {
+                int num1=Integer.valueOf(o2.getClassificationClassificationid());
+                int num2=Integer.valueOf(o1.getClassificationClassificationid());
+                int diff=num2-num1;
+                if (diff>0) {
+                    return 1;
+                }
+                else if (diff<0){
+                    return -1;
+                }
+                return 0;
+            }
+        });
+        return  classificationList;
     }
 }
