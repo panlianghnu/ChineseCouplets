@@ -80,6 +80,17 @@ public class UserController {
         tmp.setUserTime(new Date());
         tmp.setUserNickname("默认昵称");
         tmp.setUserPortrait("http://106.54.206.129:8080/pictures/saber.jpg");   //默认头像
+        tmp.setUserAge(0);
+        tmp.setUserBirthday(new Date());
+        tmp.setUserEmail("  ");
+        tmp.setUserLabel("说点什么吧～");
+        tmp.setUserLocation("  ");
+        tmp.setUserName("  ");
+        tmp.setUserNumber("  ");
+        tmp.setUserPlace("  ");
+        tmp.setUserDate(new Date());
+        tmp.setUserHonoraryofmember("  ");
+        tmp.setUserOfassociation("  ");
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         tmp.setUserTime(date);
