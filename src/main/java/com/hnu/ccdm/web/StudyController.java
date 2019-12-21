@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,8 +42,15 @@ public class StudyController {
 
     @ResponseBody
     @RequestMapping("/getCharpterList")
-    public List<Charpter> getCharpterList(){
-        return charpterService.getCharpterList();
+    public List<Charpter> getCharpterList(String bookId){
+        List<Charpter> charpterList=charpterService.getCharpterList();
+        List<Charpter> toback=new ArrayList<>();
+        for (Charpter x:charpterList){
+            if (x.getCharpterstudyid().equals(bookId)){
+                toback.add(x);
+            }
+        }
+        return toback;
     }
 
 }
