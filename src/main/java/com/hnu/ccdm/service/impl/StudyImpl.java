@@ -15,7 +15,7 @@ public class StudyImpl implements StudyService {
 
     @Override
     public List<Study> getStudyList(){
-        return studyMapper.selectByExample(new StudyExample());
+        return studyMapper.selectByExampleWithBLOBs(new StudyExample());
     }
 
     @Override

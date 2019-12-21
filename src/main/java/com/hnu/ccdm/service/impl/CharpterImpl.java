@@ -26,6 +26,6 @@ public class CharpterImpl implements CharpterService {
 
     @Override
     public List<Charpter> getCharpterList(){
-        return charpterMapper.selectByExample(new CharpterExample());
+        return charpterMapper.selectByExampleWithBLOBs(new CharpterExample());
     }
 }
