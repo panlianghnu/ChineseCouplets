@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,6 +66,12 @@ public class UserSpaceController {
                 }
             }
         }
+        Collections.sort(toBack, new Comparator<MyReplyInfo>() {
+            @Override
+            public int compare(MyReplyInfo myReplyInfo, MyReplyInfo t1) {
+                return -myReplyInfo.getReplyTime().compareTo(t1.getReplyTime());
+            }
+        });
         return toBack;
     }
 

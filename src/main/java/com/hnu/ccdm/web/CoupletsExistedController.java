@@ -149,7 +149,7 @@ public class CoupletsExistedController {
                 toBack.setCoupletsauthorDynasty(coupletsauthor.getCoupletsauthorDynasty());
                 toBack.setCoupletsauthorSex(coupletsauthor.getCoupletsauthorSex());
                 toBack.setCoupletsauthorStyle(coupletsauthor.getCoupletsauthorStyle());
-                toBack.setCoupletsauthorRemarks(coupletsauthor.getCoupletsauthorSex());
+                toBack.setCoupletsauthorRemarks(coupletsauthor.getCoupletsauthorRemarks());
                 break;
             }
         }
