@@ -280,7 +280,9 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchPostDebug")
     public List<PostWithAuthor> searchPostDebug(String searchContent) {
-
+        if(searchContent.isEmpty()){
+            return new ArrayList<>();
+        }
         List<Post> postList = postService.getPostList();
         List<Lable> lableList = labelService.getLabelList();
         List<User> userList = userService.getUserList();
