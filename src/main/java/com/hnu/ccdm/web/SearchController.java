@@ -79,7 +79,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchUser")
     public List searchUser(String searchContent) {
-        if (searchContent.equals(null)){
+        if (searchContent==null){
             return null;
         }
         updateKeyWords(searchContent);
@@ -98,7 +98,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchPost")
     public List<PostWithAuthor> searchPost(String searchContent) {
-        if (searchContent.equals(null)){
+        if (searchContent==null){
             return null;
         }
         updateKeyWords(searchContent);
@@ -174,7 +174,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchCouplets")
     public List<Coupletsexisted> searchCouplets(String searchContent) {
-        if (searchContent.equals(null)){
+        if (searchContent==null){
             return null;
         }
         updateKeyWords(searchContent);
@@ -205,7 +205,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchLabel")
     public List<PostWithAuthor> searchLabel(String searchContent) {
-        if (searchContent.equals(null)){
+        if (searchContent==null){
             return null;
         }
         updateKeyWords(searchContent);
@@ -251,7 +251,7 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchClassificion")
     public List<Coupletsexisted> searchClassifiction(String searchContent) {
-        if (searchContent.equals(null)){
+        if (searchContent==null){
             return null;
         }
         updateKeyWords(searchContent);
