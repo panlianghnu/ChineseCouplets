@@ -79,8 +79,8 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchUser")
     public List searchUser(String searchContent) {
-        if (searchContent==null){
-            return null;
+        if (searchContent.isEmpty()){
+            return new ArrayList();
         }
         updateKeyWords(searchContent);
         List<User> userList = userService.getUserList();
@@ -98,8 +98,8 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchPost")
     public List<PostWithAuthor> searchPost(String searchContent) {
-        if (searchContent==null){
-            return null;
+        if (searchContent.isEmpty()){
+            return new ArrayList();
         }
         updateKeyWords(searchContent);
         List<Post> postList = postService.getPostList();
@@ -174,8 +174,8 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchCouplets")
     public List<Coupletsexisted> searchCouplets(String searchContent) {
-        if (searchContent==null){
-            return null;
+        if (searchContent.isEmpty()){
+            return new ArrayList();
         }
         updateKeyWords(searchContent);
         searchContent = searchContent.replace(" ", "");
@@ -205,8 +205,9 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchLabel")
     public List<PostWithAuthor> searchLabel(String searchContent) {
-        if (searchContent==null){
-            return null;
+
+        if (searchContent.isEmpty()){
+            return new ArrayList();
         }
         updateKeyWords(searchContent);
         List<Post> postList = postService.getPostList();
@@ -251,8 +252,8 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchClassificion")
     public List<Coupletsexisted> searchClassifiction(String searchContent) {
-        if (searchContent==null){
-            return null;
+        if (searchContent.isEmpty()){
+            return new ArrayList();
         }
         updateKeyWords(searchContent);
         List<Classification> classificationList = classificationService.getClassificationList();
