@@ -276,4 +276,78 @@ public class SearchController {
         return toback;
     }
 
+
+    @ResponseBody
+    @RequestMapping("searchPostDebug")
+    public List<PostWithAuthor> searchPostDebug(String searchContent) {
+
+        List<Post> postList = postService.getPostList();
+        List<Lable> lableList = labelService.getLabelList();
+        List<User> userList = userService.getUserList();
+        searchContent = searchContent.replace(" ", "");
+        List<PostWithAuthor> toback = new ArrayList();
+        for (Post x : postList) {
+            User user = userService.getUserByAccount(x.getUserAccount());
+            //System.out.println(user.getUserAccount());
+            //匹配帖子的标题，内容,作者的姓名，作者的昵称
+            if (x.getPostTitle().contains(searchContent) || x.getPostContent().contains(searchContent)
+                    || (user.getUserName()!=null && user.getUserName().contains(searchContent)) || user.getUserNickname().contains(searchContent)) {
+                PostWithAuthor postWithAuthor = new PostWithAuthor();             // 临时变量
+                postWithAuthor.setPostId(x.getPostId());                       // 帖子ID
+                postWithAuthor.setPostContent(x.getPostContent());             // 帖子内容
+                postWithAuthor.setPostIsessence(x.getPostIsessence());         // 是否加精
+                postWithAuthor.setPostPsum(x.getPostPsum());                   // 点赞量
+                postWithAuthor.setPostRsum(x.getPostRsum());                   // 回复量
+                postWithAuthor.setPostViewnum(x.getPostViewnum());             // 浏览量
+                postWithAuthor.setPostTime(x.getPostTime());                   // 发帖时间
+                postWithAuthor.setPostTitle(x.getPostTitle());                 // 帖子标题
+                postWithAuthor.setPostTop(x.getPostTop());                     // 是否置顶
+                postWithAuthor.setLabelContent(x.getLableContent());           // 标签ID
+
+                for (User z : userList) {
+                    if (z.getUserAccount().equals(x.getUserAccount())) {         // 找到了发帖人， 读取发帖人信息
+                        postWithAuthor.setUserVip(z.getUserVip());
+                        postWithAuthor.setUserAccount(z.getUserAccount());        // 发帖人ID
+                        postWithAuthor.setUserNickname(z.getUserNickname());      // 发帖人昵称
+                        postWithAuthor.setUserPortrait(z.getUserPortrait());      // 发帖人头像
+                        postWithAuthor.setUserLabel(z.getUserLabel());
+                        break;
+                    }
+                }
+                toback.add(postWithAuthor);
+                continue;
+            }
+            for (Lable y : lableList) {
+                if (x.getLableContent().equals(y.getLableContent())) {
+                    if (y.getLableName().contains(searchContent)) {
+                        PostWithAuthor postWithAuthor = new PostWithAuthor();             // 临时变量
+                        postWithAuthor.setPostId(x.getPostId());                       // 帖子ID
+                        postWithAuthor.setPostContent(x.getPostContent());             // 帖子内容
+                        postWithAuthor.setPostIsessence(x.getPostIsessence());         // 是否加精
+                        postWithAuthor.setPostPsum(x.getPostPsum());                   // 点赞量
+                        postWithAuthor.setPostRsum(x.getPostRsum());                   // 回复量
+                        postWithAuthor.setPostViewnum(x.getPostViewnum());             // 浏览量
+                        postWithAuthor.setPostTime(x.getPostTime());                   // 发帖时间
+                        postWithAuthor.setPostTitle(x.getPostTitle());                 // 帖子标题
+                        postWithAuthor.setPostTop(x.getPostTop());                     // 是否置顶
+                        postWithAuthor.setLabelContent(x.getLableContent());           // 标签ID
+
+                        for (User z : userList) {
+                            if (z.getUserAccount().equals(x.getUserAccount())) {         // 找到了发帖人， 读取发帖人信息
+                                postWithAuthor.setUserVip(z.getUserVip());
+                                postWithAuthor.setUserAccount(z.getUserAccount());        // 发帖人ID
+                                postWithAuthor.setUserNickname(z.getUserNickname());      // 发帖人昵称
+                                postWithAuthor.setUserPortrait(z.getUserPortrait());      // 发帖人头像
+                                postWithAuthor.setUserLabel(z.getUserLabel());
+                                break;
+                            }
+                        }
+                        toback.add(postWithAuthor);
+                    }
+                }
+            }
+        }
+        return toback;
+    }
+
 }
