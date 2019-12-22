@@ -47,8 +47,10 @@ public class UserController {
         boolean flag = false;
         for (User x : list) {
             if (x.getUserAccount().equals(phone)) {
-                if (x.getUserPassword().equals(pass))
+                if (x.getUserPassword().equals(pass)){
+                    messageService.addMessage(x.getUserAccount(),"登陆成功", "欢迎回到楹联数字博物馆");
                     return x.getUserAccount();
+                }
                 flag = true;
             }
         }
@@ -96,6 +98,7 @@ public class UserController {
         Date date = new Date(System.currentTimeMillis());
         tmp.setUserTime(date);
         userService.addUser(tmp);
+        messageService.addMessage(tmp.getUserAccount(), "注册成功","欢迎加入楹联大家庭！");
         return "注册成功";
     }
 
@@ -221,14 +224,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/getMessagesByReceiverId")
     public List<Message> getMessagesByReceiverId(String id){
-        List<Message> list = messageService.getMessageList();
-        List<Message> toBack = new LinkedList<>();
-        for(Message x : list){
-            if(x.getMessageReceiverid().equals(id)){
-                toBack.add(x);
-            }
-        }
-        return toBack;
+        return messageService.getMessageListByUserId(id);
     }
 
     @ResponseBody
