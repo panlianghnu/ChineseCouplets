@@ -79,6 +79,9 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchUser")
     public List searchUser(String searchContent) {
+        if (searchContent.equals(null)){
+            return null;
+        }
         updateKeyWords(searchContent);
         List<User> userList = userService.getUserList();
         searchContent = searchContent.replace(" ", "");
@@ -95,6 +98,9 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchPost")
     public List<PostWithAuthor> searchPost(String searchContent) {
+        if (searchContent.equals(null)){
+            return null;
+        }
         updateKeyWords(searchContent);
         List<Post> postList = postService.getPostList();
         List<Lable> lableList = labelService.getLabelList();
@@ -168,6 +174,9 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchCouplets")
     public List<Coupletsexisted> searchCouplets(String searchContent) {
+        if (searchContent.equals(null)){
+            return null;
+        }
         updateKeyWords(searchContent);
         searchContent = searchContent.replace(" ", "");
         List<Coupletsexisted> coupletsexistedList = coupletsExistedService.getCoupletList();
@@ -196,6 +205,9 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchLabel")
     public List<PostWithAuthor> searchLabel(String searchContent) {
+        if (searchContent.equals(null)){
+            return null;
+        }
         updateKeyWords(searchContent);
         List<Post> postList = postService.getPostList();
         List<Lable> lableList = labelService.getLabelList();
@@ -239,6 +251,9 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchClassificion")
     public List<Coupletsexisted> searchClassifiction(String searchContent) {
+        if (searchContent.equals(null)){
+            return null;
+        }
         updateKeyWords(searchContent);
         List<Classification> classificationList = classificationService.getClassificationList();
         List<Coupletsexisted> toback = new ArrayList<>();
