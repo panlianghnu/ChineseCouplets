@@ -43,10 +43,11 @@ public class CoupletsExistedController {
             return null;
         }
         List<Coupletsexisted> toBack = new LinkedList<>();
-        //从index开始  ， 传最多10条楹联过去
-        for (int i = index; i < list.size() && i < index + 10; i++) {
+        //从index开始  ， 传最多50条楹联过去
+        for (int i = index; i < list.size() && i < index + 50; i++) {
             toBack.add(list.get(i));
         }
+        Collections.shuffle(toBack);
         return toBack;
     }
 
