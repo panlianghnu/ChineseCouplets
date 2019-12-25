@@ -40,7 +40,6 @@ public class SearchController {
     public void updateKeyWords(String searchContent){
 
         List<Hotsearch> hotsearchList=hotSearchService.getHotSearchList();
-        System.out.println(hotsearchList.size());
         if (hotsearchList.isEmpty()){
             Hotsearch hotsearch=new Hotsearch();
             int number = (int)(Math.random()*10000)+1;
@@ -79,12 +78,14 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchUser")
     public List searchUser(String searchContent) {
-        if (searchContent.isEmpty()){
-            return new ArrayList();
-        }
         updateKeyWords(searchContent);
         List<User> userList = userService.getUserList();
         searchContent = searchContent.replace(" ", "");
+
+        if (searchContent.isEmpty()){
+            return new ArrayList();
+        }
+
         //System.out.println(searchContent);
         List toback = new ArrayList();
         for (User x : userList) {
@@ -98,15 +99,17 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchPost")
     public List<PostWithAuthor> searchPost(String searchContent) {
-        if (searchContent.isEmpty()){
-            return new ArrayList();
-        }
         updateKeyWords(searchContent);
         List<Post> postList = postService.getPostList();
         List<Lable> lableList = labelService.getLabelList();
         List<User> userList = userService.getUserList();
         searchContent = searchContent.replace(" ", "");
         List<PostWithAuthor> toback = new ArrayList();
+
+        if (searchContent.isEmpty()){
+            return new ArrayList();
+        }
+
         for (Post x : postList) {
             User user = userService.getUserByAccount(x.getUserAccount());
             //System.out.println(user.getUserAccount());
@@ -174,15 +177,17 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchCouplets")
     public List<Coupletsexisted> searchCouplets(String searchContent) {
-        if (searchContent.isEmpty()){
-            return new ArrayList();
-        }
         updateKeyWords(searchContent);
         searchContent = searchContent.replace(" ", "");
         List<Coupletsexisted> coupletsexistedList = coupletsExistedService.getCoupletList();
         List<Classification> classificationList = classificationService.getClassificationList();
         List<ClassificationCoupletsexisted23Key> classificationCoupletsexisted23KeyList = classificationCoupletsexisted23KeyService.getClassificationWithCouplets();
         List<Coupletsexisted> toback = new ArrayList<Coupletsexisted>();
+
+        if (searchContent.isEmpty()){
+            return new ArrayList();
+        }
+
         for (Coupletsexisted x : coupletsexistedList) {
             if (x.getCoupletsexistedTitle().contains(searchContent) || x.getCoupletsexistedUpcouplets().contains(searchContent) || x.getCoupletsexistedDowncouplets().contains(searchContent)) {
                 toback.add(x);
@@ -205,16 +210,17 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchLabel")
     public List<PostWithAuthor> searchLabel(String searchContent) {
-
-        if (searchContent.isEmpty()){
-            return new ArrayList();
-        }
         updateKeyWords(searchContent);
         List<Post> postList = postService.getPostList();
         List<Lable> lableList = labelService.getLabelList();
         List<User> userList = userService.getUserList();
         searchContent = searchContent.replace(" ", "");
         List<PostWithAuthor> toback = new ArrayList();
+
+        if (searchContent.isEmpty()){
+            return new ArrayList();
+        }
+
         for (Post x : postList) {
             for (Lable y : lableList) {
                 if (x.getLableContent().equals(y.getLableContent())) {
@@ -252,14 +258,15 @@ public class SearchController {
     @ResponseBody
     @RequestMapping("searchClassificion")
     public List<Coupletsexisted> searchClassifiction(String searchContent) {
-        if (searchContent.isEmpty()){
-            return new ArrayList();
-        }
         updateKeyWords(searchContent);
         List<Classification> classificationList = classificationService.getClassificationList();
         List<Coupletsexisted> toback = new ArrayList<>();
         List<Coupletsexisted> coupletsexistedList = coupletsExistedService.getCoupletList();
         List<ClassificationCoupletsexisted23Key> classificationCoupletsexisted23KeyList = classificationCoupletsexisted23KeyService.getClassificationWithCouplets();
+        if (searchContent.isEmpty()){
+            return new ArrayList();
+        }
+
         for (Coupletsexisted x : coupletsexistedList) {
             for (ClassificationCoupletsexisted23Key y : classificationCoupletsexisted23KeyList) {
                 if (x.getCoupletsexistedId().equals(y.getCoupletsexistedId())) {
