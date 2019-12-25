@@ -52,14 +52,19 @@ public class PhoneCode
 //		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
 //		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 //
+        final String product = "Dysmsapi";
         // 初始化ascClient需要的几个参数
-        final String product =  "Dysmsapi";;	// 短信API产品名称（短信产品名固定，无需修改）
-        final String domain = "dysmsapi.aliyuncs.com";	// 短信API产品域名（接口地址固定，无需修改）
+        //final String product =  "Dysmsapi";;	// 短信API产品名称（短信产品名固定，无需修改）
+        final String domain = "dysmsapi.aliyuncs.com";
+        //final String domain = "dysmsapi.aliyuncs.com";	// 短信API产品域名（接口地址固定，无需修改）
         // 替换成你的AK
-        final String accessKeyId = "LTAI4FiqhioR31my6efYUYzp";// 你的accessKeyId
-        final String accessKeySecret = "fmCzXJ0OsUoz45M4yQ39CJkQwdxwoG" ;// 你的accessKeySecret，
+        final String accessKeyId = "LTAI4FrcMihcyjax8ZFXA56b";
+        //final String accessKeyId = "LTAI4FiqhioR31my6efYUYzp";// 你的accessKeyId
+        final String accessKeySecret = "htTk40wKwtX29H8OurX6GRnXqUnU1G";
+        //final String accessKeySecret = "fmCzXJ0OsUoz45M4yQ39CJkQwdxwoG" ;// 你的accessKeySecret，
         // 初始化ascClient,暂时不支持多region
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+        //IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         try
         {
             DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
@@ -79,9 +84,10 @@ public class PhoneCode
         // 必填:待发送手机号。支持以逗号分隔的形式进行批量调用，批量上限为1000个手机号码,批量调用相对于单条调用及时性稍有延迟,验证码类型的短信推荐使用单条调用的方式
         request.setPhoneNumbers(mobile);
         // 必填:短信签名-可在短信控制台中找到
-        request.setSignName("数学学习软件");
+        request.setSignName("爱学习");
         // 必填:短信模板-可在短信控制台中找到
-        request.setTemplateCode("SMS_174272420");
+        request.setTemplateCode("SMS_174271163");
+        //request.setTemplateCode("SMS_174272420");
 
         // 可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         // 友情提示:如果JSON中需要带换行符,请参照标准的JSON协议对换行符的要求,比如短信内容中包含\r\n的情况在JSON中需要表示成\\r\\n,否则会导致JSON在服务端解析失败

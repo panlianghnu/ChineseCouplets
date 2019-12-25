@@ -1,5 +1,7 @@
 package com.hnu.ccdm.web;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import com.hnu.ccdm.Aliyun.PhoneCode;
 import com.hnu.ccdm.entity.Follow;
 import com.hnu.ccdm.entity.Message;
@@ -8,6 +10,7 @@ import com.hnu.ccdm.entity.UserExample;
 import com.hnu.ccdm.service.FollowService;
 import com.hnu.ccdm.service.MessageService;
 import com.hnu.ccdm.service.UserService;
+import com.hnu.ccdm.util.getOpenIdutil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -282,5 +285,49 @@ public class UserController {
             return "手机号不存在";
         }
         return PhoneCode.sendSMS(phone);
+    }
+
+    @ResponseBody
+    @RequestMapping("loginByWx")
+    String loginByWx(String code, String nickName, String image){
+        String appId = "wx623a1795056a641d";
+        String secret = "8837315e69068f80ab08b281027cd939";
+        getOpenIdutil getopenid=new getOpenIdutil();
+        String jsonId=getopenid.getopenid(appId,code,secret);
+        JSONObject jsonObject = JSONObject.parseObject(jsonId);
+        String openId = jsonObject.getString("openid");
+
+        List<User> userList = userService.getUserList();
+        for(User x : userList){
+            if(x.getUserAccount().equals(openId)){      //登录
+                messageService.addMessage(x.getUserAccount(),"登陆成功", "欢迎回到楹联数字博物馆");
+                return openId;
+            }
+        }
+        // 如果数据库没有这个user信息 ,  则新建一个
+        User tmp = new User();
+        tmp.setUserPassword("123456");
+        tmp.setUserAccount(openId);
+        tmp.setUserTime(new Date());
+        tmp.setUserNickname(nickName);
+        tmp.setUserPortrait(image);   //头像
+        tmp.setUserAge(0);
+        tmp.setUserBirthday(new Date());
+        tmp.setUserEmail("  ");
+        tmp.setUserLabel("说点什么吧～");
+        tmp.setUserLocation("  ");
+        tmp.setUserName("  ");
+        tmp.setUserNumber("  ");
+        tmp.setUserPlace("  ");
+        tmp.setUserScore(0);
+        tmp.setUserDate(new Date());
+        tmp.setUserHonoraryofmember("  ");
+        tmp.setUserOfassociation("  ");
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        tmp.setUserTime(date);
+        userService.addUser(tmp);
+        messageService.addMessage(tmp.getUserAccount(), "注册成功","欢迎加入楹联大家庭！");
+        return openId;
     }
 }
