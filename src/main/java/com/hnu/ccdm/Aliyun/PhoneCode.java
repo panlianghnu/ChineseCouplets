@@ -58,10 +58,7 @@ public class PhoneCode
         final String domain = "dysmsapi.aliyuncs.com";
         //final String domain = "dysmsapi.aliyuncs.com";	// 短信API产品域名（接口地址固定，无需修改）
         // 替换成你的AK
-        final String accessKeyId = "LTAI4FrcMihcyjax8ZFXA56b";
-        //final String accessKeyId = "LTAI4FiqhioR31my6efYUYzp";// 你的accessKeyId
-        final String accessKeySecret = "htTk40wKwtX29H8OurX6GRnXqUnU1G";
-        //final String accessKeySecret = "fmCzXJ0OsUoz45M4yQ39CJkQwdxwoG" ;// 你的accessKeySecret，
+
         // 初始化ascClient,暂时不支持多region
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         //IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
